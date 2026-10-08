@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Sync to toolzmoolz.com (FTPS)
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: server801.shared.spaceship.host
           username: deploy@toolzmoolz.com
