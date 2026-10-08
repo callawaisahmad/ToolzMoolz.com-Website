@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Solar Panel Angle Calculator – Optimal Tilt &amp; Direction</title>
+<meta name="description" content="Find the optimal solar panel tilt angle, compass direction and row spacing for your location, plus ROI. Free solar calculator, runs in your browser."/>
+<meta name="keywords" content="solar panel angle, solar tilt calculator, panel direction, azimuth, row spacing, solar alignment, off-grid solar, solar ROI">
+<link rel="canonical" href="https://toolzmoolz.com/solar-alignment/"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="manifest.json">
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ToolzMoolz"/>
+<meta property="og:title" content="Solar Panel Alignment Calculator (SolMax) | ToolzMoolz"/>
+<meta property="og:description" content="Get the optimal tilt, direction and spacing for your solar panels from real solar astronomy — free, in your browser."/>
+<meta property="og:url" content="https://toolzmoolz.com/solar-alignment/"/>
+<meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Solar Panel Alignment Calculator (SolMax) | ToolzMoolz"/>
+<meta name="twitter:description" content="Optimal solar panel tilt, direction and spacing — free, in your browser."/>
+<meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"WebApplication",
+  "name":"SolMax — Solar Panel Alignment Calculator",
+  "url":"https://toolzmoolz.com/solar-alignment/",
+  "applicationCategory":"UtilityApplication","operatingSystem":"All",
+  "browserRequirements":"Requires JavaScript support",
+  "offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},
+  "description":"Calculate the optimal tilt angle, compass direction and row spacing for solar panels from first-principles solar astronomy, with weather-adjusted output and ROI. Runs entirely in the browser."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolzmoolz.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Solar Alignment",
+      "item": "https://toolzmoolz.com/solar-alignment/"
+    }
+  ]
+}
+</script>
+
+    <!-- tz-compliance -->
+    <script>window.dataLayer=window.dataLayer||[];function tzg(){window.dataLayer.push(arguments);}tzg('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});window.TZ_ROOT='../';</script>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../" title="ToolzMoolz — all tools"><img src="../assets/logo.svg" alt="ToolzMoolz" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-symbol',textContent:'☀'}))"/><span class="nav-tool-name">SolMax</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" data-page="home" class="active" data-i18n="nav_home">Home</a>
+      <a href="#guide" data-page="guide" data-i18n="nav_guide">How to use</a>
+      <a href="#tool" data-page="tool" data-i18n="nav_tool">Tool</a>
+      <a href="#about" data-page="about" data-i18n="nav_about">About</a>
+      <a href="#contact" data-page="contact" data-i18n="nav_contact">Contact</a>
+      <div class="lang-select-wrap">
+        <select id="langSelect" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ur">اردو</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ====== PAGE: HOME ====== -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <p class="hero-eyebrow" data-i18n="home_eyebrow">Precision Solar Alignment Instrument</p>
+    <h1 class="hero-title"><span data-i18n="home_title_1">Maximise solar yield</span><br><em data-i18n="home_title_2">with geometry.</em></h1>
+    <p class="hero-sub" data-i18n="home_sub">Enter your location, lock the sun's direction with your compass, and SolMax calculates the exact tilt, panel facing direction, and two-leg stand angles that capture the most sunlight — from first-principles astronomy, right in your browser. Free, no cloud, no data collection.</p>
+    <div class="hero-cta">
+      <a href="#tool" class="btn btn-primary btn-lg"><span data-i18n="home_cta">Open the tool</span> &nbsp;→</a>
+    </div>
+  </div>
+
+  <div class="section-wrap">
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">☀</div>
+        <h3 data-i18n="feat1_title">Smart Solar Geometry</h3>
+        <p data-i18n="feat1_desc">Uses standard solar-position equations (declination, hour angle, incidence) to find your optimal panel angle — no API calls, no cloud dependency.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧭</div>
+        <h3 data-i18n="feat2_title">Live Sun Compass</h3>
+        <p data-i18n="feat2_desc">Point your device at the sun to see its exact position on a compass. Lock the sun direction for optimum panel facing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3 data-i18n="feat3_title">Stand Angle Calculator</h3>
+        <p data-i18n="feat3_desc">Get exact angles for the two-leg stand: front leg, back leg, base width, and leg heights — ready for installation.</p>
+      </div>
+    </div>
+
+    <div class="section-alt"><div class="how-section">
+      <h2 data-i18n="how_title">How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <strong data-i18n="how_step1_title">Enter your location</strong>
+            <span data-i18n="how_step1_desc">Use GPS or type coordinates. Your latitude drives the whole calculation — and activates the live Sun Compass.</span>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <strong data-i18n="how_step2_title">Set fitting height & roof type</strong>
+            <span data-i18n="how_step2_desc">Choose roof or ground mounting, set roof type (flat/sloped), and adjustment type (stationary/movable).</span>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <strong data-i18n="how_step3_title">Lock sun direction & calculate</strong>
+            <span data-i18n="how_step3_desc">Use the compass to lock the sun's real-time direction, fetch weather, then calculate optimal alignment and stand angles.</span>
+          </div>
+        </div>
+            <span>SolMax computes tilt, direction, and row spacing optimized for annual, winter, or summer yield.</span>
+          </div>
+        </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ====== PAGE: HOW TO USE ====== -->
+<section class="page" id="page-guide">
+  <div class="section-wrap guide-page">
+    <h1 class="page-title" data-i18n="guide_title">How to use SolMax</h1>
+    <p class="page-sub" data-i18n="guide_sub">A step-by-step walkthrough — from location to optimised panel alignment.</p>
+
+    <!-- OVERVIEW FLOW -->
+    <div class="guide-flow">
+      <div class="guide-flow-step"><span class="flow-num">1</span><strong data-i18n="guide_flow_location">Location</strong><span data-i18n="guide_flow_location_sub">GPS or coordinates</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="guide-flow-step"><span class="flow-num">2</span><strong data-i18n="guide_flow_fitting">Fitting Height</strong><span data-i18n="guide_flow_fitting_sub">Roof or ground</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="guide-flow-step"><span class="flow-num">3</span><strong data-i18n="guide_flow_roof">Roof &amp; Panels</strong><span data-i18n="guide_flow_roof_sub">Type, tilt, wattage</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="guide-flow-step"><span class="flow-num">4</span><strong data-i18n="guide_flow_compass">Sun Compass</strong><span data-i18n="guide_flow_compass_sub">Lock sun direction</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="guide-flow-step"><span class="flow-num">5</span><strong data-i18n="guide_flow_weather">Weather</strong><span data-i18n="guide_flow_weather_sub">Clouds, temp, soiling</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="guide-flow-step"><span class="flow-num">6</span><strong data-i18n="guide_flow_calculate">Calculate</strong><span data-i18n="guide_flow_calculate_sub">Optimal alignment &amp; stand angles</span></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">1</span><h2 data-i18n="guide_step1_title">Enter your location</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="120" cy="110" r="70" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <ellipse cx="120" cy="110" rx="70" ry="18" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <line x1="120" y1="40" x2="120" y2="110" stroke="var(--accent)" stroke-width="2" stroke-dasharray="3 3"/>
+            <circle cx="120" cy="40" r="4" fill="var(--accent)"/>
+            <text x="126" y="36" font-size="9" fill="var(--body-muted)" font-family="DM Mono, monospace">your lat</text>
+            <line x1="50" y1="110" x2="120" y2="110" stroke="var(--body-faint)" stroke-width="1" stroke-dasharray="2 2"/>
+            <text x="16" y="114" font-size="8" fill="var(--body-faint)" font-family="DM Mono, monospace">equator</text>
+            <path d="M85 130 Q120 118 155 130" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="92" y="146" font-size="8" fill="var(--accent)" font-family="DM Mono, monospace">latitude angle</text>
+            <circle cx="50" cy="165" r="3" fill="var(--success)"/>
+            <text x="58" y="169" font-size="9" fill="var(--body)" font-family="DM Sans, sans-serif">GPS auto-detect</text>
+            <circle cx="50" cy="180" r="3" fill="var(--accent)"/>
+            <text x="58" y="184" font-size="9" fill="var(--body)" font-family="DM Sans, sans-serif">Manual coordinates</text>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <p data-i18n="guide_step1_p1">SolMax needs your <strong>latitude</strong> and <strong>longitude</strong> — these are the only inputs that drive the solar geometry. Your latitude determines how high the sun climbs in your sky throughout the year.</p>
+          <div class="guide-tip">
+            <span class="tip-label" data-icon="bolt" data-i18n="guide_step1_tip_label">Two ways</span>
+            <span data-i18n="guide_step1_tip">Tap <strong>"Use my current location"</strong> for instant GPS coordinates, or enter latitude/longitude manually. Either way unlocks the live Sun Compass and updates the elevation chart above.</span>
+          </div>
+          <p data-i18n="guide_step1_p2">The sun chart shows three curves — winter solstice, equinox, and summer solstice. The higher a curve reaches, the more direct sunlight your panels receive on those days. Once you have a location, the chart becomes specific to <strong>your latitude</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">2</span><h2 data-i18n="guide_step2_title">Set fitting height</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+            <rect x="60" y="20" width="120" height="90" rx="4" fill="none" stroke="var(--border)" stroke-width="2"/>
+            <text x="120" y="55" font-size="11" fill="var(--heading)" font-family="DM Sans, sans-serif" text-anchor="middle" font-weight="600">ROOF</text>
+            <text x="120" y="72" font-size="9" fill="var(--body-muted)" font-family="DM Mono, monospace" text-anchor="middle">11 ft default</text>
+            <rect x="60" y="120" width="120" height="30" rx="4" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <text x="120" y="140" font-size="11" fill="var(--accent)" font-family="DM Sans, sans-serif" text-anchor="middle" font-weight="600">GROUND</text>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step2_roof_title">Roof mounting</h3>
+            <p data-i18n="guide_step2_roof">Panels are installed on your rooftop. Default first-floor height is 11 feet. This is the most common residential setup.</p>
+          </div>
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step2_ground_title">Ground mounting</h3>
+            <p data-i18n="guide_step2_ground">Panels are installed on a standalone frame on the ground. This gives full freedom of angle and direction, but requires more space and structural support.</p>
+          </div>
+          <div class="guide-tip">
+            <span class="tip-label" data-icon="bolt" data-i18n="guide_step2_tip_label">Height matters</span>
+            <span data-i18n="guide_step2_tip">The fitting height affects wind exposure, structural requirements, and maintenance access. Higher installations need stronger mounting hardware.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">3</span><h2 data-i18n="guide_step3_title">Set roof type &amp; panel specs</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 170 L120 40 L200 170 Z" fill="none" stroke="var(--border)" stroke-width="2"/>
+            <line x1="120" y1="40" x2="120" y2="170" stroke="var(--body-faint)" stroke-width="1" stroke-dasharray="2 3"/>
+            <text x="124" y="106" font-size="8" fill="var(--body-faint)" font-family="DM Mono, monospace">90°</text>
+            <path d="M100 75 L120 40 L140 75" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="112" y="80" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace">pitch</text>
+            <line x1="40" y1="170" x2="80" y2="170" stroke="var(--heading)" stroke-width="2"/>
+            <line x1="120" y1="170" x2="160" y2="170" stroke="var(--heading)" stroke-width="2"/>
+            <rect x="72" y="110" width="16" height="60" rx="2" fill="var(--accent)" opacity="0.5"/>
+            <rect x="108" y="90" width="16" height="80" rx="2" fill="var(--accent)" opacity="0.7"/>
+            <rect x="144" y="70" width="16" height="100" rx="2" fill="var(--accent)" opacity="0.9"/>
+            <text x="68" y="184" font-size="8" fill="var(--body-muted)" font-family="DM Mono, monospace">flush mount</text>
+            <text x="148" y="184" font-size="8" fill="var(--body-muted)" font-family="DM Mono, monospace">tilt frames</text>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step3_roof_type_title">Roof type</h3>
+            <p data-i18n="guide_step3_roof_type"><strong>Flat</strong> — your roof is almost level. Panels need a tilted stand to angle them toward the sun. <strong>Sloped</strong> — your roof already has an angle built in, and panels can follow that slope.</p>
+          </div>
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step3_adjustment_title">Adjustment type</h3>
+            <p data-i18n="guide_step3_adjustment"><strong>Stationary</strong> — panels are fixed to the roof through a stand at a set angle. <strong>Movable</strong> — panels can be adjusted or re-angled seasonally.</p>
+          </div>
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step3_compass_title">Roof facing compass</h3>
+            <p data-i18n="guide_step3_compass">Drag the needle or tap a compass letter to set the direction your roof slopes toward. This matters because a south-facing roof (in the northern hemisphere) gets the most total sunlight.</p>
+          </div>
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step3_wattage_title">Panel wattage</h3>
+            <p data-i18n="guide_step3_wattage">Enter your panel's nameplate power rating in watts. Typical residential panels range from <strong>350W to 500W</strong>. This is used alongside the geometry and weather data to estimate your energy yield.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">4</span><h2 data-i18n="guide_step4_title">Use the Sun Compass &amp; Lock Direction</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="120" cy="100" r="68" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <circle cx="120" cy="100" r="50" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <text x="120" y="26" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">N</text>
+            <text x="120" y="180" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">S</text>
+            <text x="46" y="104" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">W</text>
+            <text x="194" y="104" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">E</text>
+            <line x1="120" y1="100" x2="155" y2="50" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="155" cy="50" r="4" fill="#EF4444"/>
+            <text x="160" y="46" font-size="9" fill="#EF4444" font-family="DM Mono, monospace" font-weight="600">YOU</text>
+            <line x1="120" y1="100" x2="175" y2="118" stroke="#FBBF24" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 3"/>
+            <circle cx="175" cy="118" r="4" fill="#FBBF24"/>
+            <text x="180" y="122" font-size="9" fill="#FBBF24" font-family="DM Mono, monospace" font-weight="600">SUN</text>
+            <circle cx="120" cy="100" r="5" fill="var(--accent)"/>
+            <text x="20" y="196" font-size="8" fill="var(--body-faint)" font-family="DM Mono, monospace">Red = your heading · Yellow = sun's position</text>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <p data-i18n="guide_step4_p1">Once your location is set, the <strong>Sun Compass</strong> appears automatically. Rotate your device and watch two needles track in real time:</p>
+          <ul class="guide-list">
+            <li data-i18n="guide_step4_red"><span class="guide-dot" style="background:#EF4444"></span><strong>Red needle</strong> — the direction you're currently pointing your device (from the built-in compass sensor).</li>
+            <li data-i18n="guide_step4_yellow"><span class="guide-dot" style="background:#FBBF24"></span><strong>Yellow needle</strong> — the sun's exact position in the sky right now, calculated from your coordinates and the current time.</li>
+          </ul>
+          <div class="guide-tip">
+            <span class="tip-label" data-icon="bolt" data-i18n="guide_step4_tip_label">Lock the sun direction</span>
+            <span data-i18n="guide_step4_tip">Tap <strong>"Lock Sun Direction"</strong> to capture the current sun azimuth. This locks in the optimum direction your panels should face, and will be used in the final calculation.</span>
+          </div>
+          <p data-i18n="guide_step4_p2">The locked direction appears on the results compass, showing you exactly which way to orient your panels for maximum energy capture.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">5</span><h2 data-i18n="guide_step5_title">Adjust for weather</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg">
+            <path d="M55 100 A35 35 0 0 1 85 65 A40 40 0 0 1 158 62 A30 30 0 0 1 185 100 Z" fill="none" stroke="var(--body-muted)" stroke-width="2"/>
+            <circle cx="75" cy="85" r="3" fill="var(--body-muted)"/>
+            <circle cx="95" cy="78" r="3" fill="var(--body-muted)"/>
+            <circle cx="110" cy="85" r="3" fill="var(--body-muted)"/>
+            <circle cx="155" cy="80" r="3" fill="var(--body-muted)"/>
+            <circle cx="140" cy="90" r="3" fill="var(--body-muted)"/>
+            <line x1="20" y1="120" x2="220" y2="120" stroke="var(--border)" stroke-width="1"/>
+            <circle cx="30" cy="120" r="3" fill="var(--accent)"/>
+            <text x="40" y="124" font-size="8" fill="var(--body)" font-family="DM Sans, sans-serif">Cloud cover</text>
+            <circle cx="30" cy="135" r="3" fill="var(--accent)"/>
+            <text x="40" y="139" font-size="8" fill="var(--body)" font-family="DM Sans, sans-serif">Daytime temperature</text>
+            <circle cx="30" cy="150" r="3" fill="var(--accent)"/>
+            <text x="40" y="154" font-size="8" fill="var(--body)" font-family="DM Sans, sans-serif">Days since rain (soiling)</text>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <p data-i18n="guide_step5_p1">Solar geometry assumes clear skies, but real weather reduces output. Adjust three sliders to match your site:</p>
+          <ul class="guide-list">
+            <li data-i18n="guide_step5_cloud"><strong>Cloud cover</strong> — average percentage. 0% = desert clear, 100% = permanent overcast. The default of 35% approximates a mild climate. Fetch real data with one click.</li>
+            <li data-i18n="guide_step5_temp"><strong>Daytime temperature</strong> — panels lose efficiency above 25°C. Hot climates see 8–15% power loss on summer afternoons.</li>
+            <li data-i18n="guide_step5_rain"><strong>Days since rain</strong> — dust and dirt accumulate on dry panels, blocking light. Rain washes them clean. 7 days is a typical default.</li>
+          </ul>
+          <div class="guide-tip">
+            <span class="tip-label" data-icon="refresh" data-i18n="guide_step5_tip_label">One-click fetch</span>
+            <span data-i18n="guide_step5_tip">Tap <strong>"Fetch typical weather for my location"</strong> to pull real 7-day average data from Open-Meteo (free, no API key). Adjust further if your site is unusual.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">6</span><h2 data-i18n="guide_step6_title">Calculate &amp; interpret results</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="100" height="36" rx="6" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1"/>
+            <text x="60" y="26" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">TILT</text>
+            <text x="60" y="39" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle">30°</text>
+            <rect x="130" y="10" width="100" height="36" rx="6" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1"/>
+            <text x="180" y="26" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">DIRECTION</text>
+            <text x="180" y="39" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle">S 180°</text>
+            <rect x="70" y="60" width="100" height="36" rx="6" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1"/>
+            <text x="120" y="76" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">SUN HOURS/DAY</text>
+            <text x="120" y="89" font-size="11" fill="var(--heading)" font-family="DM Mono, monospace" text-anchor="middle">5.2 hrs</text>
+            <text x="120" y="116" font-size="9" fill="var(--body-muted)" font-family="DM Mono, monospace" text-anchor="middle">Month-by-month breakdown</text>
+            <rect x="20" y="126" width="40" height="12" rx="2" fill="var(--accent)" opacity="0.4"/>
+            <rect x="62" y="118" width="40" height="20" rx="2" fill="var(--accent)" opacity="0.7"/>
+            <rect x="104" y="108" width="40" height="30" rx="2" fill="var(--accent)"/>
+            <rect x="146" y="114" width="40" height="24" rx="2" fill="var(--accent)" opacity="0.6"/>
+            <rect x="188" y="126" width="40" height="12" rx="2" fill="var(--accent)" opacity="0.4"/>
+            <text x="20" y="156" font-size="7" fill="var(--body-faint)" font-family="DM Mono, monospace" text-anchor="middle">J</text>
+            <text x="62" y="156" font-size="7" fill="var(--body-faint)" font-family="DM Mono, monospace" text-anchor="middle">M</text>
+            <text x="104" y="156" font-size="7" fill="var(--body-faint)" font-family="DM Mono, monospace" text-anchor="middle">J</text>
+            <text x="146" y="156" font-size="7" fill="var(--body-faint)" font-family="DM Mono, monospace" text-anchor="middle">S</text>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <p data-i18n="guide_step6_p1">Tap <strong>"Calculate optimal alignment"</strong> — SolMax runs a two-stage brute-force search across all possible tilts and directions to find the combination that maximizes sunlight capture for your chosen priority.</p>
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step6_output_title">Understanding the outputs</h3>
+            <ul class="guide-list">
+              <li data-i18n="guide_step6_tilt"><strong>Tilt angle</strong> — how far the panel leans back from flat. Steeper tilts favour low winter sun; shallower tilts favour high summer sun.</li>
+              <li data-i18n="guide_step6_direction"><strong>Direction (azimuth)</strong> — the compass direction the panel faces. This matches your locked sun direction for optimum energy capture.</li>
+              <li data-i18n="guide_step6_hours"><strong>Effective sun-hours/day</strong> — the average daily equivalent of full-intensity, straight-on sunlight after accounting for geometry, weather, and system losses.</li>
+              <li data-i18n="guide_step6_stand"><strong>Stand angles</strong> — the exact angles for the two-leg stand: front leg (vertical) and back leg (angled to achieve the tilt), plus the base width and leg heights.</li>
+            </ul>
+          </div>
+          <div class="guide-subsection">
+            <h3 data-i18n="guide_step6_charts_title">Reading the charts</h3>
+            <ul class="guide-list">
+              <li data-i18n="guide_step6_sun_chart"><strong>Sun elevation chart</strong> — shows how high the sun gets at every hour for winter solstice, equinox, and summer solstice. The 10° dashed line marks the altitude below which light is too scattered to be useful.</li>
+              <li data-i18n="guide_step6_bar_chart"><strong>Bar chart</strong> — effective sun-hours per month. The tallest bar shows the best month. The pattern across the year tells you if your array is balanced.</li>
+              <li data-i18n="guide_step6_table"><strong>Month table</strong> — exact numbers for each month: productive window, day length, and effective hours.</li>
+            </ul>
+          </div>
+          <div class="guide-tip">
+            <span class="tip-label" data-icon="target" data-i18n="guide_step6_tip_label">Optimization priority</span>
+            <span data-i18n="guide_step6_tip"><strong>Annual</strong> = best total across the whole year (the safe default). <strong>Winter</strong> = steeper tilt for low winter sun. <strong>Summer</strong> = shallower tilt for high summer sun.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCIENCE SECTION -->
+    <div class="guide-card guide-science">
+      <div class="guide-step-header"><span class="guide-step-num">⚙</span><h2 data-i18n="guide_science_title">The science in one page</h2></div>
+      <div class="guide-row">
+        <div class="guide-visual">
+          <svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="60" height="26" rx="4" fill="var(--accent)" opacity="0.2"/>
+            <text x="40" y="27" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">LATITUDE</text>
+            <path d="M80 23 L100 23" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="100" y="10" width="60" height="26" rx="4" fill="var(--accent)" opacity="0.3"/>
+            <text x="130" y="27" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">DECLINATION</text>
+            <path d="M80 55 L100 55" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="10" y="48" width="60" height="26" rx="4" fill="var(--accent)" opacity="0.2"/>
+            <text x="40" y="65" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">HOUR ANGLE</text>
+            <path d="M160 23 L180 23" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="180" y="10" width="55" height="26" rx="4" fill="var(--accent)" opacity="0.5"/>
+            <text x="207" y="27" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">ALTITUDE</text>
+            <path d="M160 55 L180 55" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="100" y="48" width="55" height="26" rx="4" fill="var(--accent)" opacity="0.5"/>
+            <text x="127" y="65" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">AZIMUTH</text>
+            <path d="M150 68 L195 78" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="150" y="80" width="80" height="26" rx="6" fill="var(--accent)"/>
+            <text x="190" y="96" font-size="9" fill="#fff" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">INCIDENCE</text>
+            <path d="M40 74 L90 86" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="10" y="80" width="75" height="26" rx="4" fill="var(--accent)" opacity="0.3"/>
+            <text x="47" y="96" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">PANEL TILT</text>
+            <rect x="10" y="118" width="75" height="26" rx="4" fill="var(--accent)" opacity="0.3"/>
+            <text x="47" y="134" font-size="9" fill="var(--accent)" font-family="DM Mono, monospace" text-anchor="middle">PANEL AZIMUTH</text>
+            <path d="M47 106 L47 118" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <path d="M190 106 L190 118 L140 118" stroke="var(--body-muted)" stroke-width="1.5"/>
+            <rect x="100" y="122" width="100" height="26" rx="6" fill="var(--success)"/>
+            <text x="150" y="138" font-size="10" fill="#fff" font-family="DM Mono, monospace" text-anchor="middle" font-weight="600">OPTIMUM RESULT</text>
+            <path d="M85 135 L100 135" stroke="var(--body-muted)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="guide-text">
+          <p data-i18n="guide_science_p1">SolMax uses <strong>standard solar-position equations</strong> from the solar engineering literature (Duffie &amp; Beckman, 2013). The calculation chain is straightforward:</p>
+          <ol class="guide-list guide-ol">
+            <li data-i18n="guide_science_s1"><strong>Solar declination</strong> — where the sun is north/south of the equator on a given day (varies from −23.45° to +23.45° through the year).</li>
+            <li data-i18n="guide_science_s2"><strong>Hour angle &amp; day length</strong> — how far east or west the sun is from the local meridian. Sunrise to sunset defines the daylight window.</li>
+            <li data-i18n="guide_science_s3"><strong>Solar altitude &amp; azimuth</strong> — the sun's height above the horizon and its compass direction at any moment.</li>
+            <li data-i18n="guide_science_s4"><strong>Angle of incidence</strong> — the master equation. It combines latitude, declination, hour angle, panel tilt, and panel azimuth into one number representing how "straight-on" the sunlight hits your panel.</li>
+          </ol>
+          <p data-i18n="guide_science_p2">The optimiser evaluates <strong>thousands of (tilt, azimuth) combinations</strong> across representative days for every month, picks the best one, then refines with finer resolution around the winner. The result is the static tilt and direction that captures the most sunlight for your chosen priority.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div class="guide-card">
+      <div class="guide-step-header"><span class="guide-step-num">✓</span><h2 data-i18n="guide_ref_title">Quick reference</h2></div>
+      <div class="guide-ref-grid">
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="pin"></span><span data-i18n="guide_ref_gps"><strong>GPS location</strong> — most accurate. Auto-detects timezone.</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="roof"></span><span data-i18n="guide_ref_fitting"><strong>Fitting height</strong> — Roof (default 11ft) or Ground mounting.</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="compass"></span><span data-i18n="guide_ref_compass"><strong>Sun Compass</strong> — Point device at sun, then lock direction.</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="roof"></span><span data-i18n="guide_ref_roof"><strong>Roof type</strong> — Flat or Sloped. Stationary or Movable adjustment.</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="cloud"></span><span data-i18n="guide_ref_weather"><strong>Weather fetch</strong> — one click pulls real data from Open-Meteo.</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="target"></span><span data-i18n="guide_ref_priority"><strong>Priority</strong> — Annual (best total), Winter (steeper), Summer (shallower).</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="bolt"></span><span data-i18n="guide_ref_results"><strong>Results</strong> — tilt, direction, stand angles, effective sun-hours/day.</span></div>
+        <div class="guide-ref-item"><span class="ref-icon" data-icon="feedback"></span><span data-i18n="guide_ref_feedback"><strong>Feedback</strong> — submit actual production data to help refine the model.</span></div>
+      </div>
+    </div>
+
+    <div class="guide-cta">
+      <p data-i18n="guide_cta">Ready to optimise your solar array?</p>
+      <a href="#tool" class="btn btn-primary btn-lg"><span data-i18n="guide_cta_btn">Open the tool</span> &nbsp;→</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PAGE: TOOL ====== -->
+<section class="page" id="page-tool">
+  <div class="wrap">
+
+    <div class="chart-card">
+      <div class="chart-label"><span data-i18n="chart_title">SUN ELEVATION ACROSS THE DAY</span><span id="chartLatLabel" data-i18n="chart_awaiting">— awaiting location —</span></div>
+      <p class="chart-sub" data-i18n="chart_sub">How high the sun climbs above the horizon at different times of year — low curves mean long shadows and shorter productive windows, high curves mean more direct light.</p>
+      <div id="sunChartMount"></div>
+      <div class="chart-legend">
+        <span><i class="dot" style="background:#5B8DB8"></i><span data-i18n="chart_legend_dec">Dec 21</span> <small style="color:var(--text-faint);" data-i18n="chart_legend_winter">(winter solstice)</small></span>
+        <span><i class="dot" style="background:#FE7F2D"></i><span data-i18n="chart_legend_equinox">Equinox</span></span>
+        <span><i class="dot" style="background:#D96C4A"></i><span data-i18n="chart_legend_jun">Jun 21</span> <small style="color:var(--text-faint);" data-i18n="chart_legend_summer">(summer solstice)</small></span>
+        <span style="color:var(--text-faint)" data-i18n="chart_legend_threshold">┄ 10° usable-light threshold</span>
+      </div>
+      <div class="chart-insight" id="chartInsight"></div>
+    </div>
+
+    <div class="modules">
+
+      <!-- MODULE 1: LOCATION -->
+      <div class="module">
+        <div class="module-head"><span class="module-num">1</span><h3 class="module-title" data-icon="pin"><span data-i18n="mod1_title">Location</span></h3></div>
+        <p class="module-desc" data-i18n="mod1_desc">Your latitude determines the sun's height in the sky all year — the single biggest factor in panel angle.</p>
+        <div class="row">
+          <button class="btn btn-primary" id="btnGeo" type="button" data-icon="pin"><span data-i18n="mod1_geo_btn">Use my current location</span></button>
+          <button class="btn btn-ghost" id="btnManual" type="button"><span data-i18n="mod1_manual_btn">Enter manually</span></button>
+        </div>
+        <div class="loc-status" id="locStatus"></div>
+        <div class="row conditional" id="latlonRow">
+          <div class="field">
+            <div class="field-label-row">
+              <label for="latInput" data-icon="target" data-i18n="lat_label">Latitude</label>
+              <button type="button" class="info-btn" data-info="location" data-icon="info" aria-label="What is latitude?" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="latInput" step="0.0001" placeholder="e.g. 24.8607">
+          </div>
+          <div class="field">
+            <div class="field-label-row">
+              <label for="lonInput" data-icon="target" data-i18n="lon_label">Longitude</label>
+              <button type="button" class="info-btn" data-info="location" data-icon="info" aria-label="What is longitude?" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="lonInput" step="0.0001" placeholder="e.g. 67.0011">
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 2: FITTING HEIGHT -->
+      <div class="module">
+        <div class="module-head"><span class="module-num">2</span><h3 class="module-title" data-icon="roof"><span data-i18n="mod2_title">Fitting Height</span></h3></div>
+        <p class="module-desc" data-i18n="mod2_desc">Where will the panels be installed? This affects wind exposure and structural requirements.</p>
+        <div class="field">
+          <div class="field-label-row">
+            <label data-icon="roof"><span data-i18n="mod2_label">Installation location</span></label>
+            <button type="button" class="info-btn" data-info="fittingHeight" data-icon="info" aria-label="What do these mean?" aria-expanded="false"></button>
+          </div>
+          <div class="segmented" id="fittingHeightGroup">
+            <label class="seg-btn active"><input type="radio" name="fittingHeight" value="roof" checked><span data-icon="roof"></span><span data-i18n="mod2_roof">Roof</span></label>
+            <label class="seg-btn"><input type="radio" name="fittingHeight" value="ground"><span data-icon="ground"></span><span data-i18n="mod2_ground">Ground</span></label>
+          </div>
+        </div>
+        <div class="row conditional" id="roofHeightRow">
+          <div class="field">
+            <div class="field-label-row">
+              <label for="roofHeight" data-icon="ruler"><span data-i18n="mod2_roof_height">Roof height (feet)</span></label>
+              <button type="button" class="info-btn" data-info="roofHeight" data-icon="info" aria-label="What is roof height?" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="roofHeight" value="11" min="0" max="100">
+            <span class="hint" data-i18n="mod2_roof_hint">Typical first floor height is 11 feet</span>
+          </div>
+        </div>
+        <div class="row conditional" id="groundHeightRow" style="display:none;">
+          <div class="field">
+            <div class="field-label-row">
+              <label for="groundHeight" data-icon="ruler"><span data-i18n="mod2_ground_height">Ground stand height (feet)</span></label>
+              <button type="button" class="info-btn" data-info="groundHeight" data-icon="info" aria-label="What is ground stand height?" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="groundHeight" value="11" min="0" max="100">
+            <span class="hint" data-i18n="mod2_ground_hint">Height of the stand from ground to panel bottom edge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUN COMPASS — appears after location is confirmed -->
+      <div class="module" id="sunCompassModule" style="display:none;">
+        <div class="module-head"><span class="module-num"><span data-icon="compass"></span></span><h3 class="module-title" data-icon="compass"><span data-i18n="sun_compass_title">Sun compass</span></h3></div>
+        <p class="module-desc" id="sunCompassDesc" data-i18n="sun_compass_desc">Point your device toward the sun to connect the solar geometry with the real world.</p>
+        <div class="sun-compass-row">
+          <div id="sunCompassMount"></div>
+          <div class="sun-compass-info">
+            <div class="sun-info-row"><span class="sun-info-label" data-i18n="sun_heading_label">Your heading</span><span class="sun-info-value" id="sunHeadingVal">—</span></div>
+            <div class="sun-info-row"><span class="sun-info-label" data-i18n="sun_position_label">Sun position</span><span class="sun-info-value" id="sunAzimuthVal">—</span></div>
+            <div class="sun-info-row"><span class="sun-info-label" data-i18n="sun_diff_label">Difference</span><span class="sun-info-value" id="sunDiffVal">—</span></div>
+            <div class="sun-info-row"><span class="sun-info-label" data-i18n="sun_time_label">Local time</span><span class="sun-info-value" id="sunLocalTimeVal">—</span></div>
+          </div>
+        </div>
+        <div class="sun-compass-hint" id="sunCompassHint">
+          <span data-icon="phoneTilt"></span>
+          <span>Rotate your device so the <strong>red needle</strong> points toward the <strong>yellow needle</strong> — that's where the sun is right now. <button class="btn btn-ghost" id="btnCalibrateSun" type="button" data-icon="check" style="margin-top:8px;">I'm pointing at the sun</button></span>
+        </div>
+        <div class="sun-compass-lock" id="sunCompassLock" style="display:none; margin-top:12px;">
+          <button class="btn btn-primary" id="btnLockSunDirection" type="button" data-icon="lock"><span data-i18n="sun_compass_lock_btn">Lock Sun Direction</span></button>
+          <div class="weather-status" id="sunLockStatus"></div>
+        </div>
+        <div class="weather-status" id="sunCompassStatus"></div>
+      </div>
+
+      <!-- MODULE 3: ROOF & PANELS -->
+      <div class="module">
+        <div class="module-head"><span class="module-num">3</span><h3 class="module-title" data-icon="roof"><span data-i18n="mod3_title">Roof &amp; panels</span></h3></div>
+        <p class="module-desc" data-i18n="mod3_desc">Tells the instrument what you're mounting to, and your panel specification.</p>
+        <div class="field">
+          <div class="field-label-row">
+            <label data-icon="roof"><span data-i18n="mod3_roof_type">Roof type</span></label>
+            <button type="button" class="info-btn" data-info="roofTypeSlope" data-icon="info" aria-label="What do these mean?" aria-expanded="false"></button>
+          </div>
+          <div class="segmented" id="roofTypeGroup">
+            <label class="seg-btn active"><input type="radio" name="roofType" value="flat" checked><span data-icon="roofFlat"></span><span data-i18n="mod3_flat">Flat</span></label>
+            <label class="seg-btn"><input type="radio" name="roofType" value="sloped"><span data-icon="roof"></span><span data-i18n="mod3_sloped">Sloped</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label-row">
+            <label data-icon="sliders"><span data-i18n="mod3_adjustment">Adjustment type</span></label>
+            <button type="button" class="info-btn" data-info="adjustmentType" data-icon="info" aria-label="What do these mean?" aria-expanded="false"></button>
+          </div>
+          <div class="segmented" id="adjustmentTypeGroup">
+            <label class="seg-btn active"><input type="radio" name="adjustmentType" value="stationary" checked><span data-icon="roof"></span><span data-i18n="mod3_stationary">Stationary</span></label>
+            <label class="seg-btn"><input type="radio" name="adjustmentType" value="movable"><span data-icon="sliders"></span><span data-i18n="mod3_movable">Movable</span></label>
+          </div>
+        </div>
+        <div class="row conditional" id="pitchRow">
+          <div class="field">
+            <div class="field-label-row">
+              <label for="roofPitch" data-icon="angle"><span data-i18n="mod3_roof_pitch">Roof pitch (°)</span></label>
+              <button type="button" class="info-btn" data-info="roofPitch" data-icon="info" aria-label="What is roof pitch?" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="roofPitch" value="30" min="0" max="90">
+            <span class="hint" data-i18n="mod3_roof_pitch_hint">0° = flat, 90° = a vertical wall. Most house roofs are 15–40°</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label-row">
+            <label data-icon="compass"><span data-i18n="mod3_roof_face">Which way does the roof slope face?</span></label>
+            <button type="button" class="info-btn" data-info="roofFacing" data-icon="info" aria-label="How do I find this?" aria-expanded="false"></button>
+          </div>
+          <div class="compass-wrap">
+            <div id="facingCompassMount"></div>
+            <div class="compass-readout">
+              <span class="deg" id="facingDegLabel">180°</span>
+              <span class="name" id="facingNameLabel">South</span>
+              <span class="drag-hint" data-i18n="drag_hint">Drag the needle, or tap a letter, to set the direction your roof faces.</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <div class="field-label-row">
+              <label for="panelWattage" data-icon="bolt"><span data-i18n="mod3_panel_watt">Panel wattage (W)</span></label>
+              <button type="button" class="info-btn" data-info="panelWattage" data-icon="info" aria-label="Info" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="panelWattage" value="400" min="100" max="800" step="5">
+          </div>
+          <div class="field" style="opacity:0.55;">
+            <div class="field-label-row">
+              <label for="panelEfficiency" data-icon="ruler"><span data-i18n="mod3_panel_eff">Panel efficiency (%)</span></label>
+              <button type="button" class="info-btn" data-info="panelEfficiency" data-icon="info" aria-label="Info" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="panelEfficiency" value="21" min="10" max="30" step="0.5">
+          </div>
+          <div class="field" style="opacity:0.55;">
+            <div class="field-label-row">
+              <label for="tempCoeff" data-icon="spacing"><span data-i18n="mod3_temp_coeff">Temp coefficient (%/°C)</span></label>
+              <button type="button" class="info-btn" data-info="tempCoeff" data-icon="info" aria-label="Info" aria-expanded="false"></button>
+            </div>
+            <input type="number" id="tempCoeff" value="-0.35" min="-0.6" max="-0.15" step="0.01">
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label-row">
+            <label data-icon="target"><span data-i18n="mod3_optimize">Optimize for</span></label>
+            <button type="button" class="info-btn" data-info="priority" data-icon="info" aria-label="What do these mean?" aria-expanded="false"></button>
+          </div>
+          <div class="segmented" id="priorityGroup">
+            <label class="seg-btn active"><input type="radio" name="priority" value="annual" checked><span data-icon="cycle"></span><span data-i18n="mod3_annual">Annual</span></label>
+            <label class="seg-btn"><input type="radio" name="priority" value="winter"><span data-icon="snow"></span><span data-i18n="mod3_winter">Winter</span></label>
+            <label class="seg-btn"><input type="radio" name="priority" value="summer"><span data-icon="sun"></span><span data-i18n="mod3_summer">Summer</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 4: WEATHER & ENVIRONMENT -->
+      <div class="module">
+        <div class="module-head"><span class="module-num">4</span><h3 class="module-title" data-icon="cloud"><span data-i18n="mod4_title">Weather &amp; environment</span></h3></div>
+        <p class="module-desc" data-i18n="mod4_desc">Local conditions affect real-world output. Adjust these to match your site, or fetch typical data (free, no API key).</p>
+        <div class="row">
+          <div class="field">
+            <label for="cloudCoverSlider" data-icon="cloud"><span data-i18n="mod4_cloud">Average cloud cover</span></label>
+            <input type="range" id="cloudCoverSlider" min="0" max="100" value="35">
+            <div class="range-labels"><span data-i18n="range_clear">Clear</span><span id="cloudCoverVal">35%</span><span data-i18n="range_overcast">Overcast</span></div>
+          </div>
+          <div class="field">
+            <label for="avgTempInput" data-icon="sun"><span data-i18n="mod4_temp">Avg daytime temp (°C)</span></label>
+            <input type="number" id="avgTempInput" value="25" min="-10" max="50">
+          </div>
+          <div class="field">
+            <label for="daysSinceRain" data-icon="ruler"><span data-i18n="mod4_rain">Days since rain (soiling)</span></label>
+            <input type="number" id="daysSinceRain" value="7" min="0" max="90">
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-ghost" id="btnFetchWeather" type="button" data-icon="refresh"><span data-i18n="mod4_fetch_btn">Fetch typical weather for my location</span></button>
+        </div>
+        <div class="weather-status" id="weatherStatus"></div>
+      </div>
+
+    </div>
+
+    <div class="calc-zone">
+      <button class="btn btn-primary btn-full" id="btnCalc" type="button" style="max-width:360px; margin:0 auto;" data-icon="bolt"><span data-i18n="calc_btn">Calculate optimal alignment</span></button>
+      <div class="calc-error" id="calcError"></div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="divider" data-i18n="results_divider">Recommended alignment</div>
+      <div class="readout-panel">
+        <div id="lockedSunDisplay" style="display:none; margin-bottom:16px; padding:10px 14px; background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.2); border-radius:8px; font-size:13px; color:#b45309;">
+          <span data-icon="lock"></span> <strong data-i18n="results_locked_sun">Locked sun direction:</strong> <span id="lockedSunText">—</span>
+        </div>
+        <div class="result-compass-row">
+          <div id="resultCompassMount"></div>
+          <div>
+            <div class="k-row"><span class="k" data-icon="compass"><span data-i18n="results_direction">Direction</span></span><button type="button" class="info-btn" data-info="resultAzimuth" data-icon="info" aria-label="Info" aria-expanded="false"></button></div>
+            <div class="v" id="outAzimuth" style="font-size:24px;">—</div>
+          </div>
+        </div>
+        <div class="readout-grid">
+          <div class="readout-item">
+            <div class="k-row"><span class="k" data-icon="angle"><span data-i18n="results_tilt">Tilt angle</span></span><button type="button" class="info-btn" data-info="resultTilt" data-icon="info" aria-label="Info" aria-expanded="false"></button></div>
+            <div class="v" id="outTilt">—<small>°</small></div>
+          </div>
+          <div class="readout-item">
+            <div class="k-row"><span class="k" data-icon="spacing"><span data-i18n="results_spacing">Row spacing</span></span><button type="button" class="info-btn" data-info="resultSpacing" data-icon="info" aria-label="Info" aria-expanded="false"></button></div>
+            <div class="v" id="outSpacing">—</div>
+          </div>
+          <div class="readout-item">
+            <div class="k-row"><span class="k" data-icon="clock"><span data-i18n="results_hours">Peak sun hours/day</span></span><button type="button" class="info-btn" data-info="resultHours" data-icon="info" aria-label="Info" aria-expanded="false"></button></div>
+            <div class="v" id="outHours">—</div>
+          </div>
+        </div>
+        <div class="plain-summary" id="plainSummary"></div>
+        <div id="standAnglePanel"></div>
+        <div class="efficiency-note" id="mismatchNote" style="display:none;"></div>
+      </div>
+
+      <div class="card">
+        <h3 data-icon="barchart"><span data-i18n="results_bar_chart_title">Effective sun-hours by month</span></h3>
+        <div id="barChartMount"></div>
+      </div>
+
+      <div class="card">
+        <h3 data-icon="calendar"><span data-i18n="results_month_table_title">Month-by-month detail</span></h3>
+        <div style="overflow-x:auto;">
+        <table id="monthTable">
+          <thead><tr><th data-icon="calendar"><span data-i18n="month_header">Month</span></th><th data-icon="clock"><span data-i18n="sun_window_header">Sun window</span></th><th data-icon="sun"><span data-i18n="day_length_header">Day length</span></th><th data-icon="bolt"><span data-i18n="effective_hrs_header">Effective hrs</span></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-icon="warning"><span data-i18n="caveats_title">Important notes</span></h3>
+        <ul class="caveats" id="caveatsList"></ul>
+      </div>
+
+      <div class="card" id="feedbackCard">
+        <h3 data-icon="feedback"><span data-i18n="feedback_title">Help SolMax improve — self-learning</span></h3>
+        <p class="feedback-desc" data-i18n="feedback_desc">Once you have actual production data, let us know how close the estimate was. This helps refine the model for your region.</p>
+        <div class="feedback-row">
+          <div class="field" style="max-width:200px;">
+            <label for="feedbackAccuracy" data-i18n="feedback_kwh_label">Actual daily kWh production</label>
+            <input type="number" id="feedbackAccuracy" step="0.1" placeholder="e.g. 12.5">
+          </div>
+          <div class="field" style="max-width:150px;">
+            <label for="feedbackMonths" data-i18n="feedback_months_label">Months of data</label>
+            <input type="number" id="feedbackMonths" value="6" min="1" max="120">
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-ghost" id="btnFeedback" type="button" data-icon="star"><span data-i18n="feedback_submit">Submit feedback</span></button>
+        </div>
+        <div class="feedback-status" id="feedbackStatus"></div>
+        <div class="learning-summary" id="learningSummary"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== PAGE: ABOUT ====== -->
+<section class="page" id="page-about">
+  <div class="section-wrap about-page"> <div class="section-alt">
+    <h1 class="page-title" data-i18n="about_title">About SolMax</h1>
+    <p class="page-sub" data-i18n="about_sub">Understanding the science behind your solar panel alignment</p>
+
+    <div class="about-card">
+      <h2 data-i18n="about_problem_title">The problem it solves</h2>
+      <p data-i18n="about_problem_p1">Solar panels produce the most energy when sunlight hits them straight-on. SolMax finds the <strong>fixed tilt and direction</strong> that captures the most sunlight.</p>
+    </div>
+
+    <div class="about-card">
+      <h2 data-i18n="about_how_title">How the calculation works</h2>
+      <p data-i18n="about_how_p1">SolMax uses standard solar-position equations. At its core are four key quantities:</p>
+      <div class="about-grid">
+        <div class="about-item">
+          <strong data-i18n="about_how_s1_title">Solar declination</strong>
+          <span data-i18n="about_how_s1">The sun's latitude in the sky, ranging from −23.45° to +23.45°.</span>
+        </div>
+        <div class="about-item">
+          <strong data-i18n="about_how_s2_title">Hour angle &amp; day length</strong>
+          <span data-i18n="about_how_s2">The sun's angular position east or west of the local meridian.</span>
+        </div>
+        <div class="about-item">
+          <strong data-i18n="about_how_s3_title">Solar altitude</strong>
+          <span data-i18n="about_how_s3">How high the sun is above the horizon. Below 10° is not useful for power.</span>
+        </div>
+        <div class="about-item">
+          <strong data-i18n="about_how_s4_title">Angle of incidence</strong>
+          <span data-i18n="about_how_s4">How directly the sun hits your panel at any moment.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <h2 data-i18n="about_opt_title">The optimization algorithm</h2>
+      <p data-i18n="about_opt_p1">SolMax uses a two-stage brute-force search:</p>
+      <ul class="about-list">
+        <li data-i18n="about_opt_s1"><strong>Stage 1</strong> — Coarse sweep of all directions and tilts.</li>
+        <li data-i18n="about_opt_s2"><strong>Stage 2</strong> — Fine refinement around the best candidate.</li>
+      </ul>
+      <p data-i18n="about_opt_p2">The result is the static tilt and direction that captures the most sunlight for your chosen priority.</p>
+    </div>
+
+    <div class="about-card">
+      <h2 data-i18n="about_spacing_title">Row spacing</h2>
+      <p data-i18n="about_spacing_p1">SolMax calculates minimum spacing using the worst-case solar altitude on the winter solstice.</p>
+    </div>
+
+    <div class="about-card">
+      <h2 data-i18n="about_limit_title">Limitations</h2>
+      <ul class="about-list">
+        <li data-i18n="about_limit_s1">SolMax models <strong>geometry only</strong>.</li>
+        <li data-i18n="about_limit_s2">It does <strong>not</strong> model cloud cover, humidity, dust, or shading.</li>
+        <li data-i18n="about_limit_s3">Clock times use standard time and your location's astronomical solar noon.</li>
+        <li data-i18n="about_limit_s4">Treat results as an <strong>optimal-aiming guide</strong>, not a guarantee.</li>
+      </ul>
+    </div>
+
+    <div class="about-card">
+      <h2 data-i18n="about_data_title">Data sources</h2>
+      <p data-i18n="about_data_p1">The solar-position algorithms are based on:</p>
+      <ul class="about-list">
+        <li data-i18n="about_data_ref1">Duffie &amp; Beckman (2013). Solar Engineering of Thermal Processes.</li>
+        <li data-i18n="about_data_ref2">Cooper (1969). Klein's average-day approximation.</li>
+        <li data-i18n="about_data_ref3">NOAA Solar Calculator for verification.</li>
+      </ul>
+      <p data-i18n="about_data_p2">No external APIs, no server calls, no data collection.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ====== PAGE: CONTACT ====== -->
+<section class="page" id="page-contact">
+  <div class="section-wrap contact-page"> <div class="section-alt">
+    <h1 class="page-title" data-i18n="contact_title">Contact</h1>
+    <p class="page-sub" data-i18n="contact_sub">Questions, suggestions, or feedback? We'd love to hear from you.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">✉</div>
+        <h3 data-i18n="contact_email">Email</h3>
+        <p><a href="mailto:solmax@solarpanelalignment.com">solmax@solarpanelalignment.com</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon"></div>
+        <h3 data-i18n="contact_github">GitHub</h3>
+        <p><a href="https://github.com/anomalyco/heliotrope-solar" target="_blank">github.com/anomalyco/heliotrope-solar</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">☀</div>
+        <h3 data-i18n="contact_opensource">Open source</h3>
+        <p data-i18n="contact_opensource_desc">SolMax is free and open source. Contributions, issues, and feature requests are welcome on GitHub.</p>
+      </div>
+    </div>
+
+    <div class="contact-form-card">
+        <h3 data-i18n="contact_send_title">Send a message</h3>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="contactName" data-i18n="contact_name_label">Name</label>
+            <input type="text" id="contactName" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="contactEmail" data-i18n="contact_email_label">Email</label>
+            <input type="email" id="contactEmail" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="field">
+          <label for="contactMessage" data-i18n="contact_message_label">Message</label>
+          <textarea id="contactMessage" rows="4" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary"><span data-i18n="contact_send_btn">Send message</span></button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
+  </div></div>
+</section>
+
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">☀ SolMax</div>
+    <div class="footer-links">
+      <a href="#home" data-i18n="nav_home">Home</a>
+      <a href="#guide" data-i18n="nav_guide">How to use</a>
+      <a href="#tool" data-i18n="nav_tool">Tool</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+            <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../cookie-policy.html">Cookie Policy</a>
+            <button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button>
+    </div>
+    <div class="footer-copy" data-i18n="footer_copy">Solar Panel Alignment Instrument &bull; Built with first-principles astronomy</div>
+  </div>
+</footer>
+
+<script src="js/translations.js"></script>
+<script src="js/solar-engine.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+
+    <!-- tz-scripts -->
+    <script src="../assets/consent.js" defer></script>
+    <script src="../assets/ads.js" defer></script>
+</body>
+</html>

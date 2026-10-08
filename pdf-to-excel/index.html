@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="https://toolzmoolz.com/pdf-to-excel/"/>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#0b1220"/>
+    <link rel="icon" href="/favicon.ico" sizes="any"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="ToolzMoolz"/>
+    <meta property="og:title" content="Convert PDF to Excel Online Free - PDF to XLSX Table Extractor | ToolzMoolz"/>
+    <meta property="og:description" content="Extract tables and clean data from your PDF documents into fully formatted Microsoft Excel (.xlsx) or CSV spreadsheets. 100% client-side browser execution, secure &amp; free."/>
+    <meta property="og:url" content="https://toolzmoolz.com/pdf-to-excel/"/>
+    <meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Convert PDF to Excel Online Free - PDF to XLSX Table Extractor | ToolzMoolz"/>
+    <meta name="twitter:description" content="Extract tables and clean data from your PDF documents into fully formatted Microsoft Excel (.xlsx) or CSV spreadsheets. 100% client-side browser execution, secure &amp; free."/>
+    <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+
+    <title>PDF to Excel Converter Online Free – PDF to XLSX</title>
+    <meta name="description" content="Convert PDF to Excel online free: extract tables into clean, editable .xlsx or CSV files. Runs in your browser. No upload, no signup, secure."/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../assets/convert-queue.css"/>
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "PDF to Excel Converter",
+      "url": "https://toolzmoolz.com/pdf-to-excel/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript and HTML5 canvas support",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Convert tables inside PDF files into clean, editable spreadsheet grids locally in the browser and download as Excel (.xlsx) or CSV files instantly."
+    }
+    </script>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are my uploaded PDF documents safe and private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, absolutely. ToolzMoolz operates 100% in your browser. All text parsing, table reconstructions, and Excel compiles are done locally on your device. No file is ever sent to a server, keeping your sensitive corporate data completely secure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the converter support scanned PDF pages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This tool extracts text characters directly from digital (native) PDFs. Scanned PDFs containing pure image scans without text layers cannot be parsed natively client-side without OCR; native PDFs will parse instantly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I edit the parsed rows before downloading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Our tool features an interactive spreadsheet preview editor. You can click on any cell, change its text, add or delete rows, and download the finalized, edited table."
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- PDF.js for rendering/parsing PDF pages, SheetJS for Excel exports (both loaded on demand via fastload.js) -->
+    <script defer src="../assets/fastload.js"></script>
+    <!-- shared iLovePDF-style file queue -->
+    <script defer src="../assets/convert-queue.js"></script>
+    <style>
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-head {
+            padding: 10px 16px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .upload-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed var(--border);
+            margin: 16px;
+            border-radius: 8px;
+            transition: all 0.18s ease;
+            background: var(--bg);
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(102,126,234,0.05);
+        }
+
+        .upload-zone .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .upload-zone h3 {
+            font-size: 16px;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .upload-zone p {
+            font-size: 12.5px;
+            color: var(--muted);
+        }
+
+        .preview-table-container {
+            flex-grow: 1;
+            overflow: auto;
+            max-height: 380px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .data-grid {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            color: var(--text);
+            text-align: left;
+        }
+
+        .data-grid th, .data-grid td {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            outline: none;
+            white-space: nowrap;
+        }
+
+        .data-grid th {
+            background: var(--bg);
+            color: var(--muted);
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .data-grid td:focus {
+            background: rgba(102,126,234,0.08);
+            border: 1px solid var(--primary);
+        }
+
+        .action-bar {
+            padding: 12px 16px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-action:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-download:hover {
+            background: #e63946;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolzmoolz.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "PDF to Excel",
+      "item": "https://toolzmoolz.com/pdf-to-excel/"
+    }
+  ]
+}
+</script>
+
+    <!-- tz-compliance -->
+    <script>window.dataLayer=window.dataLayer||[];function tzg(){window.dataLayer.push(arguments);}tzg('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});window.TZ_ROOT='../';</script>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="../" class="brand" title="ToolzMoolz Home">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="brand-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <span class="brand-wordmark" style="display:none;">
+                <span class="bw-icon">T</span> ToolzMoolz
+            </span>
+        </a>
+
+        <div class="header-divider"></div>
+
+        <nav class="tool-nav" id="toolNav">
+            <a href="../" id="nav-home">Home</a>
+            <a href="../reverse-jargon/">Reverse Jargon</a>
+            <a href="../image-converter/">Image Converter</a>
+            <a href="../case-converter/">Case Converter</a>
+            <a href="../passport-photo/">Passport Photo</a>
+            <a href="../pdf-signature/">PDF Signature</a>
+            <div class="nav-mobile-coffee">
+                <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+            </div>
+        </nav>
+
+        <a href="../#toolGrid" class="ktx-nav-pill">All Tools</a>
+
+        <div class="nav-coffee">
+            <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+        <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- ══ TOOL PAGE ════════════════════════════════════════════════ -->
+<div class="tool-page">
+
+    <!-- ── TOP BAR: Tool header ── -->
+    <div class="tool-topbar" style="margin-bottom: 24px;">
+        <div class="tool-topbar-header">
+            <div class="tool-icon-sm" style="background:linear-gradient(135deg,#ff9966,#ff5e62);">📈</div>
+            <div class="tool-topbar-title">
+                <h1>PDF to Excel Converter</h1>
+                <p>Upload your PDF, extract all text rows, review the spreadsheet data grid, and export to Excel (.xlsx) instantly.</p>
+            </div>
+            <a href="../" style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;white-space:nowrap;transition:color 0.15s;"
+               onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--muted)'">
+                ← All Tools
+            </a>
+        </div>
+    </div>
+
+    <!-- ── PANEL LAYOUT ── -->
+    <div class="layout-grid">
+        
+        <!-- LEFT: Upload Zone -->
+        <div class="panel">
+            <div class="panel-head">1. Load PDF File</div>
+            <div class="upload-zone" id="uploadZone">
+                <div class="icon">📑</div>
+                <h3>Choose PDF File</h3>
+                <p>Drag & drop your PDF document here, or click to browse</p>
+                <span class="status-badge" style="margin-top:12px;color:var(--muted);font-weight:500;">Max size: 25MB · 100% Client-Side</span>
+                <input type="file" id="pdfFile" accept="application/pdf" multiple style="display:none;"/>
+            </div>
+            <div class="tzq-list" id="p2x-list"></div>
+            <div class="tzq-toolbar">
+                <button class="btn-action" id="p2x-add" type="button">+ Add more PDFs</button>
+                <span class="tzq-count" id="p2x-count"></span>
+                <button class="btn-action btn-download" id="p2x-convert" type="button" style="margin-left:auto;background:var(--primary);">Select PDF files</button>
+            </div>
+            <div class="action-bar" style="border-top:1px solid var(--border);">
+                <label class="toggle-wrap" style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;color:var(--text-sub);">
+                    <input type="checkbox" id="headerCheckbox" checked/> First row is header
+                </label>
+                <button class="btn-action" id="resetBtn">✕ Clear</button>
+            </div>
+        </div>
+
+        <!-- RIGHT: Spreadsheet Grid -->
+        <div class="panel">
+            <div class="panel-head">
+                2. Preview & Edit Spreadsheet Grid
+                <span class="status-badge" id="rowCountText" style="display:none;">0 rows extracted</span>
+            </div>
+            <div class="preview-table-container">
+                <div id="emptyState" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:240px;color:var(--muted);font-size:13px;">
+                    <div style="font-size:32px;margin-bottom:12px;">📊</div>
+                    Upload a PDF to parse text rows into this editable grid.
+                </div>
+                <table class="data-grid" id="dataGrid" style="display:none;">
+                    <thead id="gridHead"></thead>
+                    <tbody id="gridBody"></tbody>
+                </table>
+            </div>
+            <div class="action-bar">
+                <button class="btn-action" id="addRowBtn" disabled>➕ Add Row</button>
+                <div style="display:flex;gap:8px;">
+                    <button class="btn-action btn-download" id="dlCSV" disabled>⬇ CSV</button>
+                    <button class="btn-action btn-download" id="dlXLSX" disabled style="background:var(--primary);">⬇ Excel (.xlsx)</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── SEO SECTION ── -->
+    <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
+        <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Convert PDF to Excel Online Free</h2>
+        <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our browser-based PDF to Excel converter makes it simple to extract tables, numerical listings, and database blocks from digital PDF documents and convert them into fully editable spreadsheets. When working with PDF lists, copying and pasting data manually ruins the spacing and columns. By utilizing high-fidelity local text-coordinate extraction (leveraging PDF.js), this tool groups line fragments by their coordinates, automatically populating an interactive grid editor. Once parsed, you can tweak, append, or delete row values before exporting directly as clean Microsoft Excel (.xlsx) or CSV files.</p>
+        
+        <h3 style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Step-by-Step Instructions:</h3>
+        <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13px; line-height: 1.7; margin-bottom: 24px;">
+            <li><strong>Select File:</strong> Click "Choose PDF File" or drag & drop any native PDF document under 25MB.</li>
+            <li><strong>Automatic Parsing:</strong> The browser's local parser immediately reads all page characters, grouping them into rows and columns by matching vertical text alignments.</li>
+            <li><strong>Review & Edit:</strong> Review the extracted data inside the preview panel. Click on any table cell to manually update details, or tap **Add Row** to input new entries.</li>
+            <li><strong>Save & Export:</strong> Click **Excel (.xlsx)** or **CSV** to save the reviewed tabular data to your local download folder instantly.</li>
+        </ol>
+
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 24px; margin-bottom: 12px;">Frequently Asked Questions (FAQ)</h3>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Is my data kept safe and secure?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Yes, 100%. Our tool is fully serverless. All document readings, coordinate mappings, table assemblies, and file generations are handled client-side inside your own browser window. Your sensitive corporate details, invoices, or customer databases are never sent over the network.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Why does the table look blank or show spacing offsets?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">This tool extracts text characters directly from digital (native) PDFs. Scanned PDFs (pure images without text layers) or highly complex double-column brochures may not line up perfectly. In these cases, you can simply click any cell in our interactive grid editor and manually edit the values in seconds.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Is there a file page limit?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">There is no hardcoded page limit. Since processing occurs in your local system memory, documents under 30 pages parse almost instantly; larger spreadsheets may take slightly longer depending on your device speed.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="footer-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="footer-wordmark" style="display:none;">
+                <span>T</span> ToolzMoolz
+            </div>
+            <p>Free tools that are easy, safe and private &mdash; every tool runs 100% in your browser. No uploads, no signups, no watermarks.</p>
+        </div>
+
+        <!-- Popular Tools -->
+        <div class="footer-tools">
+            <h5>Popular Tools</h5>
+            <ul>
+                <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                <li><a href="../image-converter/">Image Converter</a></li>
+                <li><a href="../pdf-to-excel/">PDF to Excel</a></li>
+                <li><a href="../pdf-signature/">Sign PDF Online</a></li>
+                <li><a href="../passport-photo/">Passport Photo</a></li>
+                <li><a href="../qr-generator/">QR Code Generator</a></li>
+            </ul>
+        </div>
+
+        <!-- More Tools -->
+        <div class="footer-tools">
+            <h5>More Tools</h5>
+            <ul><li><a href="../keyword-spinner/">Keyword Spinner</a></li>
+                
+                <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+                <li><a href="../pdf-to-jpg/">PDF to JPG</a></li>
+                <li><a href="../ocr-extractor/">OCR Text Extractor</a></li>
+                <li><a href="../bg-remover/">Background Remover</a></li>
+                <li><a href="../audio-trimmer/">Audio Trimmer</a></li>
+                <li><a href="../md-editor/">Markdown Editor</a></li>
+                <li><a href="../solar-alignment/">Solar Panel Angle</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+            <h5>Get in Touch</h5>
+            <a href="mailto:dev@toolzmoolz.com" class="btn-email">&#9993;&#65039; dev@toolzmoolz.com</a>
+            <button class="btn-coffee-footer" onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="../">ToolzMoolz.com</a> &mdash; Built with <span aria-hidden="true">&#10084;&#65039;</span> for everyone</span>
+        <ul class="footer-legal">
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Tip Modal -->
+<div class="modal-overlay" id="tipModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeTip()">✕</button>
+    <div class="modal-emoji">❤️</div>
+    <h3>Support ToolzMoolz</h3>
+    <p class="modal-sub">Every tool is 100% free. A small tip helps keep the lights on!</p>
+    <div class="tip-amounts" id="tipAmounts">
+      <button class="tip-amount active" data-amount="1"><span class="tip-price">£1</span><span class="tip-label">A sip ☕</span></button>
+      <button class="tip-amount" data-amount="3"><span class="tip-price">£3</span><span class="tip-label">A coffee</span></button>
+      <button class="tip-amount" data-amount="5"><span class="tip-price">£5</span><span class="tip-label">A treat 🍰</span></button>
+      <button class="tip-amount" data-amount="10"><span class="tip-price">£10</span><span class="tip-label">Legend 🦸</span></button>
+    </div>
+    <input type="number" class="custom-amount" id="customAmount" placeholder="Custom amount (£)" min="1" oninput="syncCustom(this)"/>
+    <div class="pay-channels">
+      <a class="pay-channel" onclick="payWith('kofi')"><span class="ch-icon">☕</span><div><span class="ch-name">Ko-fi</span><span class="ch-desc">Cards · PayPal · Apple Pay · Google Pay</span></div><span class="ch-arrow">→</span></a>
+    </div>
+    <p class="tip-note">Opens Ko-fi in a popup — you stay right here. Thank you! ❤️</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══ SCRIPT LOGIC ════════════════════════════════════════════ -->
+<script>
+    // ── Tip modal ─────────────────────────────────────────
+    var _tipAmount = 1;
+    var CHANNELS = { kofi: 'https://ko-fi.com/toolzmoolz' };
+    function openTip() { document.getElementById('tipModal').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeTip() { document.getElementById('tipModal').classList.remove('open'); document.body.style.overflow=''; }
+    function syncCustom(el) {
+        if (el.value) {
+            document.querySelectorAll('.tip-amount').forEach(function(b){ b.classList.remove('active'); });
+            _tipAmount = parseFloat(el.value) || 1;
+        }
+    }
+    function payWith(ch) {
+        var url = CHANNELS[ch] || '';
+        if (!url) { showToast('Payment link not set yet.'); return; }
+        var popup = window.open(url,'payment','width=520,height=680,top='+Math.round((screen.height-680)/2)+',left='+Math.round((screen.width-520)/2)+',resizable=yes,scrollbars=yes');
+        if (!popup) window.open(url,'_blank');
+        closeTip();
+        showToast('Opening payment — thank you! ❤️');
+    }
+
+    // ── Mobile nav ────────────────────────────────────────
+    document.getElementById('navToggle').addEventListener('click', function() {
+        document.getElementById('toolNav').classList.toggle('open');
+    });
+
+    // ── Toast notifier ────────────────────────────────────
+    function showToast(msg) {
+        var toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+
+    // ── Global parsed table storage ───────────────────────
+    let tableData = []; // Array of arrays: [ [cell, cell, cell], [cell, cell, cell] ]
+    let maxCols = 0;
+
+    const uploadZone = document.getElementById('uploadZone');
+    const pdfFileInput = document.getElementById('pdfFile');
+    const dataGrid   = document.getElementById('dataGrid');
+    const gridHead   = document.getElementById('gridHead');
+    const gridBody   = document.getElementById('gridBody');
+    const emptyState = document.getElementById('emptyState');
+    const addRowBtn  = document.getElementById('addRowBtn');
+    const dlCSVBtn   = document.getElementById('dlCSV');
+    const dlXLSXBtn  = document.getElementById('dlXLSX');
+    const rowCountText = document.getElementById('rowCountText');
+
+    // shared queue: select PDFs -> uploaded -> explicit convert -> finished -> per-file .xlsx
+    // (convert-queue.js is deferred, so init once the DOM is ready)
+    var queue = null;
+    function initQueue() {
+    queue = window.TZQueue.create({
+        list: '#p2x-list',
+        input: '#pdfFile',
+        dropzone: '#uploadZone',
+        addBtn: '#p2x-add',
+        convertBtn: '#p2x-convert',
+        countEl: '#p2x-count',
+        accept: /\.pdf$/i,
+        acceptLabel: 'PDF',
+        maxSize: 25 * 1024 * 1024,
+        icon: '&#128202;',
+        toast: showToast,
+        convertLabel: 'Convert to Excel',
+        idleLabel: 'Select PDF files',
+        convertingLabel: 'Converting PDF to Excel…',
+        errorText: 'Could not extract text',
+        logErrors: false,
+        validate: function (f) {
+            return f.type === 'application/pdf' || /\.pdf$/i.test(f.name) ? true : 'Please select a valid PDF file.';
+        },
+        warm: function () { return window.TZLib.load(['pdfjs', 'xlsx']); },
+        convert: function (e) { return parsePDFFile(e.file); },
+        outName: function (e) {
+            return e.name.replace(/\.pdf$/i, '') + '-extracted-table.xlsx';
+        }
+    });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initQueue);
+    } else {
+        initQueue();
+    }
+
+    document.getElementById('resetBtn').addEventListener('click', clearAll);
+
+    function clearAll() {
+        pdfFileInput.value = '';
+        tableData = [];
+        maxCols = 0;
+        gridHead.innerHTML = '';
+        gridBody.innerHTML = '';
+        dataGrid.style.display = 'none';
+        emptyState.style.display = 'flex';
+        rowCountText.style.display = 'none';
+        addRowBtn.disabled = true;
+        dlCSVBtn.disabled = true;
+        dlXLSXBtn.disabled = true;
+        if (queue) queue.clearAll();
+    }
+
+    // ── PDF Text Extraction & Alignment Parser ────────────
+    async function parsePDFFile(file) {
+        if (!file || file.type !== 'application/pdf') {
+            showToast('Please select a valid PDF file.');
+            throw new Error('invalid file');
+        }
+
+        showToast('Parsing PDF... please wait.');
+        try {
+            await window.TZLib.load(['pdfjs', 'xlsx']);
+            tableData = [];
+            maxCols = 0;
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            let totalPages = pdf.numPages;
+            let tempRowsMap = new Map(); // Group text items by their roughly matching Y coordinates
+
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                const page = await pdf.getPage(pageNum);
+                const textContent = await page.getTextContent();
+                const items = textContent.items;
+
+                items.forEach(item => {
+                    if (!item.str.trim()) return;
+
+                    // item.transform is [scaleX, skewX, skewY, scaleY, translateX, translateY]
+                    // translateY (index 5) represents vertical position from bottom up.
+                    // Let's round translateY to group line elements (standard rows usually fall in a 5px band)
+                    const y = Math.round(item.transform[5] / 8) * 8; // group elements in 8px height lines
+                    const x = item.transform[4]; // horizontal position
+
+                    if (!tempRowsMap.has(y)) {
+                        tempRowsMap.set(y, []);
+                    }
+                    tempRowsMap.get(y).push({ text: item.str, x: x });
+                });
+            }
+
+            // Sort rows descending by Y coordinate (PDF.js coordinate is bottom-up)
+            const sortedYs = Array.from(tempRowsMap.keys()).sort((a, b) => b - a);
+            
+            tableData = [];
+            maxCols = 0;
+
+            sortedYs.forEach(y => {
+                let rowItems = tempRowsMap.get(y);
+                // Sort horizontally from left to right
+                rowItems.sort((a, b) => a.x - b.x);
+
+                // Group items close to each other, or separate if separated by substantial gaps
+                let parsedRow = [];
+                let currentItem = rowItems[0].text;
+                let lastX = rowItems[0].x;
+
+                for (let i = 1; i < rowItems.length; i++) {
+                    const item = rowItems[i];
+                    // If separation is more than 35px, treat as new column
+                    if (item.x - lastX > 35) {
+                        parsedRow.push(currentItem.trim());
+                        currentItem = item.text;
+                    } else {
+                        currentItem += " " + item.str;
+                    }
+                    lastX = item.x;
+                }
+                parsedRow.push(currentItem.trim());
+
+                if (parsedRow.length > 0) {
+                    tableData.push(parsedRow);
+                    if (parsedRow.length > maxCols) maxCols = parsedRow.length;
+                }
+            });
+
+            // Standardize rows so all of them have exactly maxCols length
+            tableData.forEach(row => {
+                while (row.length < maxCols) {
+                    row.push('');
+                }
+            });
+
+            if (tableData.length === 0) {
+                showToast('Failed to extract text. Make sure PDF has selectable text.');
+                throw new Error('no text extracted');
+            }
+
+            // Render table grid
+            renderGrid();
+            showToast('PDF extracted successfully!');
+            return buildXlsxBlob();
+
+        } catch (err) {
+            if (err && err.message === 'invalid file') throw err;
+            if (err && err.message === 'no text extracted') throw err;
+            console.error(err);
+            showToast('Error parsing PDF. Make sure it is not corrupted.');
+            throw err;
+        }
+    }
+
+    function buildXlsxBlob() {
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(tableData);
+        XLSX.utils.book_append_sheet(wb, ws, "Extracted Data");
+        const out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        return new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    }
+
+    function renderGrid() {
+        gridHead.innerHTML = '';
+        gridBody.innerHTML = '';
+
+        if (tableData.length === 0) return;
+
+        const useHeader = document.getElementById('headerCheckbox').checked;
+        let startIndex = 0;
+
+        // Render Header row
+        const hr = document.createElement('tr');
+        if (useHeader && tableData.length > 0) {
+            tableData[0].forEach((colVal, colIdx) => {
+                const th = document.createElement('th');
+                th.textContent = colVal || `Column ${colIdx + 1}`;
+                th.contentEditable = true;
+                th.addEventListener('blur', e => {
+                    tableData[0][colIdx] = e.target.textContent;
+                });
+                hr.appendChild(th);
+            });
+            startIndex = 1;
+        } else {
+            for (let colIdx = 0; colIdx < maxCols; colIdx++) {
+                const th = document.createElement('th');
+                th.textContent = `Column ${colIdx + 1}`;
+                hr.appendChild(th);
+            }
+        }
+        gridHead.appendChild(hr);
+
+        // Render Body rows
+        for (let rowIdx = startIndex; rowIdx < tableData.length; rowIdx++) {
+            const tr = document.createElement('tr');
+            tableData[rowIdx].forEach((cellVal, colIdx) => {
+                const td = document.createElement('td');
+                td.textContent = cellVal;
+                td.contentEditable = true;
+                td.addEventListener('blur', e => {
+                    tableData[rowIdx][colIdx] = e.target.textContent;
+                });
+                tr.appendChild(td);
+            });
+            gridBody.appendChild(tr);
+        }
+
+        emptyState.style.display = 'none';
+        dataGrid.style.display = 'table';
+        rowCountText.style.display = 'inline';
+        rowCountText.textContent = `${tableData.length - startIndex} rows extracted`;
+
+        addRowBtn.disabled = false;
+        dlCSVBtn.disabled = false;
+        dlXLSXBtn.disabled = false;
+    }
+
+    document.getElementById('headerCheckbox').addEventListener('change', renderGrid);
+
+    // ── Add dynamic spreadsheet row ────────────────────────
+    addRowBtn.addEventListener('click', () => {
+        let newRow = Array(maxCols).fill('');
+        tableData.push(newRow);
+        
+        const tr = document.createElement('tr');
+        for (let colIdx = 0; colIdx < maxCols; colIdx++) {
+            const td = document.createElement('td');
+            td.textContent = '';
+            td.contentEditable = true;
+            td.addEventListener('blur', e => {
+                tableData[tableData.length - 1][colIdx] = e.target.textContent;
+            });
+            tr.appendChild(td);
+        }
+        gridBody.appendChild(tr);
+        rowCountText.textContent = `${tableData.length - (document.getElementById('headerCheckbox').checked ? 1 : 0)} rows extracted`;
+    });
+
+    // ── Export Spreadsheet via SheetJS ────────────────────
+    dlCSVBtn.addEventListener('click', async () => {
+        if (!tableData.length) return;
+        try { await window.TZLib.load('xlsx'); } catch (e) { showToast('Excel engine failed to load.'); return; }
+        const ws = XLSX.utils.aoa_to_sheet(tableData);
+        const csvContent = XLSX.utils.sheet_to_csv(ws);
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'pdf-extracted-table.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('CSV downloaded successfully!');
+    });
+
+    dlXLSXBtn.addEventListener('click', async () => {
+        if (!tableData.length) return;
+        try { await window.TZLib.load('xlsx'); } catch (e) { showToast('Excel engine failed to load.'); return; }
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(tableData);
+        XLSX.utils.book_append_sheet(wb, ws, "Extracted Data");
+        XLSX.writeFile(wb, "pdf-extracted-table.xlsx");
+        showToast('Excel downloaded successfully!');
+    });
+</script>
+
+
+    <!-- tz-scripts -->
+    <script src="../assets/consent.js" defer></script>
+    <script src="../assets/ads.js" defer></script>
+</body>
+</html>

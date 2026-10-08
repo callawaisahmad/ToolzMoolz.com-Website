@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="https://toolzmoolz.com/md-editor/"/>
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolzmoolz.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Md Editor", "item": "https://toolzmoolz.com/md-editor/" }
+      ]
+    }
+    </script>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#0b1220"/>
+    <link rel="icon" href="/favicon.ico" sizes="any"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="ToolzMoolz"/>
+    <meta property="og:title" content="Free Markdown Editor with Live HTML Preview & Export | ToolzMoolz"/>
+    <meta property="og:description" content="Write Markdown with real-time HTML preview. Export to .md, HTML, or print as PDF. 100% private, runs entirely in your browser."/>
+    <meta property="og:url" content="https://toolzmoolz.com/md-editor/"/>
+    <meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Free Markdown Editor with Live HTML Preview & Export | ToolzMoolz"/>
+    <meta name="twitter:description" content="Write Markdown with real-time HTML preview. Export to .md, HTML, or print as PDF. 100% private, runs entirely in your browser."/>
+    <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+
+    <title>Markdown Editor Online with Live Preview – Free</title>
+    <meta name="description" content="Write Markdown with real-time live HTML preview. Export to .md, HTML or print as PDF. Free online markdown editor that runs in your browser."/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <style>
+      .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-card); margin-bottom: 20px; position: static; display: block; cursor: default; overflow: visible; }
+      .tool-card::before, .tool-card::after { content: none; display: none; }
+      .tool-card:hover { transform: none; box-shadow: var(--shadow-card); border-color: var(--border); }
+      .tool-card-header { margin-bottom: 20px; }
+      .tool-card-header h2 { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; margin-bottom: 4px; }
+      .tool-card-header p { font-size: 13px; color: var(--muted); font-weight: 500; }
+      .control-group { margin-bottom: 18px; }
+      .control-group label { display: block; font-size: 12.5px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+      .input-field, .select-field, .textarea-field { width: 100%; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; transition: all 0.2s ease; }
+      .input-field:focus, .select-field:focus, .textarea-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+      .textarea-field { resize: vertical; min-height: 140px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent; text-decoration: none; }
+      .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(99,102,241,0.3); }
+      .btn-primary:hover { background: #4f46e5; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99,102,241,0.45); }
+      .btn-secondary { background: var(--surface-2); border-color: var(--border); color: var(--text); }
+      .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+      .btn-danger { background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+      .btn-danger:hover { background: #ef4444; color: #fff; }
+      .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; }
+      .toast { padding: 13px 20px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-card); color: var(--text); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 12px; animation: slideInRight 0.3s ease; }
+      .toast.success { border-color: rgba(16,185,129,0.4); }
+      .toast.error { border-color: rgba(239,68,68,0.4); }
+      .toast.warning { border-color: rgba(245,158,11,0.4); }
+      @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+      @media (max-width: 600px) { .tool-card { padding: 16px 14px; } }
+    </style>
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free Markdown Editor",
+      "url": "https://toolzmoolz.com/md-editor/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0.00", "priceCurrency": "USD" },
+      "description": "Write Markdown with real-time HTML preview and export to .md, HTML, or PDF. 100% free, private, runs entirely in the browser."
+    }
+    </script>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this Markdown editor free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Write Markdown with a live HTML preview and export to .md, HTML or print as PDF — free, private and in your browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I preview my Markdown live?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The editor renders a real-time HTML preview as you type."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my notes uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything runs locally in your browser, so your notes never leave your device."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- tz-compliance -->
+    <script>window.dataLayer=window.dataLayer||[];function tzg(){window.dataLayer.push(arguments);}tzg('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});window.TZ_ROOT='../';</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="../" class="brand" title="ToolzMoolz Home">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="brand-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <span class="brand-wordmark" style="display:none;">
+                <span class="bw-icon">T</span> ToolzMoolz
+            </span>
+        </a>
+
+        <div class="header-divider"></div>
+
+        <nav class="tool-nav" id="toolNav">
+            <a href="../" id="nav-home">Home</a>
+            <a href="../reverse-jargon/">Reverse Jargon</a>
+            <a href="../image-converter/">Image Converter</a>
+            <a href="../case-converter/">Case Converter</a>
+            <a href="../passport-photo/">Passport Photo</a>
+            <a href="../pdf-signature/">PDF Signature</a>
+            <div class="nav-mobile-coffee">
+                <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+            </div>
+        </nav>
+
+        <a href="../#toolGrid" class="ktx-nav-pill">All Tools</a>
+
+        <div class="nav-coffee">
+            <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+        <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- TOOL PAGE -->
+<div class="tool-page">
+
+    <!-- TOP BAR -->
+    <div class="tool-topbar">
+        <div class="tool-topbar-header">
+            <div class="tool-icon-sm" style="background:linear-gradient(135deg,#6366f1,#a855f7);">📝</div>
+            <div class="tool-topbar-title">
+                <h1>Markdown Live Editor</h1>
+                <p>Write Markdown with real-time HTML preview and 1-click export — 100% in your browser.</p>
+            </div>
+            <a href="../" style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;white-space:nowrap;transition:color 0.15s;"
+               onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--muted)'">
+                ← All Tools
+            </a>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <div class="tool-card-header">
+            <h2>📝 Markdown Live Editor & Exporter</h2>
+            <p>Write Markdown with real-time HTML preview and 1-click export to Markdown, HTML, or PDF.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap; background: var(--surface-2); padding: 0.5rem; border-radius: 10px; border: 1px solid var(--border);">
+          <button class="btn btn-secondary" id="btn-md-bold" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;"><b>B</b></button>
+          <button class="btn btn-secondary" id="btn-md-italic" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;"><i>I</i></button>
+          <button class="btn btn-secondary" id="btn-md-header" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">H3</button>
+          <button class="btn btn-secondary" id="btn-md-link" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">🔗 Link</button>
+          <button class="btn btn-secondary" id="btn-md-code" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;"><code>&lt;/&gt;</code></button>
+          <button class="btn btn-secondary" id="btn-md-table" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">📊 Table</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+          <div>
+            <label style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; display: block;">Markdown Input</label>
+            <textarea id="md-input" class="textarea-field" style="height: 350px; font-family: monospace; font-size: 0.85rem;" placeholder="# Welcome to ToolzMoolz Markdown Editor
+
+Type your markdown here...
+
+- Item 1
+- Item 2
+
+**Bold text** and *italic text*!"></textarea>
+          </div>
+          <div>
+            <label style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; display: block;">Live Preview</label>
+            <div id="md-preview" style="height: 350px; overflow-y: auto; background: var(--surface-2); padding: 1rem; border-radius: 10px; border: 1px solid var(--border); font-size: 0.9rem;"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-top: 1.25rem; justify-content: flex-end; flex-wrap: wrap;">
+          <button class="btn btn-secondary" id="btn-export-md">💾 Export .MD</button>
+          <button class="btn btn-secondary" id="btn-export-html">🌐 Export HTML</button>
+          <button class="btn btn-primary" id="btn-print-pdf">🖨️ Print / Save PDF</button>
+        </div>
+    </div>
+
+    <!-- SEO -->
+    <div style="color: var(--text-sub); font-size: 14px; line-height: 1.7; margin-top: 8px;">
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">How to use the Markdown Editor</h3>
+        <p>Type or paste your Markdown text in the left panel. The right panel renders a live HTML preview as you type. Use the toolbar buttons to quickly insert bold, italic, headings, links, code blocks, and tables. When you are done, export your work as a <strong>.md</strong> file, a styled <strong>HTML</strong> document, or <strong>print it as a PDF</strong>.</p>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Is it private and secure?</h3>
+        <p>Yes. Everything runs entirely inside your browser. Your Markdown content is never uploaded, tracked, or stored on any server. What you write stays on your device.</p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="footer-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="footer-wordmark" style="display:none;">
+                <span>T</span> ToolzMoolz
+            </div>
+            <p>Free tools that are easy, safe and private &mdash; every tool runs 100% in your browser. No uploads, no signups, no watermarks.</p>
+        </div>
+
+        <!-- Popular Tools -->
+        <div class="footer-tools">
+            <h5>Popular Tools</h5>
+            <ul>
+                <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                <li><a href="../image-converter/">Image Converter</a></li>
+                <li><a href="../pdf-to-excel/">PDF to Excel</a></li>
+                <li><a href="../pdf-signature/">Sign PDF Online</a></li>
+                <li><a href="../passport-photo/">Passport Photo</a></li>
+                <li><a href="../qr-generator/">QR Code Generator</a></li>
+            </ul>
+        </div>
+
+        <!-- More Tools -->
+        <div class="footer-tools">
+            <h5>More Tools</h5>
+            <ul><li><a href="../keyword-spinner/">Keyword Spinner</a></li>
+                
+                <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+                <li><a href="../pdf-to-jpg/">PDF to JPG</a></li>
+                <li><a href="../ocr-extractor/">OCR Text Extractor</a></li>
+                <li><a href="../bg-remover/">Background Remover</a></li>
+                <li><a href="../audio-trimmer/">Audio Trimmer</a></li>
+                <li><a href="../md-editor/">Markdown Editor</a></li>
+                <li><a href="../solar-alignment/">Solar Panel Angle</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+            <h5>Get in Touch</h5>
+            <a href="mailto:dev@toolzmoolz.com" class="btn-email">&#9993;&#65039; dev@toolzmoolz.com</a>
+            <button class="btn-coffee-footer" onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="../">ToolzMoolz.com</a> &mdash; Built with <span aria-hidden="true">&#10084;&#65039;</span> for everyone</span>
+        <ul class="footer-legal">
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
+        </ul>
+    </div>
+</footer>
+
+<!-- TIP MODAL -->
+<div class="modal-overlay" id="tipModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeTip()">✕</button>
+    <div class="modal-emoji">❤️</div>
+    <h3>Support ToolzMoolz</h3>
+    <p class="modal-sub">Every tool is 100% free. A small tip helps keep the lights on!</p>
+    <div class="tip-amounts" id="tipAmounts">
+      <button class="tip-amount active" data-amount="1"><span class="tip-price">£1</span><span class="tip-label">A sip ☕</span></button>
+      <button class="tip-amount" data-amount="3"><span class="tip-price">£3</span><span class="tip-label">A coffee</span></button>
+      <button class="tip-amount" data-amount="5"><span class="tip-price">£5</span><span class="tip-label">A treat 🍰</span></button>
+      <button class="tip-amount" data-amount="10"><span class="tip-price">£10</span><span class="tip-label">Legend 🦸</span></button>
+    </div>
+    <input type="number" class="custom-amount" id="customAmount" placeholder="Custom amount (£)" min="1" oninput="syncCustom(this)"/>
+    <div class="pay-channels">
+      <a class="pay-channel" onclick="payWith('kofi')">
+        <span class="ch-icon">☕</span>
+        <div><span class="ch-name">Ko-fi</span><span class="ch-desc">Cards · PayPal · Apple Pay · Google Pay</span></div>
+        <span class="ch-arrow">→</span>
+      </a>
+    </div>
+    <p class="tip-note">Opens Ko-fi in a popup — you stay right here. Thank you! ❤️</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+    var _tipAmount = 1;
+    var CHANNELS = { kofi: 'https://ko-fi.com/toolzmoolz' };
+    function openTip() { document.getElementById('tipModal').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeTip() { document.getElementById('tipModal').classList.remove('open'); document.body.style.overflow=''; }
+    function syncCustom(el) {
+        if (el.value) {
+            document.querySelectorAll('.tip-amount').forEach(function(b){ b.classList.remove('active'); });
+            _tipAmount = parseFloat(el.value) || 1;
+        }
+    }
+    function payWith(ch) {
+        var url = CHANNELS[ch] || '';
+        if (!url) { showToast('Payment link not set yet.'); return; }
+        var popup = window.open(url,'payment','width=520,height=680,top='+Math.round((screen.height-680)/2)+',left='+Math.round((screen.width-520)/2)+',resizable=yes,scrollbars=yes');
+        if (!popup) window.open(url,'_blank');
+        closeTip();
+        showToast('Opening payment — thank you! ❤️');
+    }
+    function showToast(msg) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function(){ t.classList.remove('show'); }, 2500);
+    }
+
+    document.getElementById('navToggle').addEventListener('click', function() {
+        document.getElementById('toolNav').classList.toggle('open');
+    });
+
+    (function(){
+        var textarea = document.getElementById('md-input');
+        var preview = document.getElementById('md-preview');
+        var btnBold = document.getElementById('btn-md-bold');
+        var btnItalic = document.getElementById('btn-md-italic');
+        var btnHeader = document.getElementById('btn-md-header');
+        var btnLink = document.getElementById('btn-md-link');
+        var btnCode = document.getElementById('btn-md-code');
+        var btnTable = document.getElementById('btn-md-table');
+        var btnExportMd = document.getElementById('btn-export-md');
+        var btnExportHtml = document.getElementById('btn-export-html');
+        var btnPrintPdf = document.getElementById('btn-print-pdf');
+
+        textarea.addEventListener('input', updatePreview);
+
+        function updatePreview() {
+            var raw = textarea.value;
+            preview.innerHTML = parseMarkdownToHtml(raw);
+        }
+
+        btnBold.addEventListener('click', function(){ insertFormatting('**', '**', 'bold text'); });
+        btnItalic.addEventListener('click', function(){ insertFormatting('*', '*', 'italic text'); });
+        btnHeader.addEventListener('click', function(){ insertFormatting('### ', '', 'Heading Title'); });
+        btnLink.addEventListener('click', function(){ insertFormatting('[', '](https://example.com)', 'Link Text'); });
+        btnCode.addEventListener('click', function(){ insertFormatting('```js\n', '\n```', '// code block'); });
+        btnTable.addEventListener('click', function(){
+            var tableSnippet = '\n| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |\n';
+            insertRawSnippet(tableSnippet);
+        });
+
+        function insertFormatting(prefix, suffix, defaultText) {
+            var start = textarea.selectionStart;
+            var end = textarea.selectionEnd;
+            var selected = textarea.value.substring(start, end) || defaultText;
+            var replacement = prefix + selected + suffix;
+            textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + prefix.length, start + prefix.length + selected.length);
+            updatePreview();
+        }
+
+        function insertRawSnippet(snippet) {
+            var start = textarea.selectionStart;
+            textarea.value = textarea.value.substring(0, start) + snippet + textarea.value.substring(start);
+            textarea.focus();
+            updatePreview();
+        }
+
+        btnExportMd.addEventListener('click', function(){
+            if (!textarea.value.trim()) return;
+            downloadFile(textarea.value, 'document_' + Date.now() + '.md', 'text/markdown;charset=utf-8');
+            showToast('Exported Markdown file!');
+        });
+
+        btnExportHtml.addEventListener('click', function(){
+            if (!textarea.value.trim()) return;
+            var fullHtml = '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Markdown Document</title>\n  <style>\n    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #1e293b; }\n    code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }\n    pre { background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 8px; overflow-x: auto; }\n    blockquote { border-left: 4px solid #06b6d4; margin: 0; padding-left: 1rem; color: #64748b; }\n    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }\n    th, td { border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem; text-align: left; }\n    th { background: #f8fafc; }\n  </style>\n</head>\n<body>\n' + preview.innerHTML + '\n</body>\n</html>';
+            downloadFile(fullHtml, 'document_' + Date.now() + '.html', 'text/html;charset=utf-8');
+            showToast('Exported HTML document!');
+        });
+
+        btnPrintPdf.addEventListener('click', function(){
+            if (!textarea.value.trim()) return;
+            var printWin = window.open('', '_blank');
+            printWin.document.write('<!DOCTYPE html><html><head><title>Print Document</title><style>body{font-family:sans-serif;line-height:1.6;padding:2rem;color:#000}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:0.5rem}</style></head><body>' + preview.innerHTML + '</body></html>');
+            printWin.document.close();
+            printWin.focus();
+            setTimeout(function(){ printWin.print(); printWin.close(); }, 250);
+        });
+
+        function downloadFile(content, fileName, mimeType) {
+            var blob = new Blob([content], { type: mimeType });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+        }
+
+        function parseMarkdownToHtml(md) {
+            if (!md) return '<div style="color: var(--muted); font-style: italic;">Live HTML preview will render here as you type...</div>';
+            var html = md
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, label, url){
+                    var cleanUrl = url.trim();
+                    if (/^(https?:\/\/|\/|#|mailto:)/i.test(cleanUrl)) {
+                        return '<a href="' + cleanUrl + '" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">' + label + '</a>';
+                    }
+                    return label;
+                })
+                .replace(/\n\n/g, '<br><br>');
+            return html;
+        }
+
+        updatePreview();
+    })();
+
+    document.querySelectorAll('.tip-amount').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tip-amount').forEach(function(b){ b.classList.remove('active'); });
+            btn.classList.add('active');
+            _tipAmount = parseInt(btn.dataset.amount);
+            document.getElementById('customAmount').value = '';
+        });
+    });
+    document.getElementById('tipModal').addEventListener('click', function(e){ if(e.target===this) closeTip(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeTip(); });
+</script>
+
+    <!-- tz-scripts -->
+    <script src="../assets/consent.js" defer></script>
+    <script src="../assets/ads.js" defer></script>
+</body>
+</html>

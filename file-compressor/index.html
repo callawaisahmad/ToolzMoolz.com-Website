@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="https://toolzmoolz.com/file-compressor/"/>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#0b1220"/>
+    <link rel="icon" href="/favicon.ico" sizes="any"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="ToolzMoolz"/>
+    <meta property="og:title" content="Online File Compressor Free - Create ZIP Archive Client-Side | ToolzMoolz"/>
+    <meta property="og:description" content="Compress files and create ZIP archives online. Drag-and-drop multiple files, adjust compression levels, and export folders locally. 100% free, private &amp; fast."/>
+    <meta property="og:url" content="https://toolzmoolz.com/file-compressor/"/>
+    <meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Online File Compressor Free - Create ZIP Archive Client-Side | ToolzMoolz"/>
+    <meta name="twitter:description" content="Compress files and create ZIP archives online. Drag-and-drop multiple files, adjust compression levels, and export folders locally. 100% free, private &amp; fast."/>
+    <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+
+    <title>ZIP Files Online – Free File Compressor &amp; Archiver</title>
+    <meta name="description" content="Compress files and create ZIP archives online free. Drag and drop, adjust compression and download instantly. 100% in-browser, no upload, no signup."/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "File Compressor & ZIP Maker",
+      "url": "https://toolzmoolz.com/file-compressor/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript and File API support",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Aggregate and compress multiple files into structured ZIP archives locally in the browser. Supports custom compression levels and fast client-side packaging."
+    }
+    </script>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are my files uploaded to your servers to compress them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, never! Every single step of the file compression and ZIP creation is executed locally inside your web browser. We use client-side JSZip compiling, meaning your files are aggregated directly in your system memory. No data is sent over the internet, keeping your private files completely secure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the maximum file size or quantity limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are no arbitrary files limits. You can drag and drop dozens of files, and compress folders of any file types. The only limit is your device's physical memory (RAM). Typically, archives up to 500MB process flawlessly in a few seconds on most standard devices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do the compression levels mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compression levels range from 0 (Store) to 9 (Maximum). Level 0 simply wraps files into a single ZIP archive instantly without compressing their size. Levels 1 through 9 use DEFLATE algorithms to compress files. Level 6 is the industry-standard balance of fast packaging and high file size reduction."
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- JSZip for building the archive (loaded on demand via fastload.js) -->
+    <script defer src="../assets/fastload.js"></script>
+    <style>
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-head {
+            padding: 12px 16px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: var(--surface);
+        }
+
+        .tool-section-title {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-sub);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .control-group label span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .control-group input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .control-group input[type="text"]:focus {
+            border-color: var(--primary);
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            outline: none;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .stat-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-sub);
+        }
+
+        .stat-row span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .upload-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed var(--border);
+            margin: 16px;
+            border-radius: 8px;
+            transition: all 0.18s ease;
+            background: var(--bg);
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(43,45,66,0.03);
+        }
+
+        .upload-zone .icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .upload-zone h3 {
+            font-size: 15px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .upload-zone p {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .files-table-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 320px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .files-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            color: var(--text);
+            text-align: left;
+        }
+
+        .files-table th, .files-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .files-table th {
+            background: var(--bg);
+            color: var(--muted);
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .file-type-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: var(--border);
+            color: var(--text-sub);
+        }
+
+        .btn-delete {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.1s;
+        }
+
+        .btn-delete:hover {
+            background: rgba(239,35,60,0.1);
+            color: var(--accent);
+        }
+
+        .action-bar {
+            padding: 12px 16px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 12.5px;
+            font-weight: 700;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-action:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            box-shadow: 0 2px 6px rgba(239,35,60,0.3);
+        }
+
+        .btn-download:hover {
+            background: #d90429;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-download:disabled {
+            background: var(--border);
+            color: var(--muted);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolzmoolz.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "File Compressor",
+      "item": "https://toolzmoolz.com/file-compressor/"
+    }
+  ]
+}
+</script>
+
+    <!-- tz-compliance -->
+    <script>window.dataLayer=window.dataLayer||[];function tzg(){window.dataLayer.push(arguments);}tzg('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});window.TZ_ROOT='../';</script>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="../" class="brand" title="ToolzMoolz Home">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="brand-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <span class="brand-wordmark" style="display:none;">
+                <span class="bw-icon">T</span> ToolzMoolz
+            </span>
+        </a>
+
+        <div class="header-divider"></div>
+
+        <nav class="tool-nav" id="toolNav">
+            <a href="../" id="nav-home">Home</a>
+            <a href="../reverse-jargon/">Reverse Jargon</a>
+            <a href="../image-converter/">Image Converter</a>
+            <a href="../case-converter/">Case Converter</a>
+            <a href="../passport-photo/">Passport Photo</a>
+            <a href="../pdf-signature/">PDF Signature</a>
+            <div class="nav-mobile-coffee">
+                <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+            </div>
+        </nav>
+
+        <a href="../#toolGrid" class="ktx-nav-pill">All Tools</a>
+
+        <div class="nav-coffee">
+            <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+        <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- ══ TOOL PAGE ════════════════════════════════════════════════ -->
+<div class="tool-page">
+
+    <!-- ── TOP BAR: Tool header ── -->
+    <div class="tool-topbar" style="margin-bottom: 24px;">
+        <div class="tool-topbar-header">
+            <div class="tool-icon-sm" style="background:linear-gradient(135deg,#6a11cb,#2575fc);">🗜️</div>
+            <div class="tool-topbar-title">
+                <h1>File Compressor &amp; ZIP Maker</h1>
+                <p>Drag files to bundle and compress into custom .zip files instantly. 100% free, browser-based, and offline-compatible.</p>
+            </div>
+            <a href="../" style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;white-space:nowrap;transition:color 0.15s;"
+               onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--muted)'">
+                ← All Tools
+            </a>
+        </div>
+    </div>
+
+    <!-- ── PANEL LAYOUT ── -->
+    <div class="layout-grid">
+        
+        <!-- LEFT: Compression Configurations Panel -->
+        <div class="panel">
+            <div class="panel-head">Configuration</div>
+            <div class="toolbar">
+                
+                <div class="tool-section-title">Archive Name</div>
+                <div class="control-group">
+                    <input type="text" id="inputArchiveName" value="toolzmoolz-archive.zip" placeholder="archive-name.zip"/>
+                </div>
+
+                <div class="tool-section-title">Compression Profile</div>
+                <div class="control-group">
+                    <label>ZIP Level <span id="valZipLevel">6 (Standard)</span></label>
+                    <input type="range" id="inputZipLevel" min="0" max="9" value="6"/>
+                    <span style="font-size:11px;color:var(--muted);margin-top:2px;">
+                        0 = Store (fastest), 9 = Max (slowest, smallest size).
+                    </span>
+                </div>
+
+                <div class="tool-section-title">Stats Summary</div>
+                <div class="stat-card">
+                    <div class="stat-row">Files count: <span id="statFileCount">0</span></div>
+                    <div class="stat-row">Total raw size: <span id="statRawSize">0 KB</span></div>
+                    <div class="stat-row">Method: <span id="statMethod">DEFLATE</span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT: File Queue Upload Panel -->
+        <div class="panel">
+            <div class="panel-head">
+                Queued Files for Packing
+                <span class="status-badge" id="packStatus" style="display:none;color:var(--accent);">Ready to ZIP</span>
+            </div>
+            
+            <div class="upload-zone" id="uploadZone">
+                <div class="icon">📁</div>
+                <h3>Drag &amp; Drop Files</h3>
+                <p>Add documents, images, PDFs, spreadsheets, or music folders</p>
+                <span class="status-badge" style="margin-top:8px;color:var(--muted);font-weight:500;">Multi-selection active · Unlimited volume</span>
+                <input type="file" id="fileQueueInput" multiple style="display:none;"/>
+            </div>
+
+            <div class="files-table-container">
+                <div id="emptyQueueState" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:180px;color:var(--muted);font-size:12.5px;">
+                    <div style="font-size:28px;margin-bottom:8px;">📦</div>
+                    No files queued. Drag files above or click browse to start packing.
+                </div>
+                <table class="files-table" id="filesTable" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Size</th>
+                            <th>Type</th>
+                            <th style="width:50px;text-align:center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="filesTableBody"></tbody>
+                </table>
+            </div>
+            
+            <div class="action-bar">
+                <button class="btn-action" id="btnClearQueue" disabled>✕ Clear All</button>
+                <button class="btn-action btn-download" id="btnCompressDownload" disabled style="background:var(--primary);">
+                    🗜️ Compress &amp; Download ZIP
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── SEO SECTION ── -->
+    <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
+        <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Compress Files &amp; Create ZIP Archives Online for Free</h2>
+        <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our browser-based file archiver and compressor makes it incredibly easy to gather multiple images, large document libraries, and multimedia resources into a single neatly structured, compressed ZIP folder. Instead of using expensive software packages or uploading directories containing sensitive information to external cloud processing systems, ToolzMoolz uses a secure <strong>100% client-side packaging engine</strong>. This means your files remain inside your local browser memory throughout the entire compression cycle, resulting in maximum privacy and instantaneous download triggers.</p>
+        
+        <h3 style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Step-by-Step Instructions:</h3>
+        <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13px; line-height: 1.7; margin-bottom: 24px;">
+            <li><strong>Select Files:</strong> Click the "Drag &amp; Drop Files" panel or select multiple items from your desktop files explorer.</li>
+            <li><strong>Audit Queue:</strong> Review your loaded file list. You can remove redundant entries in the queue by clicking the corresponding **✕ Delete** chip.</li>
+            <li><strong>Name &amp; Profile:</strong> Type in your preferred archive name (e.g., `invoice_bundle.zip`) and slide the Compression slider to level 6 or 9.</li>
+            <li><strong>Export Archive:</strong> Click the **Compress &amp; Download ZIP** action chip. The browser's local JSZip library compiles the DEFLATE matrix and delivers your finalized folder instantly.</li>
+        </ol>
+
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 24px; margin-bottom: 12px;">Frequently Asked Questions (FAQ)</h3>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">What compression algorithm do you use?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">This tool uses the standard, universally compatible DEFLATE algorithm, ensuring that your downloaded `.zip` file can be opened natively on all versions of Windows, macOS, Linux, iOS, and Android without needing extra apps.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Is my bandwidth or internet speed going to slow down downloads?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Not at all! Since the tool compiles your ZIP file client-side within your browser window, there is zero network upload or download traffic. The speed depends only on your local CPU and RAM speed, allowing even massive 300MB bundles to finish in 2-3 seconds.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Can I include folder structures?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Yes! You can load multiple files from different subfolders, and they will be aggregated cleanly. The tool outputs a flat bundle of all selected files into a single, structured container for quick access.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="footer-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="footer-wordmark" style="display:none;">
+                <span>T</span> ToolzMoolz
+            </div>
+            <p>Free tools that are easy, safe and private &mdash; every tool runs 100% in your browser. No uploads, no signups, no watermarks.</p>
+        </div>
+
+        <!-- Popular Tools -->
+        <div class="footer-tools">
+            <h5>Popular Tools</h5>
+            <ul>
+                <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                <li><a href="../image-converter/">Image Converter</a></li>
+                <li><a href="../pdf-to-excel/">PDF to Excel</a></li>
+                <li><a href="../pdf-signature/">Sign PDF Online</a></li>
+                <li><a href="../passport-photo/">Passport Photo</a></li>
+                <li><a href="../qr-generator/">QR Code Generator</a></li>
+            </ul>
+        </div>
+
+        <!-- More Tools -->
+        <div class="footer-tools">
+            <h5>More Tools</h5>
+            <ul><li><a href="../keyword-spinner/">Keyword Spinner</a></li>
+                
+                <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+                <li><a href="../pdf-to-jpg/">PDF to JPG</a></li>
+                <li><a href="../ocr-extractor/">OCR Text Extractor</a></li>
+                <li><a href="../bg-remover/">Background Remover</a></li>
+                <li><a href="../audio-trimmer/">Audio Trimmer</a></li>
+                <li><a href="../md-editor/">Markdown Editor</a></li>
+                <li><a href="../solar-alignment/">Solar Panel Angle</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+            <h5>Get in Touch</h5>
+            <a href="mailto:dev@toolzmoolz.com" class="btn-email">&#9993;&#65039; dev@toolzmoolz.com</a>
+            <button class="btn-coffee-footer" onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="../">ToolzMoolz.com</a> &mdash; Built with <span aria-hidden="true">&#10084;&#65039;</span> for everyone</span>
+        <ul class="footer-legal">
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Tip Modal -->
+<div class="modal-overlay" id="tipModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeTip()">✕</button>
+    <div class="modal-emoji">❤️</div>
+    <h3>Support ToolzMoolz</h3>
+    <p class="modal-sub">Every tool is 100% free. A small tip helps keep the lights on!</p>
+    <div class="tip-amounts" id="tipAmounts">
+      <button class="tip-amount active" data-amount="1"><span class="tip-price">£1</span><span class="tip-label">A sip ☕</span></button>
+      <button class="tip-amount" data-amount="3"><span class="tip-price">£3</span><span class="tip-label">A coffee</span></button>
+      <button class="tip-amount" data-amount="5"><span class="tip-price">£5</span><span class="tip-label">A treat 🍰</span></button>
+      <button class="tip-amount" data-amount="10"><span class="tip-price">£10</span><span class="tip-label">Legend 🦸</span></button>
+    </div>
+    <input type="number" class="custom-amount" id="customAmount" placeholder="Custom amount (£)" min="1" oninput="syncCustom(this)"/>
+    <div class="pay-channels">
+      <a class="pay-channel" onclick="payWith('kofi')"><span class="ch-icon">☕</span><div><span class="ch-name">Ko-fi</span><span class="ch-desc">Cards · PayPal · Apple Pay · Google Pay</span></div><span class="ch-arrow">→</span></a>
+    </div>
+    <p class="tip-note">Opens Ko-fi in a popup — you stay right here. Thank you! ❤️</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══ SCRIPT LOGIC ════════════════════════════════════════════ -->
+<script>
+    // ── Tip modal ─────────────────────────────────────────
+    var _tipAmount = 1;
+    var CHANNELS = { kofi: 'https://ko-fi.com/toolzmoolz' };
+    function openTip() { document.getElementById('tipModal').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeTip() { document.getElementById('tipModal').classList.remove('open'); document.body.style.overflow=''; }
+    function syncCustom(el) {
+        if (el.value) {
+            document.querySelectorAll('.tip-amount').forEach(function(b){ b.classList.remove('active'); });
+            _tipAmount = parseFloat(el.value) || 1;
+        }
+    }
+    function payWith(ch) {
+        var url = CHANNELS[ch] || '';
+        if (!url) { showToast('Payment link not set yet.'); return; }
+        var popup = window.open(url,'payment','width=520,height=680,top='+Math.round((screen.height-680)/2)+',left='+Math.round((screen.width-520)/2)+',resizable=yes,scrollbars=yes');
+        if (!popup) window.open(url,'_blank');
+        closeTip();
+        showToast('Opening payment — thank you! ❤️');
+    }
+
+    // ── Mobile nav ────────────────────────────────────────
+    document.getElementById('navToggle').addEventListener('click', function() {
+        document.getElementById('toolNav').classList.toggle('open');
+    });
+
+    // ── Toast notifier ────────────────────────────────────
+    function showToast(msg) {
+        var toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+
+    // ── FILE COMPRESSOR LOGIC ─────────────────────────────
+    let fileQueue = []; // Array of standard File objects
+
+    const uploadZone = document.getElementById('uploadZone');
+    const fileQueueInput = document.getElementById('fileQueueInput');
+    const emptyQueueState = document.getElementById('emptyQueueState');
+    const filesTable = document.getElementById('filesTable');
+    const filesTableBody = document.getElementById('filesTableBody');
+    const packStatus = document.getElementById('packStatus');
+
+    // Controls
+    const inputArchiveName = document.getElementById('inputArchiveName');
+    const inputZipLevel = document.getElementById('inputZipLevel');
+    const valZipLevel = document.getElementById('valZipLevel');
+    
+    const statFileCount = document.getElementById('statFileCount');
+    const statRawSize = document.getElementById('statRawSize');
+    const statMethod = document.getElementById('statMethod');
+
+    const btnClearQueue = document.getElementById('btnClearQueue');
+    const btnCompressDownload = document.getElementById('btnCompressDownload');
+
+    // Event listeners
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', e => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        if(e.dataTransfer.files.length) appendFiles(e.dataTransfer.files);
+    });
+    uploadZone.addEventListener('click', () => fileQueueInput.click());
+    fileQueueInput.addEventListener('change', e => {
+        if(e.target.files.length) appendFiles(e.target.files);
+    });
+
+    inputZipLevel.addEventListener('input', e => {
+        const level = parseInt(e.target.value);
+        let text = `${level}`;
+        if (level === 0) text += ' (Store - Fast)';
+        else if (level === 6) text += ' (Standard)';
+        else if (level === 9) text += ' (Maximum)';
+        valZipLevel.textContent = text;
+        statMethod.textContent = level === 0 ? 'STORE' : 'DEFLATE';
+    });
+
+    btnClearQueue.addEventListener('click', clearAll);
+    btnCompressDownload.addEventListener('click', compileZip);
+
+    // ── Load files to list ──
+    function appendFiles(filesList) {
+        for (let i = 0; i < filesList.length; i++) {
+            const f = filesList[i];
+            // Verify duplicates
+            const isDuplicate = fileQueue.some(queued => queued.name === f.name && queued.size === f.size);
+            if (!isDuplicate) {
+                fileQueue.push(f);
+            }
+        }
+        renderQueue();
+        showToast(`Added ${filesList.length} files to queue.`);
+    }
+
+    function removeFile(index) {
+        fileQueue.splice(index, 1);
+        renderQueue();
+        showToast('File removed.');
+    }
+
+    function clearAll() {
+        fileQueue = [];
+        fileQueueInput.value = '';
+        renderQueue();
+        showToast('Queue cleared.');
+    }
+
+    function formatSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function renderQueue() {
+        filesTableBody.innerHTML = '';
+        
+        if (fileQueue.length === 0) {
+            emptyQueueState.style.display = 'flex';
+            filesTable.style.display = 'none';
+            btnClearQueue.disabled = true;
+            btnCompressDownload.disabled = true;
+            packStatus.style.display = 'none';
+            
+            statFileCount.textContent = '0';
+            statRawSize.textContent = '0 KB';
+            return;
+        }
+
+        emptyQueueState.style.display = 'none';
+        filesTable.style.display = 'table';
+        btnClearQueue.disabled = false;
+        btnCompressDownload.disabled = false;
+        packStatus.style.display = 'inline';
+
+        let totalSize = 0;
+
+        fileQueue.forEach((f, idx) => {
+            totalSize += f.size;
+            
+            const tr = document.createElement('tr');
+            
+            // Name
+            const tdName = document.createElement('td');
+            tdName.textContent = f.name;
+            tdName.style.fontWeight = '600';
+            tdName.style.wordBreak = 'break-all';
+            tr.appendChild(tdName);
+
+            // Size
+            const tdSize = document.createElement('td');
+            tdSize.textContent = formatSize(f.size);
+            tr.appendChild(tdSize);
+
+            // Type
+            const tdType = document.createElement('td');
+            const ext = f.name.split('.').pop().toLowerCase();
+            const badge = document.createElement('span');
+            badge.className = 'file-type-badge';
+            badge.textContent = ext.slice(0, 4);
+            
+            // Custom styling for common types
+            if (['zip', 'rar', 'tar', 'gz'].includes(ext)) badge.style.background = '#ffd166';
+            else if (['jpg', 'png', 'gif', 'webp', 'svg'].includes(ext)) badge.style.background = '#4cc9f0';
+            else if (['pdf', 'docx', 'txt', 'epub'].includes(ext)) badge.style.background = '#f72585';
+            else if (['xlsx', 'csv', 'tsv'].includes(ext)) badge.style.background = '#06d6a0';
+
+            tdType.appendChild(badge);
+            tr.appendChild(tdType);
+
+            // Action
+            const tdAct = document.createElement('td');
+            tdAct.style.textAlign = 'center';
+            const btnDel = document.createElement('button');
+            btnDel.className = 'btn-delete';
+            btnDel.textContent = '✕';
+            btnDel.title = 'Remove file';
+            btnDel.addEventListener('click', () => removeFile(idx));
+            tdAct.appendChild(btnDel);
+            tr.appendChild(tdAct);
+
+            filesTableBody.appendChild(tr);
+        });
+
+        statFileCount.textContent = fileQueue.length;
+        statRawSize.textContent = formatSize(totalSize);
+    }
+
+    // ── Build ZIP Archive via JSZip ──
+    async function compileZip() {
+        if (fileQueue.length === 0) return;
+
+        showToast('Packaging ZIP... please wait.');
+        btnCompressDownload.disabled = true;
+
+        try {
+            await window.TZLib.load('jszip');
+            const zip = new JSZip();
+            const level = parseInt(inputZipLevel.value);
+
+            // Append each file to archive
+            fileQueue.forEach(f => {
+                zip.file(f.name, f);
+            });
+
+            // Set compression options
+            const options = {
+                type: 'blob',
+                compression: level === 0 ? 'STORE' : 'DEFLATE',
+                compressionOptions: {
+                    level: level
+                }
+            };
+
+            const content = await zip.generateAsync(options);
+            
+            // Trigger local download
+            let zipName = inputArchiveName.value.trim();
+            if (!zipName.endsWith('.zip')) {
+                zipName += '.zip';
+            }
+
+            const url = URL.createObjectURL(content);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = zipName;
+            a.click();
+
+            // Revoke blob
+            setTimeout(() => URL.revokeObjectURL(url), 10000);
+            
+            showToast('ZIP archive downloaded successfully!');
+        } catch (err) {
+            console.error(err);
+            showToast('Error building archive. Try reducing file sizes.');
+        } finally {
+            btnCompressDownload.disabled = false;
+        }
+    }
+</script>
+
+
+    <!-- tz-scripts -->
+    <script src="../assets/consent.js" defer></script>
+    <script src="../assets/ads.js" defer></script>
+</body>
+</html>

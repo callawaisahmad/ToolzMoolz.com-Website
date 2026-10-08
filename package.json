@@ -1,0 +1,11 @@
+{
+  "name": "toolzmoolz",
+  "version": "1.0.0",
+  "description": "ToolzMoolz — Free Online Tools",
+  "homepage": "https://toolzmoolz.com",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . -p 3000 --no-clipboard",
+    "dev": "npx serve . -p 3000"
+  }
+}

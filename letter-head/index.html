@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="https://toolzmoolz.com/letter-head/"/>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#0b1220"/>
+    <link rel="icon" href="/favicon.ico" sizes="any"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="ToolzMoolz"/>
+    <meta property="og:title" content="Business Letterhead Generator - Design &amp; Print Custom Letterheads | ToolzMoolz"/>
+    <meta property="og:description" content="Design professional, high-quality business letterheads online. Upload your logo, choose colors, input contact details, and print or download as a vector PDF."/>
+    <meta property="og:url" content="https://toolzmoolz.com/letter-head/"/>
+    <meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Business Letterhead Generator - Design &amp; Print Custom Letterheads | ToolzMoolz"/>
+    <meta name="twitter:description" content="Design professional, high-quality business letterheads online. Upload your logo, choose colors, input contact details, and print or download as a vector PDF."/>
+    <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+
+    <title>Letterhead Maker Online – Free Business Letterhead</title>
+    <meta name="description" content="Design a professional business letterhead online free. Upload your logo, add contact details and download a vector PDF. Runs in your browser."/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Business Letterhead Generator",
+      "url": "https://toolzmoolz.com/letter-head/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript support",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Design custom professional business letterheads online. Features logo uploads, custom theme colors, professional typography selections, and print or PDF exports."
+    }
+    </script>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are my business details safe and secure on ToolzMoolz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, absolutely. All inputs, text bindings, and logo images are kept strictly local inside your browser. No data is ever transmitted to a server or stored in a database."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I download the letterhead as a PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tap 'Save as PDF'. This opens your system's native Print dialog. In the Destination dropdown, simply select 'Save as PDF' and click Save to download your file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the letterhead generator support images or logos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! You can upload any standard image file (PNG, JPG, or WEBP) to serve as your company logo. A high-resolution transparent PNG is recommended."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+        .lh-wrap {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .panel-head {
+            padding: 10px 16px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+        }
+
+        .form-section {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-section:last-child { border-bottom: none; }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .form-group:last-child { margin-bottom: 0; }
+
+        .form-group label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--muted);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--text);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus { border-color: var(--primary); }
+
+        .form-group textarea { resize: none; height: 60px; }
+
+        /* Color pickers inline */
+        .color-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-row .form-group { flex: 1; }
+
+        .form-group input[type="color"] {
+            padding: 2px 4px;
+            height: 36px;
+            cursor: pointer;
+        }
+
+        /* Logo upload */
+        .logo-upload {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-preview {
+            width: 56px;
+            height: 56px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            object-fit: contain;
+            background: var(--bg);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        /* ── Letterhead Preview ── */
+        #letterheadPreview {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-shadow: 0 4px 24px rgba(43,45,66,0.10);
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .lh-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 36px 24px;
+        }
+
+        .lh-logo-zone {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lh-logo-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            display: none;
+        }
+
+        .lh-company-name {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .lh-tagline {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .lh-contact-block {
+            text-align: right;
+            font-size: 11px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .lh-divider {
+            height: 4px;
+        }
+
+        .lh-body-area {
+            padding: 32px 36px;
+        }
+
+        .lh-body-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .lh-body-line {
+            height: 1px;
+            background: #e5e5e5;
+            border-radius: 1px;
+        }
+
+        .lh-footer-bar {
+            margin-top: auto;
+            padding: 16px 36px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #aaa;
+        }
+
+        /* Action bar */
+        .action-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+            justify-content: flex-end;
+        }
+
+        .btn-dl {
+            padding: 9px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-dl:hover { background: #c9152b; }
+
+        .btn-print {
+            padding: 9px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-print:hover { background: #1a1c2e; }
+
+        @media (max-width: 768px) {
+            .lh-wrap { grid-template-columns: 1fr; }
+            .lh-header-bar { flex-direction: column; gap: 16px; text-align: center; }
+            .lh-contact-block { text-align: center; }
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolzmoolz.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Letterhead Maker",
+      "item": "https://toolzmoolz.com/letter-head/"
+    }
+  ]
+}
+</script>
+
+    <!-- tz-compliance -->
+    <script>window.dataLayer=window.dataLayer||[];function tzg(){window.dataLayer.push(arguments);}tzg('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});window.TZ_ROOT='../';</script>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="../" class="brand" title="ToolzMoolz Home">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="brand-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <span class="brand-wordmark" style="display:none;">
+                <span class="bw-icon">T</span> ToolzMoolz
+            </span>
+        </a>
+
+        <div class="header-divider"></div>
+
+        <nav class="tool-nav" id="toolNav">
+            <a href="../" id="nav-home">Home</a>
+            <a href="../reverse-jargon/">Reverse Jargon</a>
+            <a href="../image-converter/">Image Converter</a>
+            <a href="../case-converter/">Case Converter</a>
+            <a href="../passport-photo/">Passport Photo</a>
+            <a href="../pdf-signature/">PDF Signature</a>
+            <div class="nav-mobile-coffee">
+                <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+            </div>
+        </nav>
+
+        <a href="../#toolGrid" class="ktx-nav-pill">All Tools</a>
+
+        <div class="nav-coffee">
+            <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+        <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<div class="tool-page" style="max-width:1060px;">
+
+    <!-- Tool Topbar -->
+    <div class="tool-topbar">
+        <div class="tool-topbar-header">
+            <div class="tool-icon-sm" style="background:linear-gradient(135deg,#ff9a9e,#fecfef);">📄</div>
+            <div class="tool-topbar-title">
+                <h1>Free Business Letterhead Generator</h1>
+                <p>Fill in your company details and get a printable, professional letterhead instantly.</p>
+            </div>
+            <a href="../" style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;white-space:nowrap;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--muted)'">← All Tools</a>
+        </div>
+    </div>
+
+    <div class="lh-wrap">
+
+        <!-- LEFT: Form -->
+        <div class="panel">
+            <div class="panel-head">Company Details</div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="companyName" placeholder="Acme Corporation Ltd." value="Acme Corporation Ltd."/>
+                </div>
+                <div class="form-group">
+                    <label>Tagline / Slogan</label>
+                    <input type="text" id="tagline" placeholder="Building Better Futures" value="Building Better Futures"/>
+                </div>
+                <div class="form-group">
+                    <label>Logo (optional)</label>
+                    <div class="logo-upload">
+                        <div class="logo-preview" id="logoPreview">🏢</div>
+                        <div style="flex:1;">
+                            <input type="file" id="logoFile" accept="image/*" style="display:none"/>
+                            <button class="btn btn-outline" onclick="document.getElementById('logoFile').click()" style="width:100%;justify-content:center;">Upload Logo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea id="address" placeholder="123 Business Street&#10;London, EC1A 1BB">123 Business Street, London, EC1A 1BB</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="phone" placeholder="+44 20 1234 5678" value="+44 20 1234 5678"/>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="info@company.com" value="info@acme.com"/>
+                </div>
+                <div class="form-group">
+                    <label>Website</label>
+                    <input type="text" id="website" placeholder="www.company.com" value="www.acme.com"/>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label>Footer Text</label>
+                    <input type="text" id="footerText" placeholder="Reg. No. 12345678 | VAT No. GB000000000" value="Reg. No. 12345678 | VAT No. GB000000000"/>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="color-row">
+                    <div class="form-group">
+                        <label>Header Color</label>
+                        <input type="color" id="headerColor" value="#2b2d42"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Accent Color</label>
+                        <input type="color" id="accentColor" value="#ef233c"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Text Color</label>
+                        <input type="color" id="textColor" value="#2b2d42"/>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:4px;">
+                    <label>Font Style</label>
+                    <select id="fontStyle">
+                        <option value="Inter, sans-serif">Inter (Modern)</option>
+                        <option value="Georgia, serif">Georgia (Classic)</option>
+                        <option value="'Times New Roman', serif">Times New Roman (Formal)</option>
+                        <option value="'Courier New', monospace">Courier New (Typewriter)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Live Preview + actions -->
+        <div>
+            <div class="panel">
+                <div class="panel-head">Live Preview</div>
+                <div style="padding:16px;">
+                    <div id="letterheadPreview">
+
+                        <div class="lh-header-bar" id="lhHeader">
+                            <div class="lh-logo-zone">
+                                <img class="lh-logo-img" id="lhLogo" src="" alt="logo"/>
+                                <div>
+                                    <div class="lh-company-name" id="lhName">Acme Corporation Ltd.</div>
+                                    <div class="lh-tagline" id="lhTagline">Building Better Futures</div>
+                                </div>
+                            </div>
+                            <div class="lh-contact-block" id="lhContact">
+                                <div id="lhAddress">123 Business Street, London, EC1A 1BB</div>
+                                <div id="lhPhone">+44 20 1234 5678</div>
+                                <div id="lhEmail">info@acme.com</div>
+                                <div id="lhWebsite">www.acme.com</div>
+                            </div>
+                        </div>
+
+                        <div class="lh-divider" id="lhDivider"></div>
+
+                        <div class="lh-body-area">
+                            <div style="font-size:11px;color:#999;margin-bottom:20px;">[ Letter content goes here ]</div>
+                            <div class="lh-body-lines">
+                                <div class="lh-body-line"></div><div class="lh-body-line"></div>
+                                <div class="lh-body-line"></div><div class="lh-body-line"></div>
+                                <div class="lh-body-line"></div><div class="lh-body-line"></div>
+                                <div class="lh-body-line"></div><div class="lh-body-line"></div>
+                            </div>
+                        </div>
+
+                        <div class="lh-footer-bar" id="lhFooter">
+                            <span id="lhFooterText">Reg. No. 12345678 | VAT No. GB000000000</span>
+                            <span id="lhWebsiteFooter">www.acme.com</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn-print" onclick="printLH()">🖨 Print</button>
+                <button class="btn-dl" onclick="downloadPDF()">⬇ Save as PDF</button>
+            </div>
+    
+    <!-- ── SEO EXPLANATION & FAQ SECTION ── -->
+    <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
+        <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Design & Print Your Custom Business Letterhead</h2>
+        <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our free online Business Letterhead Generator is a powerful, simple way to create professional branded stationary. With customizable headers, color pickers, logo support, and elegant font options, you can design a beautiful template for invoices, corporate notifications, or employment letters. The tool runs 100% inside your browser, allowing you to preview and print or save your letterhead as a vector-perfect PDF instantly.</p>
+        
+        <h3 style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Step-by-Step Instructions:</h3>
+        <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13px; line-height: 1.7; margin-bottom: 24px;">
+            <li><strong>Company Profile:</strong> Fill in your Company Name, Slogan, and upload your high-resolution PNG logo file.</li>
+            <li><strong>Contact Details:</strong> Add your business address, official phone number, email address, and official website URL.</li>
+            <li><strong>Design Customization:</strong> Select your brand's header color, accent bar color, and body text color using the color swatches. Choose from Inter, Georgia, Times New Roman, or Courier New font styles.</li>
+            <li><strong>Interactive Review:</strong> View your live-updating design instantly in the "Live Preview" panel.</li>
+            <li><strong>Export Options:</strong> Click **Print** to open your browser's print utility, or tap **Save as PDF** to generate a clean digital document.</li>
+        </ol>
+
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 24px; margin-bottom: 12px;">Frequently Asked Questions (FAQ)</h3>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Are my business details kept safe and private?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Absolutely. All inputs, text bindings, and logo images are kept strictly local inside your browser using JavaScript variables. No data is ever transmitted to a server or stored in a database, ensuring 100% privacy.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Can I change the fonts or margins of the template?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Yes! You can toggle between modern sans-serif, classic Georgia serif, formal Times New Roman, or retro typewriter monospace fonts. Margins are optimized for standard A4 and US Letter printing sizes.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">How do I download the letterhead as a PDF?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Tap "Save as PDF". This opens your system's native Print dialog. In the Destination dropdown, simply select "Save as PDF" (or Microsoft Print to PDF) and click Save to download your high-quality file.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="footer-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="footer-wordmark" style="display:none;">
+                <span>T</span> ToolzMoolz
+            </div>
+            <p>Free tools that are easy, safe and private &mdash; every tool runs 100% in your browser. No uploads, no signups, no watermarks.</p>
+        </div>
+
+        <!-- Popular Tools -->
+        <div class="footer-tools">
+            <h5>Popular Tools</h5>
+            <ul>
+                <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                <li><a href="../image-converter/">Image Converter</a></li>
+                <li><a href="../pdf-to-excel/">PDF to Excel</a></li>
+                <li><a href="../pdf-signature/">Sign PDF Online</a></li>
+                <li><a href="../passport-photo/">Passport Photo</a></li>
+                <li><a href="../qr-generator/">QR Code Generator</a></li>
+            </ul>
+        </div>
+
+        <!-- More Tools -->
+        <div class="footer-tools">
+            <h5>More Tools</h5>
+            <ul><li><a href="../keyword-spinner/">Keyword Spinner</a></li>
+                
+                <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+                <li><a href="../pdf-to-jpg/">PDF to JPG</a></li>
+                <li><a href="../ocr-extractor/">OCR Text Extractor</a></li>
+                <li><a href="../bg-remover/">Background Remover</a></li>
+                <li><a href="../audio-trimmer/">Audio Trimmer</a></li>
+                <li><a href="../md-editor/">Markdown Editor</a></li>
+                <li><a href="../solar-alignment/">Solar Panel Angle</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+            <h5>Get in Touch</h5>
+            <a href="mailto:dev@toolzmoolz.com" class="btn-email">&#9993;&#65039; dev@toolzmoolz.com</a>
+            <button class="btn-coffee-footer" onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="../">ToolzMoolz.com</a> &mdash; Built with <span aria-hidden="true">&#10084;&#65039;</span> for everyone</span>
+        <ul class="footer-legal">
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
+        </ul>
+    </div>
+</footer>
+<!-- Tip Modal -->
+<div class="modal-overlay" id="tipModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeTip()">✕</button>
+    <div class="modal-emoji">❤️</div>
+    <h3>Support ToolzMoolz</h3>
+    <p class="modal-sub">Every tool is 100% free. A small tip helps keep the lights on!</p>
+    <div class="tip-amounts" id="tipAmounts">
+      <button class="tip-amount active" data-amount="1"><span class="tip-price">£1</span><span class="tip-label">A sip ☕</span></button>
+      <button class="tip-amount" data-amount="3"><span class="tip-price">£3</span><span class="tip-label">A coffee</span></button>
+      <button class="tip-amount" data-amount="5"><span class="tip-price">£5</span><span class="tip-label">A treat 🍰</span></button>
+      <button class="tip-amount" data-amount="10"><span class="tip-price">£10</span><span class="tip-label">Legend 🦸</span></button>
+    </div>
+    <input type="number" class="custom-amount" id="customAmount" placeholder="Custom amount (£)" min="1"/>
+    <div class="pay-channels">
+      <a class="pay-channel" onclick="payWith('kofi')"><span class="ch-icon">☕</span><div><span class="ch-name">Ko-fi</span><span class="ch-desc">Cards · PayPal · Apple Pay · Google Pay</span></div><span class="ch-arrow">→</span></a>
+    </div>
+    <p class="tip-note">Opens Ko-fi in a popup — you stay right here. Thank you! ❤️</p>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+    var _tipAmount=1;
+    var CHANNELS={kofi:'https://ko-fi.com/toolzmoolz'};
+    function openTip(){document.getElementById('tipModal').classList.add('open');document.body.style.overflow='hidden';}
+    function closeTip(){document.getElementById('tipModal').classList.remove('open');document.body.style.overflow='';}
+    function payWith(ch){var url=CHANNELS[ch]||'';if(!url)return;var p=window.open(url,'payment','width=520,height=680,top='+Math.round((screen.height-680)/2)+',left='+Math.round((screen.width-520)/2)+',resizable=yes,scrollbars=yes');if(!p)window.open(url,'_blank');closeTip();}
+    document.querySelectorAll('.tip-amount').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tip-amount').forEach(function(x){x.classList.remove('active')});b.classList.add('active');_tipAmount=parseInt(b.dataset.amount);document.getElementById('customAmount').value='';});});
+    document.addEventListener('DOMContentLoaded',function(){document.getElementById('tipModal').addEventListener('click',function(e){if(e.target===this)closeTip();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTip();});});
+    document.getElementById('navToggle').addEventListener('click', () => {
+        document.getElementById('toolNav').classList.toggle('open');
+    });
+
+    // Live updates
+    function bind(id, elId, prop) {
+        const input = document.getElementById(id);
+        const el    = document.getElementById(elId);
+        if (!input || !el) return;
+        input.addEventListener('input', () => { el[prop || 'textContent'] = input.value; });
+    }
+
+    bind('companyName', 'lhName');
+    bind('tagline',     'lhTagline');
+    bind('address',     'lhAddress');
+    bind('phone',       'lhPhone');
+    bind('email',       'lhEmail');
+    bind('website',     'lhWebsite');
+    bind('website',     'lhWebsiteFooter');
+    bind('footerText',  'lhFooterText');
+
+    // Colors
+    document.getElementById('headerColor').addEventListener('input', e => {
+        document.getElementById('lhHeader').style.background = e.target.value;
+        document.getElementById('lhName').style.color = '#fff';
+        document.getElementById('lhTagline').style.color = 'rgba(255,255,255,0.7)';
+        document.getElementById('lhContact').style.color = 'rgba(255,255,255,0.85)';
+    });
+
+    document.getElementById('accentColor').addEventListener('input', e => {
+        document.getElementById('lhDivider').style.background = e.target.value;
+    });
+
+    // Font
+    document.getElementById('fontStyle').addEventListener('change', e => {
+        document.getElementById('letterheadPreview').style.fontFamily = e.target.value;
+    });
+
+    // Logo
+    document.getElementById('logoFile').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+            document.getElementById('lhLogo').src = ev.target.result;
+            document.getElementById('lhLogo').style.display = 'block';
+            document.getElementById('logoPreview').innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:contain;border-radius:4px;"/>`;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Print
+    function printLH() {
+        const content = document.getElementById('letterheadPreview').outerHTML;
+        const win = window.open('', '_blank');
+        win.document.write(`
+            <html><head><title>Letterhead</title>
+            <link rel="stylesheet" href="../css/style.css"/>
+            <style>
+                body { margin:0; padding:0; font-family:'Inter',sans-serif; }
+                @media print { body { -webkit-print-color-adjust: exact; } }
+            </style>
+            </head><body>${content}</body></html>
+        `);
+        win.document.close();
+        win.focus();
+        setTimeout(() => win.print(), 400);
+    }
+
+    // Save as PDF (via browser print dialog)
+    function downloadPDF() {
+        showToast('Opening print dialog — save as PDF from the menu.');
+        setTimeout(printLH, 300);
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg; t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // Apply initial accent divider color
+    document.getElementById('lhDivider').style.background = document.getElementById('accentColor').value;
+</script>
+
+    <!-- tz-scripts -->
+    <script src="../assets/consent.js" defer></script>
+    <script src="../assets/ads.js" defer></script>
+</body>
+</html>

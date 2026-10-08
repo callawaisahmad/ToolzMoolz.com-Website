@@ -1,0 +1,5 @@
+# AdSense ads.txt — ToolzMoolz
+# TODO(adsense): replace pub-0000000000000000 with the real AdSense publisher ID
+# from Account > Settings > Account information (drop the leading "ca-").
+# Until then AdSense ad requests stay disabled by assets/ads.js.
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

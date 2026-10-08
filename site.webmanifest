@@ -1,0 +1,14 @@
+{
+  "name": "ToolzMoolz — 30+ Free Online Tools",
+  "short_name": "ToolzMoolz",
+  "description": "30+ free, private, browser-based tools — ReverseJargon AI, image converter & compressor, PDF tools, OCR and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "icons": [
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

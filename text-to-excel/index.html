@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="https://toolzmoolz.com/text-to-excel/"/>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#0b1220"/>
+    <link rel="icon" href="/favicon.ico" sizes="any"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="ToolzMoolz"/>
+    <meta property="og:title" content="Text to Clean Excel Converter - Convert CSV/TSV to XLSX Online | ToolzMoolz"/>
+    <meta property="og:description" content="Paste raw delimited text, CSV, TSV, or pipe-separated data and download a clean, formatted Excel (.xlsx) file instantly. 100% browser-based &amp; secure."/>
+    <meta property="og:url" content="https://toolzmoolz.com/text-to-excel/"/>
+    <meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Text to Clean Excel Converter - Convert CSV/TSV to XLSX Online | ToolzMoolz"/>
+    <meta name="twitter:description" content="Paste raw delimited text, CSV, TSV, or pipe-separated data and download a clean, formatted Excel (.xlsx) file instantly. 100% browser-based &amp; secure."/>
+    <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
+
+    <title>Text to Excel Converter – Paste CSV &amp; TSV, Get XLSX</title>
+    <meta name="description" content="Paste delimited text, CSV or TSV and convert it to a clean, formatted Excel (.xlsx) file instantly. 100% browser-based, free and private."/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Text to Clean Excel Converter",
+      "url": "https://toolzmoolz.com/text-to-excel/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript and SheetJS support",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Convert raw delimited text, CSV, TSV, or pipe-separated values into formatted Excel (.xlsx) files instantly. Includes a live-updating responsive table preview."
+    }
+    </script>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my pasted data safe and secure on ToolzMoolz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, absolutely. The entire conversion process occurs locally in your browser using secure JavaScript. No data is ever transmitted, uploaded, or cached on our servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What maximum file size or row count is supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Since the script processes raw text within your browser memory, it can comfortably parse up to 50,000 rows in seconds without any performance lag."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert tab-separated files (TSV) with this tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Simply choose the 'Tab' option in the delimiter bar before clicking 'Preview Table'. It will correctly separate each tab-spaced column."
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- SheetJS for Excel export (loaded on demand via fastload.js) -->
+    <script defer src="../assets/fastload.js"></script>
+    <style>
+        .excel-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .panel-head {
+            padding: 10px 16px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 240px;
+            padding: 14px 16px;
+            font-family: 'Inter', monospace;
+            font-size: 13px;
+            color: var(--text);
+            background: var(--surface);
+            border: none;
+            outline: none;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        textarea::placeholder { color: var(--muted); }
+
+        /* Options row */
+        .options-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .opt-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .radio-btn {
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--surface);
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .radio-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        /* Table preview */
+        .table-wrap {
+            overflow: auto;
+            max-height: 320px;
+            padding: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th {
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 11px;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 7px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            white-space: nowrap;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        tr:nth-child(even) td { background: var(--bg); }
+        tr:hover td { background: rgba(43,45,66,0.04); }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .empty-state .icon { font-size: 36px; margin-bottom: 10px; }
+
+        .action-bar {
+            display: flex;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .row-count {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .row-count strong { color: var(--primary); }
+
+        .btn-xl {
+            padding: 9px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            background: #1d7a40;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .btn-xl:hover { background: #155d30; }
+        .btn-xl:disabled { background: var(--muted); cursor: not-allowed; }
+
+        /* Header toggle */
+        .toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .toggle-wrap input[type="checkbox"] {
+            accent-color: var(--primary);
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 640px) {
+            .excel-wrap { grid-template-columns: 1fr; }
+            textarea { min-height: 160px; }
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolzmoolz.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Text to Excel",
+      "item": "https://toolzmoolz.com/text-to-excel/"
+    }
+  ]
+}
+</script>
+
+    <!-- tz-compliance -->
+    <script>window.dataLayer=window.dataLayer||[];function tzg(){window.dataLayer.push(arguments);}tzg('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});window.TZ_ROOT='../';</script>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════ -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="../" class="brand" title="ToolzMoolz Home">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="brand-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <span class="brand-wordmark" style="display:none;">
+                <span class="bw-icon">T</span> ToolzMoolz
+            </span>
+        </a>
+
+        <div class="header-divider"></div>
+
+        <nav class="tool-nav" id="toolNav">
+            <a href="../" id="nav-home">Home</a>
+            <a href="../reverse-jargon/">Reverse Jargon</a>
+            <a href="../image-converter/">Image Converter</a>
+            <a href="../case-converter/">Case Converter</a>
+            <a href="../passport-photo/">Passport Photo</a>
+            <a href="../pdf-signature/">PDF Signature</a>
+            <div class="nav-mobile-coffee">
+                <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+            </div>
+        </nav>
+
+        <a href="../#toolGrid" class="ktx-nav-pill">All Tools</a>
+
+        <div class="nav-coffee">
+            <button onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+        <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<div class="tool-page" style="max-width:1000px;">
+
+    <!-- Tool Topbar -->
+    <div class="tool-topbar">
+        <div class="tool-topbar-header">
+            <div class="tool-icon-sm" style="background:linear-gradient(135deg,#11998e,#38ef7d);">📊</div>
+            <div class="tool-topbar-title">
+                <h1>Delimited Text to Clean Excel Converter</h1>
+                <p>Paste CSV, TSV, or any delimited text — preview and download a clean .xlsx file.</p>
+            </div>
+            <a href="../" style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;white-space:nowrap;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--muted)'">← All Tools</a>
+        </div>
+    </div>
+
+    <div class="excel-wrap">
+
+        <!-- LEFT: Input -->
+        <div class="panel">
+            <div class="panel-head">Paste Your Data</div>
+            <textarea id="inputData" placeholder="Paste CSV, TSV, or pipe-separated data here…
+
+Example (comma):
+Name, Email, Phone
+Alice, alice@mail.com, 01234
+Bob, bob@mail.com, 05678
+
+Example (tab-separated):
+Name	Email	Phone
+Alice	alice@mail.com	01234"></textarea>
+
+            <div class="options-row">
+                <span class="opt-label">Delimiter</span>
+                <div class="radio-group" id="delimGroup">
+                    <button class="radio-btn active" data-delim=",">Comma</button>
+                    <button class="radio-btn" data-delim="	">Tab</button>
+                    <button class="radio-btn" data-delim="|">Pipe |</button>
+                    <button class="radio-btn" data-delim=";">Semi-colon</button>
+                    <button class="radio-btn" data-delim=" ">Space</button>
+                </div>
+            </div>
+
+            <div class="options-row" style="border-top:none;padding-top:4px;">
+                <label class="toggle-wrap">
+                    <input type="checkbox" id="hasHeader" checked/> First row is header
+                </label>
+                <label class="toggle-wrap" style="margin-left:auto;">
+                    <input type="checkbox" id="trimCells" checked/> Trim whitespace
+                </label>
+            </div>
+
+            <div style="padding:8px 16px 12px;display:flex;gap:8px;">
+                <button class="btn btn-outline" id="clearBtn">✕ Clear</button>
+                <button class="btn btn-accent" id="parseBtn">→ Preview Table</button>
+            </div>
+        </div>
+
+        <!-- RIGHT: Preview -->
+        <div class="panel" style="display:flex;flex-direction:column;">
+            <div class="panel-head">
+                Table Preview
+                <span id="previewBadge" style="font-size:10px;color:var(--accent);letter-spacing:0;font-weight:700;"></span>
+            </div>
+            <div class="table-wrap" id="tableWrap">
+                <div class="empty-state">
+                    <div class="icon">📋</div>
+                    Paste data on the left and click <strong>Preview Table</strong>
+                </div>
+            </div>
+            <div class="action-bar">
+                <span class="row-count" id="rowCount"></span>
+                <div style="display:flex;gap:8px;">
+                    <button class="btn-xl" id="downloadCSV" disabled style="background:var(--primary);">⬇ CSV</button>
+                    <button class="btn-xl" id="downloadXLSX" disabled>⬇ Excel (.xlsx)</button>
+                </div>
+            </div>
+        </div>
+
+    
+    <!-- ── SEO EXPLANATION & FAQ SECTION ── -->
+    <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
+        <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Convert Text to Clean Excel Spreadsheet Online</h2>
+        <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our free online Delimited Text to Excel converter is a simple, browser-based tool to parse raw, messy data blocks and download them as perfectly formatted spreadsheets. Copying and pasting data tables from emails, log files, PDFs, or raw text databases often ruins column alignments. By choosing the correct delimiter (comma, tab, semi-colon, space, or vertical pipe), you can preview and parse your records instantly before saving them to a standard Excel (.xlsx) file. It is also the quickest way to turn an exported keyword list from the <a href="../keyword-spinner/">Keyword Spinner</a> into one keyword per row in a spreadsheet.</p>
+        
+        <h3 style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Step-by-Step Instructions:</h3>
+        <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13px; line-height: 1.7; margin-bottom: 24px;">
+            <li><strong>Input Data:</strong> Paste your raw delimited text or CSV contents inside the left-side text area.</li>
+            <li><strong>Select Delimiter:</strong> Choose the character that separates your values (e.g. Comma for CSV, Tab for TSV, Pipe '|', Semicolon, or Space).</li>
+            <li><strong>Adjust Options:</strong> Toggle "First row is header" to define column headings, and select "Trim whitespace" to auto-remove extra spaces around cell contents.</li>
+            <li><strong>Preview:</strong> Tap **Preview Table** to verify that your columns and rows are correctly mapped in the preview display panel.</li>
+            <li><strong>Export:</strong> Click **Excel (.xlsx)** to download a native, clean Microsoft Excel spreadsheet, or tap **CSV** to save a standard comma-separated values file.</li>
+        </ol>
+
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 24px; margin-bottom: 12px;">Frequently Asked Questions (FAQ)</h3>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Is SheetJS library executed client-side?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Yes! We use SheetJS (xlsx.full.min.js) strictly in the browser. The conversion is entirely offline. Your financial data, email lists, or database logs are never sent to a server, ensuring 100% data compliance.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">What maximum file size or row count is supported?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">Since the script processes raw text within your browser memory, it can comfortably parse up to 50,000 rows in seconds without any performance lag. It depends entirely on your local device's memory.</p>
+            </div>
+            <div>
+                <h4 style="font-size: 13.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Does the tool support nested tables or custom delimiters?</h4>
+                <p style="color: var(--text-sub); font-size: 12.5px; line-height: 1.5;">It parses standard flat tables. For other delimiters, simply choose the closest match or pre-convert your separators inside a text editor to comma or tab before pasting.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <img src="../assets/logo.svg" alt="ToolzMoolz" class="footer-logo"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="footer-wordmark" style="display:none;">
+                <span>T</span> ToolzMoolz
+            </div>
+            <p>Free tools that are easy, safe and private &mdash; every tool runs 100% in your browser. No uploads, no signups, no watermarks.</p>
+        </div>
+
+        <!-- Popular Tools -->
+        <div class="footer-tools">
+            <h5>Popular Tools</h5>
+            <ul>
+                <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                <li><a href="../image-converter/">Image Converter</a></li>
+                <li><a href="../pdf-to-excel/">PDF to Excel</a></li>
+                <li><a href="../pdf-signature/">Sign PDF Online</a></li>
+                <li><a href="../passport-photo/">Passport Photo</a></li>
+                <li><a href="../qr-generator/">QR Code Generator</a></li>
+            </ul>
+        </div>
+
+        <!-- More Tools -->
+        <div class="footer-tools">
+            <h5>More Tools</h5>
+            <ul><li><a href="../keyword-spinner/">Keyword Spinner</a></li>
+                
+                <li><a href="../heic-to-jpg/">HEIC to JPG</a></li>
+                <li><a href="../pdf-to-jpg/">PDF to JPG</a></li>
+                <li><a href="../ocr-extractor/">OCR Text Extractor</a></li>
+                <li><a href="../bg-remover/">Background Remover</a></li>
+                <li><a href="../audio-trimmer/">Audio Trimmer</a></li>
+                <li><a href="../md-editor/">Markdown Editor</a></li>
+                <li><a href="../solar-alignment/">Solar Panel Angle</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+            <h5>Get in Touch</h5>
+            <a href="mailto:dev@toolzmoolz.com" class="btn-email">&#9993;&#65039; dev@toolzmoolz.com</a>
+            <button class="btn-coffee-footer" onclick="openTip()">&#9749; Buy Us a Coffee</button>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="../">ToolzMoolz.com</a> &mdash; Built with <span aria-hidden="true">&#10084;&#65039;</span> for everyone</span>
+        <ul class="footer-legal">
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
+        </ul>
+    </div>
+</footer>
+<!-- Tip Modal -->
+<div class="modal-overlay" id="tipModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeTip()">✕</button>
+    <div class="modal-emoji">❤️</div>
+    <h3>Support ToolzMoolz</h3>
+    <p class="modal-sub">Every tool is 100% free. A small tip helps keep the lights on!</p>
+    <div class="tip-amounts" id="tipAmounts">
+      <button class="tip-amount active" data-amount="1"><span class="tip-price">£1</span><span class="tip-label">A sip ☕</span></button>
+      <button class="tip-amount" data-amount="3"><span class="tip-price">£3</span><span class="tip-label">A coffee</span></button>
+      <button class="tip-amount" data-amount="5"><span class="tip-price">£5</span><span class="tip-label">A treat 🍰</span></button>
+      <button class="tip-amount" data-amount="10"><span class="tip-price">£10</span><span class="tip-label">Legend 🦸</span></button>
+    </div>
+    <input type="number" class="custom-amount" id="customAmount" placeholder="Custom amount (£)" min="1"/>
+    <div class="pay-channels">
+      <a class="pay-channel" onclick="payWith('kofi')"><span class="ch-icon">☕</span><div><span class="ch-name">Ko-fi</span><span class="ch-desc">Cards · PayPal · Apple Pay · Google Pay</span></div><span class="ch-arrow">→</span></a>
+    </div>
+    <p class="tip-note">Opens Ko-fi in a popup — you stay right here. Thank you! ❤️</p>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+    var _tipAmount=1;
+    var CHANNELS={kofi:'https://ko-fi.com/toolzmoolz'};
+    function openTip(){document.getElementById('tipModal').classList.add('open');document.body.style.overflow='hidden';}
+    function closeTip(){document.getElementById('tipModal').classList.remove('open');document.body.style.overflow='';}
+    function payWith(ch){var url=CHANNELS[ch]||'';if(!url)return;var p=window.open(url,'payment','width=520,height=680,top='+Math.round((screen.height-680)/2)+',left='+Math.round((screen.width-520)/2)+',resizable=yes,scrollbars=yes');if(!p)window.open(url,'_blank');closeTip();}
+    document.querySelectorAll('.tip-amount').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tip-amount').forEach(function(x){x.classList.remove('active')});b.classList.add('active');_tipAmount=parseInt(b.dataset.amount);document.getElementById('customAmount').value='';});});
+    document.addEventListener('DOMContentLoaded',function(){document.getElementById('tipModal').addEventListener('click',function(e){if(e.target===this)closeTip();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTip();});});
+    document.getElementById('navToggle').addEventListener('click', () => {
+        document.getElementById('toolNav').classList.toggle('open');
+    });
+
+    let currentDelim = ',';
+    let parsedData = [];
+
+    // Delimiter buttons
+    document.querySelectorAll('#delimGroup .radio-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#delimGroup .radio-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentDelim = btn.dataset.delim;
+        });
+    });
+
+    function parseData() {
+        const raw = document.getElementById('inputData').value.trim();
+        if (!raw) { showToast('Paste some data first!'); return; }
+
+        const trim = document.getElementById('trimCells').checked;
+        const hasHeader = document.getElementById('hasHeader').checked;
+
+        const rows = raw.split('\n').filter(r => r.trim() !== '');
+        parsedData = rows.map(row => row.split(currentDelim).map(cell => trim ? cell.trim() : cell));
+
+        renderTable(parsedData, hasHeader);
+    }
+
+    function renderTable(data, hasHeader) {
+        const tableWrap = document.getElementById('tableWrap');
+        if (!data.length) return;
+
+        let html = '<table>';
+        let startRow = 0;
+
+        if (hasHeader && data[0]) {
+            html += '<thead><tr>';
+            data[0].forEach(cell => { html += `<th>${escHtml(cell)}</th>`; });
+            html += '</tr></thead>';
+            startRow = 1;
+        }
+
+        html += '<tbody>';
+        for (let i = startRow; i < data.length; i++) {
+            html += '<tr>';
+            data[i].forEach(cell => { html += `<td title="${escHtml(cell)}">${escHtml(cell)}</td>`; });
+            html += '</tr>';
+        }
+        html += '</tbody></table>';
+
+        tableWrap.innerHTML = html;
+
+        const dataRows = data.length - (hasHeader ? 1 : 0);
+        const cols = data[0]?.length || 0;
+        document.getElementById('rowCount').innerHTML = `<strong>${dataRows}</strong> rows × <strong>${cols}</strong> cols`;
+        document.getElementById('previewBadge').textContent = `${dataRows} rows`;
+        document.getElementById('downloadXLSX').disabled = false;
+        document.getElementById('downloadCSV').disabled = false;
+    }
+
+    function escHtml(str) {
+        return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    document.getElementById('parseBtn').addEventListener('click', parseData);
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        document.getElementById('inputData').value = '';
+        document.getElementById('tableWrap').innerHTML = `<div class="empty-state"><div class="icon">📋</div>Paste data on the left and click <strong>Preview Table</strong></div>`;
+        document.getElementById('rowCount').textContent = '';
+        document.getElementById('previewBadge').textContent = '';
+        document.getElementById('downloadXLSX').disabled = true;
+        document.getElementById('downloadCSV').disabled = true;
+        parsedData = [];
+    });
+
+    // Parse on delimiter change automatically if data present
+    document.querySelectorAll('#delimGroup .radio-btn').forEach(btn => {
+        btn.addEventListener('click', () => { if (parsedData.length) parseData(); });
+    });
+
+    // Download XLSX
+    document.getElementById('downloadXLSX').addEventListener('click', async () => {
+        if (!parsedData.length) return;
+        try { await window.TZLib.load('xlsx'); }
+        catch (err) { showToast('Could not load the Excel engine. Check your connection.'); return; }
+        const ws = XLSX.utils.aoa_to_sheet(parsedData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'toolzmoolz-data.xlsx');
+    });
+
+    // Download CSV
+    document.getElementById('downloadCSV').addEventListener('click', () => {
+        if (!parsedData.length) return;
+        const csv = parsedData.map(row => row.map(c => `"${c.replace(/"/g,'""')}"`).join(',')).join('\n');
+        const blob = new Blob([csv], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'toolzmoolz-data.csv'; a.click();
+        URL.revokeObjectURL(url);
+    });
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg; t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
+    }
+</script>
+
+    <!-- tz-scripts -->
+    <script src="../assets/consent.js" defer></script>
+    <script src="../assets/ads.js" defer></script>
+</body>
+</html>

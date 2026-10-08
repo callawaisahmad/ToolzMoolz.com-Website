@@ -1,0 +1,17 @@
+{
+  "name": "SolMax \u2014 Solar Panel Alignment | ToolzMoolz",
+  "short_name": "SolMax",
+  "description": "Calculate the optimal tilt, direction and spacing for solar panels based on exact location.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef3fb",
+  "theme_color": "#0b1220",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
