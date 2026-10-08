@@ -1,0 +1,24 @@
+name: Deploy to live site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync to toolzmoolz.com (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: server801.shared.spaceship.host
+          username: deploy@toolzmoolz.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./
+          server-dir: /
+          exclude: "**/.git*, **/.github/**, **/api-config.php, **/.ftpquota"
