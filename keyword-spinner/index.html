@@ -718,7 +718,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #2 · 10 Oct 2026, 1:50 PM PKT</span>
     </div>
 </footer>
 
@@ -1039,6 +1039,50 @@
               'leak','locks','key','keys','sofa','shed','deck','roof','gutter','drain','lamp'],
     locPreps: ['in','around'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['near me','nearby','close to me','around here','in my area'],
+    /* neutral, service-free patterns used for TOPIC keywords (see detectContext) */
+    neutral: [
+      'best {subject}','{subject} near me','{subject} guide','{subject} reviews',
+      '{subject} prices','{subject} cost','cheap {subject}','affordable {subject}',
+      '{subject} online','{subject} ideas','{subject} tips','top {subject}',
+      'local {subject}','{subject} comparison','how to choose {subject}','{subject} deals'
+    ],
+    /* topic keywords get domain-appropriate extras on top of the neutral list */
+    topics: [
+      { key: 'food', name: 'food & drink', patterns: ['{subject} recipes','{subject} delivery','healthy {subject}','easy {subject}','{subject} menu','{subject} ideas'],
+        triggers: ['food','foods','recipe','recipes','cooking','cook','baking','bake','meal','meals','dinner','lunch','breakfast','brunch','snack','snacks','cuisine','restaurant','restaurants','cafe','cafes','coffee','tea','pizza','burger','burgers','cake','cakes','bakery','dessert','desserts','vegan','vegetarian','diet','nutrition','grocery','groceries','takeaway','takeout','catering','barbecue','bbq','smoothie','smoothies','juice','menu','dishes','dish','pasta','sushi','chocolate','cheese','bread','salad','soup','spices','sauce','sauces','chicken','beef','seafood','gluten free','keto'] },
+      { key: 'health', name: 'health & fitness', patterns: ['{subject} classes','{subject} near me','{subject} benefits','{subject} for beginners','{subject} cost','{subject} tips'],
+        triggers: ['yoga','gym','fitness','workout','workouts','exercise','exercises','weight loss','therapy','therapist','doctor','doctors','dentist','dental','clinic','hospital','massage','meditation','pilates','physiotherapy','physio','nutritionist','wellness','health','mental health','chiropractor','counseling','counselling','acupuncture','rehab','orthodontist','immunization','vaccination','pediatrician','dermatologist','optometrist','blood test','checkup','remedy','supplement','supplements','vitamins'] },
+      { key: 'beauty', name: 'beauty & grooming', patterns: ['{subject} near me','{subject} prices','{subject} ideas','{subject} at home','{subject} products','{subject} tutorial'],
+        triggers: ['makeup','skincare','skin care','hair','hairstyle','hairstyles','haircut','nails','nail','manicure','pedicure','salon','barber','barbershop','lashes','eyelashes','brows','eyebrows','waxing','facial','cosmetics','beauty','spa','hair color','hair colour','extensions','tattoo','piercing'] },
+      { key: 'tech', name: 'tech & software', patterns: ['best {subject}','{subject} online','free {subject}','{subject} tools','{subject} for beginners','{subject} alternatives','{subject} price','{subject} download','how to use {subject}'],
+        triggers: ['app','apps','software','saas','ai','chatbot','chatgpt','website','websites','plugin','plugins','api','code','coding','programming','developer','developers','laptop','laptops','computer','computers','phone','phones','smartphone','smartphones','gadget','gadgets','device','devices','cybersecurity','vpn','hosting','database','python','javascript','wordpress','tool','tools','platform','platforms','crm','erp','cloud','data'] },
+      { key: 'learning', name: 'education & learning', patterns: ['{subject} online','best {subject}','free {subject}','{subject} for beginners','{subject} near me','{subject} cost','{subject} classes','{subject} certification'],
+        triggers: ['course','courses','class','classes','tutorial','tutorials','training','lesson','lessons','learn','learning','study','exam','exams','school','scholarship','college','university','degree','certification','certificate','tutor','tutoring','coaching','education','bootcamp','academy','ielts','toefl','mba'] },
+      { key: 'finance', name: 'finance & money', patterns: ['best {subject}','{subject} rates','{subject} calculator','{subject} for beginners','{subject} comparison','cheap {subject}','{subject} online','{subject} advice'],
+        triggers: ['loan','loans','mortgage','mortgages','insurance','credit card','bank','banking','investment','investing','stocks','stock','crypto','cryptocurrency','bitcoin','tax','taxes','accounting','bookkeeping','salary','pension','budget','budgeting','finance','financial','forex','trading','refinance','broker','payroll','audit'] },
+      { key: 'travel', name: 'travel', patterns: ['best {subject}','cheap {subject}','{subject} deals','{subject} near me','{subject} packages','{subject} booking','{subject} offers'],
+        triggers: ['hotel','hotels','flight','flights','airline','airlines','travel','holiday','holidays','vacation','tour','tours','trip','trips','resort','resorts','hostel','booking','visa','passport','itinerary','tourist','cruise','camping','airbnb','car rental','rental car','sightseeing','safari','honeymoon'] },
+      { key: 'property', name: 'property & real estate', patterns: ['{subject} near me','best {subject}','{subject} prices','{subject} for sale','{subject} for rent','{subject} agent','cheap {subject}'],
+        triggers: ['house','houses','home','homes','apartment','apartments','flat','flats','property','properties','real estate','realtor','estate agent','landlord','condo','villa','plot','relocation'] },
+      { key: 'fashion', name: 'fashion', patterns: ['best {subject}','{subject} online','{subject} for sale','cheap {subject}','{subject} ideas','{subject} near me','{subject} store','{subject} deals'],
+        triggers: ['dress','dresses','shoes','shoe','sneakers','handbag','handbags','bag','bags','clothing','clothes','fashion','outfit','outfits','jacket','jeans','shirt','shirts','t-shirt','watch','watches','jewellery','jewelry','sunglasses','wardrobe','style','saree','lehenga','heels','boots','scarf'] },
+      { key: 'pets', name: 'pets', patterns: ['{subject} near me','best {subject}','{subject} food','{subject} grooming','{subject} training','{subject} for sale','{subject} care'],
+        triggers: ['dog','dogs','puppy','puppies','cat','cats','kitten','kittens','pet','pets','vet','veterinarian','aquarium','fish tank','hamster','rabbit','parrot','leash','litter','pet food','pet grooming','dog training','kennel','breeder'] },
+      { key: 'events', name: 'events & weddings', patterns: ['{subject} near me','best {subject}','{subject} ideas','{subject} packages','{subject} prices','{subject} planner','{subject} decorations','{subject} venue'],
+        triggers: ['wedding','weddings','party','parties','birthday','event','events','dj','venue','invitation','invitations','decorations','anniversary','baby shower','event planner','bride','groom','engagement','corporate event'] },
+      { key: 'marketing', name: 'marketing & seo', patterns: ['best {subject}','{subject} tools','{subject} services','{subject} for beginners','{subject} strategy','{subject} tips','{subject} agency','{subject} examples'],
+        triggers: ['seo','marketing','advertising','ads','ad','ppc','adwords','google ads','facebook ads','instagram ads','keyword','keywords','backlink','backlinks','content marketing','copywriting','email marketing','social media','branding','analytics','traffic','conversion','landing page','funnel','campaign','campaigns','affiliate','influencer','lead generation'] },
+      { key: 'gaming', name: 'gaming', patterns: ['best {subject}','{subject} online','{subject} for beginners','{subject} tips','{subject} download','free {subject}','{subject} reviews'],
+        triggers: ['game','games','gaming','console','consoles','playstation','xbox','nintendo','steam','esports','gamer','gamers','minecraft','fortnite','gameplay','rpg','fps','mods','gaming pc','gaming laptop','controller'] },
+      { key: 'music', name: 'music', patterns: ['best {subject}','{subject} online','{subject} for beginners','{subject} lessons','{subject} download','free {subject}','{subject} ideas'],
+        triggers: ['music','song','songs','guitar','piano','singing','band','concert','karaoke','spotify','playlist','playlists','rapper','producer','beat','beats','vocals','instrument','drums','violin','ukulele','flute'] },
+      { key: 'photography', name: 'photography', patterns: ['{subject} near me','best {subject}','{subject} prices','{subject} ideas','{subject} for beginners','{subject} course','{subject} booking'],
+        triggers: ['photo','photos','photography','photographer','camera','cameras','lens','lenses','portrait','portraits','headshots','videography','drone','photo editing','lightroom','photoshoot','album'] },
+      { key: 'products', name: 'products', patterns: ['best {subject}','{subject} online','{subject} for sale','cheap {subject}','{subject} reviews','{subject} price','{subject} deals','{subject} near me','where to buy {subject}'],
+        triggers: ['bottle','bottles','gift','gifts','toy','toys','furniture','mattress','headphones','earbuds','backpack','product','products','item','items','brand','brands','accessories','accessory','kit','set','machine','machines','equipment','supplies','supply','gift card','gift ideas'] },
+      { key: 'homecare', name: 'home & cleaning', patterns: ['{subject} near me','best {subject}','{subject} prices','{subject} service','{subject} company','{subject} quote','{subject} booking'],
+        triggers: ['cleaning','cleaner','cleaners','house cleaning','housekeeping','gardening','gardener','landscaping','pest control','fumigation','movers','removals','laundry','carpet cleaning','window cleaning','oven cleaning','deep cleaning','maid'] }
+    ],
     timeWords: ['24 hours','24 hr','24h','24/7','emergency','urgent','same day','express'],
     mobileWords: ['mobile','roadside','on call'],
     templates: [
@@ -1166,7 +1210,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} repair','{subject} replacement','{subject} installation','{subject} maintenance',
+          '{subject} repair','{subject} replacement','{subject} installation',
           '{subject} inspection','emergency {subject} service','mobile {subject} service',
           '{subject} specialist','{subject} company','{subject} contractor','{subject} cost',
           '{subject} prices','local {subject} service','{subject} shop'
@@ -1194,6 +1238,7 @@
               'motor','freno','frenos','embrague','alternador','sensor','pintura','abolladura','gotera'],
     locPreps: ['en'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['cerca de mí','cerca de mi','cerca','en mi zona','al lado mío'],
+    neutral: ['mejor {subject}','{subject} cerca de mí','guía de {subject}','opiniones de {subject}','precio de {subject}','{subject} barato','{subject} online','consejos de {subject}','mejores {subject}','cómo elegir {subject}'],
     timeWords: ['24 horas','24h','24/7','urgente','urgencia','emergency','inmediato','rápido'],
     mobileWords: ['móvil','movil','a domicilio','en carretera'],
     templates: [
@@ -1291,7 +1336,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} reparación','{subject} sustitución','{subject} instalación','{subject} mantenimiento',
+          '{subject} reparación','{subject} sustitución','{subject} instalación',
           '{subject} inspección','servicio urgente de {subject}','servicio móvil de {subject}',
           '{subject} especialista','empresa de {subject}','{subject} a domicilio','precio de {subject}'
         ],
@@ -1315,6 +1360,7 @@
               'moteur','frein','freins','embrayage','alternateur','capteur','peinture','fuite','fuites'],
     locPreps: ['à','a'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['près de chez moi','près de moi','à proximité','dans mon quartier','tout proche'],
+    neutral: ['meilleur {subject}','{subject} près de chez moi','guide {subject}','avis sur {subject}','prix {subject}','{subject} pas cher','{subject} en ligne','conseils {subject}','meilleurs {subject}','comment choisir {subject}'],
     timeWords: ['24h/24','24 h','24/7','urgence','urgent','immédiat','immédiatement'],
     mobileWords: ['mobile','sur route','à domicile','sur place'],
     templates: [
@@ -1398,7 +1444,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} réparation','{subject} remplacement','{subject} installation','{subject} entretien',
+          '{subject} réparation','{subject} remplacement','{subject} installation',
           '{subject} inspection','service urgent {subject}','service mobile {subject}',
           '{subject} spécialiste','entreprise {subject}','{subject} à domicile'
         ],
@@ -1422,6 +1468,7 @@
               'bremsen','kupplung','lichtmaschine','sensor','lack','delle','undicht','leck'],
     locPreps: ['in'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['in meiner Nähe','in meiner Naehe','nahe bei mir','in der Nähe','direkt um die Ecke'],
+    neutral: ['beste {subject}','{subject} in meiner Nähe','{subject} Ratgeber','{subject} Bewertungen','{subject} Preise','günstige {subject}','{subject} online','{subject} Tipps','top {subject}','{subject} Vergleich'],
     timeWords: ['24 stunden','24std','24/7','notdienst','dringend','sofort','express','rund um die uhr'],
     mobileWords: ['mobil','vor ort','am ort','pannenhilfe'],
     templates: [
@@ -1509,7 +1556,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} reparatur','{subject} austausch','{subject} montage','{subject} wartung',
+          '{subject} reparatur','{subject} austausch','{subject} montage',
           '{subject} inspection','{subject} notdienst','mobiler {subject} service',
           '{subject} fachbetrieb','{subject} unternehmen'
         ],
@@ -1532,6 +1579,7 @@
               'motor','travão','travões','embraiagem','alternador','sensor','pintura','amolgadura','fuga','fugas','pneu furado'],
     locPreps: ['em','no','na'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['perto de mim','perto de si','na minha zona','ao pé de mim','aqui perto'],
+    neutral: ['melhor {subject}','{subject} perto de mim','guia de {subject}','avaliações de {subject}','preço de {subject}','{subject} barato','{subject} online','dicas de {subject}','melhores {subject}','como escolher {subject}'],
     timeWords: ['24 horas','24h','24/7','urgente','urgência','imediato','rápido'],
     mobileWords: ['móvel','movel','ao domicílio','a domicílio','na estrada'],
     templates: [
@@ -1621,7 +1669,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} reparação','{subject} substituição','{subject} instalação','{subject} manutenção',
+          '{subject} reparação','{subject} substituição','{subject} instalação',
           '{subject} inspeção','serviço urgente de {subject}','serviço móvel de {subject}',
           '{subject} especialista','empresa de {subject}','{subject} a domicílio'
         ],
@@ -1645,6 +1693,7 @@
               'motore','freno','freni','frizione','alternatore','sensore','vernice','ammaccatura','perdita','perdite'],
     locPreps: ['a','in'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['vicino a me','vicino a casa mia','nella mia zona','a pochi passi'],
+    neutral: ['miglior {subject}','{subject} vicino a me','guida {subject}','recensioni {subject}','prezzo {subject}','{subject} economico','{subject} online','consigli {subject}','migliori {subject}','come scegliere {subject}'],
     timeWords: ['24 ore','24h','24/7','urgente','urgenza','immediato','rapido'],
     mobileWords: ['mobile','su strada','a domicilio','sul posto'],
     templates: [
@@ -1728,7 +1777,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} riparazione','{subject} sostituzione','{subject} installazione','{subject} manutenzione',
+          '{subject} riparazione','{subject} sostituzione','{subject} installazione',
           '{subject} ispezione','servizio urgente {subject}','servizio mobile {subject}',
           '{subject} specialista','azienda {subject}','{subject} a domicilio'
         ],
@@ -1750,6 +1799,7 @@
               'lak','deuk','lek','lekke','band lek'],
     locPreps: ['in'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['in de buurt','bij mij in de buurt','dichtbij','om de hoek'],
+    neutral: ['beste {subject}','{subject} in de buurt','{subject} gids','{subject} reviews','{subject} prijzen','goedkope {subject}','{subject} online','{subject} tips','top {subject}','{subject} vergelijken'],
     timeWords: ['24 uur','24uur','24/7','spoed','noodgeval','direct','snel'],
     mobileWords: ['mobiel','onderweg','op locatie','langs de weg'],
     templates: [
@@ -1830,7 +1880,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} reparatie','{subject} vervanging','{subject} montage','{subject} onderhoud',
+          '{subject} reparatie','{subject} vervanging','{subject} montage',
           '{subject} inspectie','spoedservice {subject}','mobiele {subject} service',
           '{subject} specialist','{subject} bedrijf','{subject} thuis'
         ],
@@ -1850,6 +1900,7 @@
               'نافذة','سقف','صنبور','مرحاض','رادياتير','صمام','محرك','فرامل','قفل','تسرب','تسريب'],
     locPreps: ['في'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['بالقرب مني','قريب مني','بالقرب منك','في منطقتي','قريب'],
+    neutral: ['أفضل {subject}','{subject} بالقرب مني','دليل {subject}','تقييمات {subject}','أسعار {subject}','{subject} رخيص','{subject} عبر الإنترنت','نصائح {subject}','كيف تختار {subject}'],
     timeWords: ['24 ساعة','24ساعة','24/7','طارئ','عاجل','فوري','سريع'],
     mobileWords: ['متنقل','في الطريق','في الموقع','منزلي'],
     templates: [
@@ -1917,7 +1968,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} إصلاح','{subject} استبدال','{subject} تركيب','{subject} صيانة',
+          '{subject} إصلاح','{subject} استبدال','{subject} تركيب',
           '{subject} فحص','خدمة طوارئ {subject}','خدمة متنقلة {subject}','{subject} متخصص',
           'شركة {subject}'
         ],
@@ -1936,6 +1987,7 @@
               'دروازہ','باریش','چھت','نلکا','کھلاڑا','ریڈی ایٹر','ونٹ','چیمیں','موٹر','بریک','سینسر','لک','مسالا','ٹوٹا'],
     locPreps: ['میں'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['میرے قریب','مجھ کے قریب','قریب میں','اس علاقے میں','قریبی'],
+    neutral: ['بہترین {subject}','{subject} میرے قریب','{subject} گائیڈ','{subject} کے جائزے','{subject} کی قیمت','سستا {subject}','{subject} آن لائن','{subject} کے مشورے','{subject} کیسے منتخب کریں'],
     timeWords: ['24 گھنٹے','24 گھنٹہ','24/7','ہنگامی','فوری','جلد'],
     mobileWords: ['موبائل','سفر','جگہ پر','گھر پر'],
     templates: [
@@ -1999,7 +2051,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} مرمت','{subject} تبدیلی','{subject} نصب','{subject} مینٹیننس',
+          '{subject} مرمت','{subject} تبدیلی','{subject} نصب',
           '{subject} چیک','ہنگامی {subject} سروس','موبائل {subject} سروس','{subject} متخصص','{subject} کمپنی'
         ],
         phrasings: []
@@ -2019,6 +2071,7 @@
               'स्क्रीन','मोटर','ब्रेक','सेंसर','पेंट','टपक','फटी'],
     locPreps: ['में'], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['मेरे पास','मेरे करीब','पास में','आसपास','नज़दीक'],
+    neutral: ['सबसे अच्छा {subject}','{subject} मेरे पास','{subject} गाइड','{subject} की समीक्षा','{subject} की कीमत','सस्ता {subject}','{subject} ऑनलाइन','{subject} के टिप्स','{subject} कैसे चुनें'],
     timeWords: ['24 घंटे','24 घंटे','24/7','आपातकालीन','फौरन','जल्दी'],
     mobileWords: ['मोबाइल','रास्ते में','आपके स्थान पर','घर पर'],
     templates: [
@@ -2080,7 +2133,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} मरम्मत','{subject} बदलना','{subject} इंस्टॉल','{subject} रखरखाव','{subject} जांच',
+          '{subject} मरम्मत','{subject} बदलना','{subject} इंस्टॉल','{subject} जांच',
           'इमरजेंसी {subject} सर्विस','मोबाइल {subject} सर्विस','{subject} विशेषज्ञ'
         ],
         phrasings: []
@@ -2101,6 +2154,7 @@
               'sensör','boya','çukur','sızıntı','patlak'],
     locPreps: [''], locPrepsShort: [''], locPrefix: false, locCase: { vowel: "'da", cons: "'de" },
     nearMe: ['yanımda','bana yakın','çevremde','yakınlarda','hemen yakınımda'],
+    neutral: ['en iyi {subject}','{subject} yanımda','{subject} rehberi','{subject} yorumları','{subject} fiyatları','ucuz {subject}','{subject} online','{subject} ipuçları','{subject} nasıl seçilir'],
     timeWords: ['24 saat','24/7','acil','derhal','hemen','gece','gündüz'],
     mobileWords: ['mobil','yolda','yerinde','evde','servis aracı'],
     templates: [
@@ -2175,7 +2229,7 @@
       generic: {
         always: true, triggers: [],
         services: [
-          '{subject} onarımı','{subject} değişimi','{subject} montajı','{subject} bakımı','{subject} kontrolü',
+          '{subject} onarımı','{subject} değişimi','{subject} montajı','{subject} kontrolü',
           'acil {subject} servisi','mobil {subject} servisi','{subject} uzmanı','{subject} firması'
         ],
         phrasings: []
@@ -2198,6 +2252,7 @@
               'sprzęgło','alternator','czujnik','lakier','wgniecenie','wyciek','nieszczelność','dziurawy'],
     locPreps: [''], locPrepsShort: [''], locPrefix: true, locCase: null,
     nearMe: ['w pobliżu mnie','w pobliżu','blisko mnie','w okolicy','na miejscu'],
+    neutral: ['najlepszy {subject}','{subject} w mojej okolicy','{subject} poradnik','{subject} opinie','{subject} ceny','tani {subject}','{subject} online','{subject} porady','jak wybrać {subject}'],
     timeWords: ['24 godziny','24 godzin','24/7','pilne','natychmiast','awaryjnie','ekspres'],
     mobileWords: ['mobilny','mobilna','w terenie','na miejscu','z dojazdem','na drodze'],
     templates: [
@@ -2598,6 +2653,69 @@
     return out;
   }
 
+  /* ═══════════════ 6b. CONTEXT: TRADE vs TOPIC (food, health, tech…) ═══════════════
+     A keyword is only a "trade" keyword when the user actually asked for a service
+     (repair/fix/install…) or used a trade noun (tyre, boiler, plumber…). Any other
+     keyword (food, yoga, seo…) is treated as a TOPIC and gets topic-appropriate,
+     service-free variations instead of the default "repair/maintenance" filler.   */
+  function fillPhrase(phrase, parsed, pack) {
+    var s = tidy(lc(phrase, pack));
+    s = s.split('{subject}').join(parsed.subject || parsed.object || '')
+         .split('{object}').join(parsed.object || '')
+         .split('{objects}').join(pluralize(parsed.object || '', pack.code, pack))
+         .split('{qualifier}').join(parsed.qualifier || '')
+         .split('{qualifiers}').join(pluralize(parsed.qualifier || '', pack.code, pack));
+    return tidy(s.replace(/\s+/g, ' '));
+  }
+
+  function triggerHit(list, hay) {
+    for (var i = 0; i < (list || []).length; i++) {
+      var t = flatOf(list[i]);
+      if (!t) continue;
+      var esc = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+');
+      if (new RegExp('(^|[^a-z0-9])' + esc + 's?([^a-z0-9]|$)').test(hay)) return true;
+    }
+    return false;
+  }
+
+  function detectContext(parsed, pack) {
+    var neutral = pack.neutral || [];
+    if (parsed.serviceGiven) return { isTrade: true, topic: null, patterns: [] };
+    var hay = flatOf(parsed.lower + ' ' + parsed.subject + ' ' + parsed.core);
+    var topics = pack.topics || [];
+    for (var i = 0; i < topics.length; i++) {
+      if (triggerHit(topics[i].triggers, hay)) {
+        return { isTrade: false, topic: topics[i],
+                 patterns: (topics[i].patterns || []).concat(neutral) };
+      }
+    }
+    var rel = pack.related || {};
+    var tradeHit = Object.keys(rel).some(function (k) {
+      return k !== 'generic' && triggerHit(rel[k].triggers, hay);
+    });
+    if (tradeHit) return { isTrade: true, topic: null, patterns: [] };
+    return { isTrade: false, topic: null, patterns: neutral.slice() };
+  }
+
+  /* bases for a topic keyword — neutral / topic patterns, never the trade templates */
+  function buildIntentBases(parsed, pack, patterns) {
+    var seen = {}, out = [];
+    function push(v, tier) {
+      v = tidy(lc(v, pack));
+      if (!v || v.indexOf('{') >= 0) return;
+      if (seen[v] || wc(v) > MAX_WORDS) return;
+      seen[v] = 1;
+      out.push({ text: v, tier: tier });
+    }
+    (patterns || []).forEach(function (p) {
+      if (p.indexOf('{qualifier}') >= 0 && !parsed.qualifier) return;
+      push(fillPhrase(p, parsed, pack), 0);
+    });
+    var subject = parsed.subject || parsed.object;
+    if (subject) push(tidy(lc(subject, pack)), 1);
+    return out;
+  }
+
   /* ═══════════════ 7. MODIFIERS (sections 4 + 5) ═══════════════ */
 
   /* does the base already contain one of these words? then never stack it */
@@ -2782,6 +2900,7 @@
   /* extra service-word synonyms — last resort filler for the 50 floor */
   function synonymForms(parsed, ctx) {
     var out = [], seen = {};
+    if (!ctx.isTrade) return out;             /* never inject service words into topics */
     var syn = ctx.pack.synonyms && ctx.pack.synonyms[parsed.service];
     if (!syn) return out;
     var alt = parsed.service;
@@ -3016,8 +3135,22 @@
         : ['proximity', 'time', 'business', 'mobile', 'quality', 'location']
     };
 
+    /* --- context: service/trade keyword or general topic keyword? --- */
+    var context = detectContext(parsed, pack);
+    ctx.isTrade = context.isTrade;
+    ctx.topic = context.topic;
+    if (!context.isTrade) {
+      /* topics never take emergency / mobile / "company" style modifiers */
+      ctx.enabledGroups = ctx.enabledGroups.filter(function (g) {
+        return g === 'proximity' || g === 'quality';
+      });
+      if (!ctx.enabledGroups.length) ctx.enabledGroups = ['proximity', 'quality'];
+    }
+
     /* --- main keyword variations --- */
-    var bases = buildBaseVariants(parsed, pack);
+    var bases = context.isTrade
+      ? buildBaseVariants(parsed, pack)
+      : buildIntentBases(parsed, pack, context.patterns);
     var withMods = applyModifiers(bases, ctx);
     var expanded = expandSpellings(withMods, ctx);
     var main = dedupeAndRank(expanded);
@@ -3035,8 +3168,11 @@
     if (opts.max && opts.max > 0) main = main.slice(0, opts.max);
 
     /* --- related services --- */
-    var catalog = opts.related === false ? [] : findRelatedServices(parsed, pack, bases.map(function (b) { return b.text; }));
-    if (opts.exclude) catalog = catalog.filter(function (c) { return opts.exclude.indexOf(c.key) < 0; });
+    var catalog = [];
+    if (opts.related !== false && context.isTrade) {
+      catalog = findRelatedServices(parsed, pack, bases.map(function (b) { return b.text; }));
+      if (opts.exclude) catalog = catalog.filter(function (c) { return opts.exclude.indexOf(c.key) < 0; });
+    }
 
     var groups = [];
     if (opts.related !== false) {
@@ -3045,16 +3181,43 @@
       var usedInMain = {};
       main.forEach(function (t) { usedInMain[flatOf(t)] = 1; });
       var usedInGroups = {};
-      catalog.forEach(function (c) {
-        var vars = spinRelatedService(c.name, ctx, opts.perService || 10, c.problem);
-        vars = vars.filter(function (t) {
-          var f = flatOf(t);
-          if (usedInMain[f] || usedInGroups[f]) return false;
-          usedInGroups[f] = 1;
-          return true;
+      if (context.isTrade) {
+        catalog.forEach(function (c) {
+          var vars = spinRelatedService(c.name, ctx, opts.perService || 10, c.problem);
+          vars = vars.filter(function (t) {
+            var f = flatOf(t);
+            if (usedInMain[f] || usedInGroups[f]) return false;
+            usedInGroups[f] = 1;
+            return true;
+          });
+          if (vars.length) groups.push({ key: c.key, name: c.name, category: c.category, problem: c.problem, items: vars });
         });
-        if (vars.length) groups.push({ key: c.key, name: c.name, category: c.category, problem: c.problem, items: vars });
-      });
+      } else {
+        /* topic keyword → one group of topic-appropriate extra phrases */
+        var ritems = [];
+        context.patterns.forEach(function (p) {
+          if (p.indexOf('{qualifier}') >= 0 && !parsed.qualifier) return;
+          var phrase = fillPhrase(p, parsed, pack);
+          if (!phrase || phrase.indexOf('{') >= 0) return;
+          var pf = flatOf(phrase);
+          if (usedInMain[pf] || usedInGroups[pf]) return;
+          usedInGroups[pf] = 1;
+          spinRelatedService(phrase, ctx, opts.perService || 10, false).forEach(function (t) {
+            var f = flatOf(t);
+            if (usedInMain[f] || usedInGroups[f]) return;
+            usedInGroups[f] = 1;
+            ritems.push(t);
+          });
+        });
+        if (ritems.length) {
+          groups.push({
+            key: 'topic-' + (context.topic ? context.topic.key : 'general'),
+            name: context.topic ? context.topic.name : 'related ideas',
+            category: 'topic', problem: false,
+            items: ritems.slice(0, Math.max(30, (opts.perService || 10) * 3))
+          });
+        }
+      }
     }
 
     return {
@@ -3072,12 +3235,13 @@
   function surplusFor(parsed, ctx) {
     var pack = ctx.pack, out = [], i;
     var mods = [];
-    Object.keys(pack.modGroups || {}).forEach(function (g) {
-      var d = pack.modGroups[g];
+    (ctx.enabledGroups || Object.keys(pack.modGroups || {})).forEach(function (g) {
+      var d = pack.modGroups && pack.modGroups[g];
+      if (!d) return;
       (d.prefix || []).concat(d.suffix || []).forEach(function (w) { mods.push(w); });
     });
     mods = uniq(mods);
-    var subjectBits = [parsed.object, parsed.subject, parsed.service].filter(Boolean);
+    var subjectBits = [parsed.object, parsed.subject].concat(ctx.isTrade ? [parsed.service] : []).filter(Boolean);
     for (i = 0; i < mods.length; i++) {
       for (var j = 0; j < subjectBits.length; j++) {
         out.push(tidy(lc(mods[i] + ' ' + subjectBits[j], pack)));
