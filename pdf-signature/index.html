@@ -52,37 +52,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Are my PDF documents secure on ToolzMoolz?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, absolutely. All rendering and signing processes run strictly client-side using JavaScript libraries. Your sensitive PDF files are never uploaded to any server or network location."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is my signature legally binding?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Electronic signatures are legally binding for general agreements, employment contracts, and NDAs under the US ESIGN Act and EU eIDAS regulations."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I sign multi-page documents?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Use the page navigation bar to flip through all pages of your loaded document and place signatures exactly where they are needed."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Are my private PDF documents secure on ToolzMoolz?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! We use PDF.js and jsPDF libraries strictly client-side. The file is never sent to our servers or processed over the network. Your sensitive business agreements, legal contracts, and personal info remain 100% private and protected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I sign multi-page PDF documents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! The page navigation bar allows you to step through all pages of your loaded document, place signatures on any page, and compile the entire document into a single signed PDF file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my signature legally binding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in most jurisdictions, electronic signatures are legally binding for general agreements, employment contracts, and NDA forms under the ESIGN Act (US) and eIDAS regulations (EU)."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <!-- PDF.js to render PDF pages, jsPDF to output the final signed PDF (both loaded on demand via fastload.js) -->
     <script defer src="../assets/fastload.js"></script>
     <style>
@@ -561,6 +561,8 @@
 
     
     <!-- ── SEO EXPLANATION & FAQ SECTION ── -->
+    </div>
+
     <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
         <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Sign PDF Documents Online for Free</h2>
         <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our free online PDF Signature tool is a secure, browser-based solution to quickly sign digital contracts, application forms, and business documents. With zero software downloads or registrations required, you can draw a custom signature, type your name using elegant cursive fonts, or upload a transparent signature image. The signature can be dragged and resized anywhere on your PDF canvas, and the final document is merged and saved locally in seconds.</p>
@@ -660,7 +662,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 <!-- Tip Modal -->

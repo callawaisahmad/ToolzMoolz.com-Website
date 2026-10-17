@@ -47,19 +47,45 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "How does the age calculator work?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Enter your date of birth and the tool instantly calculates the difference between that date and today, giving your age in years, months and days. You can also change the 'age at' date to work out how old you were, or will be, on any date." } },
-        { "@type": "Question", "name": "Is the age calculator accurate?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. It accounts for different month lengths and leap years using your browser's calendar, so the years, months and days are exact." } },
-        { "@type": "Question", "name": "Is my date of birth kept private?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Completely. The calculation runs 100% in your browser. Your date of birth is never uploaded, stored, or sent to any server." } }
-      ]
+      "@type": "Question",
+      "name": "How is my age calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We compare your date of birth to today (or any date you choose), accounting for different month lengths and leap years, to give an exact years-months-days result."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my date of birth private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool runs entirely in your browser. Your date of birth is never uploaded or stored anywhere."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I calculate age on a past or future date?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — set the \"age at the date of\" field to any date to see how old you were, or will be, on that day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Completely free, with no sign-up or installation. Use it as often as you like."
+      }
     }
-    </script>
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -284,7 +310,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

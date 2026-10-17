@@ -27,7 +27,7 @@
     <meta name="twitter:description" content="Convert Word documents to polished, print-ready PDFs entirely in your browser. Free, private, no signup."/>
     <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
     <title>Word to PDF Converter Online Free – DOCX to PDF</title>
-    <meta name="description" content="Convert Word (.docx) to PDF online free — real selectable, searchable text with fonts, layout and images preserved. Runs 100% in your browser, nothing is uploaded. No signup."/>
+    <meta name="description" content="Convert Word (.docx) to PDF online free — real selectable, searchable text with fonts, layout and images preserved. 100% in your browser, nothing uploaded."/>
     <meta name="keywords" content="word to pdf, convert word to pdf, convert word to pdf online, word to pdf convert online, word to pdf free convert online, free word to pdf online, word to pdf converter, docx to pdf, ms word to pdf, word to pdf online free, turn word document into pdf"/>
     <link rel="stylesheet" href="../css/style.css"/>
     <style>
@@ -58,8 +58,53 @@
         .w2p-sep { opacity: 0.5; }
     </style>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my Word document private when I convert it to PDF?","acceptedAnswer":{"@type":"Answer","text":"Yes. The entire conversion happens locally in your browser. Your .docx file is never uploaded, stored, or transmitted anywhere — the progress bars simply show your browser reading and laying out the file."}},{"@type":"Question","name":"Is the text in the resulting PDF selectable and searchable?","acceptedAnswer":{"@type":"Answer","text":"Yes. The PDF is produced by your browser's own print engine, so the words are stored as real text rather than as a flat picture of the page. You can select, copy and search the text, and the file stays small because it is not storing full-page images."}},{"@type":"Question","name":"Will my fonts, images and formatting be preserved?","acceptedAnswer":{"@type":"Answer","text":"Most standard formatting — paragraphs, headings, tables, bullet lists, bold/italic text and images — is preserved, with proper A4 page breaks. Very complex layouts such as tracked changes, footnotes, exact multi-column layouts or embedded macros may be simplified."}},{"@type":"Question","name":"Why does a print dialog appear instead of downloading straight away?","acceptedAnswer":{"@type":"Answer","text":"Because we refuse to send your document to a server, the saving step is performed by your own browser. In that dialog choose Save as PDF as the destination and press Save. Leave margins on Default so the A4 layout is respected."}},{"@type":"Question","name":"Is this Word to PDF converter really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free forever. There are no limits, no watermarks, no registration and no premium tier."}}]}
-    </script>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is my Word document private when I convert it to PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The entire conversion happens locally in your browser. Your .docx file is never uploaded, stored, or transmitted anywhere — the progress bars simply show your browser reading and laying out the file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the text in the resulting PDF selectable and searchable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The PDF is produced by your browser's own print engine, so the words are stored as real text rather than as a flat picture of the page. You can select, copy and search the text, and the file stays small because it is not storing full-page images."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my formatting be preserved?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard formatting — fonts, headings, paragraphs, lists, tables and images — carries over cleanly, with proper A4 page breaks. Highly complex layouts like tracked changes, embedded macros, exact multi-column layouts or Word-only effects may be simplified."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a print dialog appear instead of downloading straight away?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because we refuse to send your document to a server, the saving step is performed by your own browser. In that dialog choose Save as PDF as the destination and press Save. Leave margins on Default so the A4 layout is respected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What file types are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This converter accepts Microsoft Word documents in the modern .docx format. You can add several files at once, save them individually, or use Save all to merge them into a single PDF. Files up to 25MB each are supported, completely free."
+      }
+    }
+  ]
+}
+</script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"HowTo","name":"How to use the word to pdf converter","description":"Convert Word (.docx) to a print-ready PDF with selectable, searchable text — convert locally, then save as PDF from the print dialog. Runs 100% in your browser. No signup.","step":[{"@type":"HowToStep","position":1,"name":"Add your .docx files","text":"Drag and drop one or more Word documents into the upload zone. Each file appears in the list with its name, size and a read progress bar."},{"@type":"HowToStep","position":2,"name":"Click Convert to PDF","text":"Press the Convert to PDF button and wait while each Word document is prepared for printing in your browser."},{"@type":"HowToStep","position":3,"name":"Save as PDF","text":"Press Save PDF on a document (or Save all to merge several into one file). In the print dialog choose 'Save as PDF' as the destination, keep margins on Default, then press Save."}]}
     </script>
@@ -284,7 +329,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 
@@ -335,6 +380,10 @@
         closeTip();
         showToast('Opening payment — thank you! &#10084;&#65039;');
     }
+
+    // Expose inline-handler targets (this script is wrapped in an IIFE).
+    window.openTip = openTip; window.closeTip = closeTip;
+    window.payWith = payWith; window.syncCustom = syncCustom;
 
     // ── Mobile nav ────────────────────────────────────────
     document.getElementById('navToggle').addEventListener('click', function() {

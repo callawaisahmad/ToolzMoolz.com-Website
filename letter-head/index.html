@@ -52,37 +52,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Are my business details safe and secure on ToolzMoolz?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, absolutely. All inputs, text bindings, and logo images are kept strictly local inside your browser. No data is ever transmitted to a server or stored in a database."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I download the letterhead as a PDF?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Tap 'Save as PDF'. This opens your system's native Print dialog. In the Destination dropdown, simply select 'Save as PDF' and click Save to download your file."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does the letterhead generator support images or logos?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! You can upload any standard image file (PNG, JPG, or WEBP) to serve as your company logo. A high-resolution transparent PNG is recommended."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Are my business details kept safe and private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. All inputs, text bindings, and logo images are kept strictly local inside your browser using JavaScript variables. No data is ever transmitted to a server or stored in a database, ensuring 100% privacy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change the fonts or margins of the template?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can toggle between modern sans-serif, classic Georgia serif, formal Times New Roman, or retro typewriter monospace fonts. Margins are optimized for standard A4 and US Letter printing sizes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I download the letterhead as a PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tap \"Save as PDF\". This opens your system's native Print dialog. In the Destination dropdown, simply select \"Save as PDF\" (or Microsoft Print to PDF) and click Save to download your high-quality file."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <style>
         .lh-wrap {
             display: grid;
@@ -526,8 +526,11 @@
                 <button class="btn-print" onclick="printLH()">🖨 Print</button>
                 <button class="btn-dl" onclick="downloadPDF()">⬇ Save as PDF</button>
             </div>
+        </div>
     
     <!-- ── SEO EXPLANATION & FAQ SECTION ── -->
+    </div>
+
     <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
         <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Design & Print Your Custom Business Letterhead</h2>
         <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our free online Business Letterhead Generator is a powerful, simple way to create professional branded stationary. With customizable headers, color pickers, logo support, and elegant font options, you can design a beautiful template for invoices, corporate notifications, or employment letters. The tool runs 100% inside your browser, allowing you to preview and print or save your letterhead as a vector-perfect PDF instantly.</p>
@@ -622,7 +625,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 <!-- Tip Modal -->

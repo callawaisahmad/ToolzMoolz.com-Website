@@ -53,37 +53,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Are my uploaded PDF documents safe and private?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, absolutely. ToolzMoolz operates 100% in your browser. All text parsing, table reconstructions, and Excel compiles are done locally on your device. No file is ever sent to a server, keeping your sensitive corporate data completely secure."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does the converter support scanned PDF pages?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "This tool extracts text characters directly from digital (native) PDFs. Scanned PDFs containing pure image scans without text layers cannot be parsed natively client-side without OCR; native PDFs will parse instantly."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I edit the parsed rows before downloading?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Our tool features an interactive spreadsheet preview editor. You can click on any cell, change its text, add or delete rows, and download the finalized, edited table."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Is my data kept safe and secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. Our tool is fully serverless. All document readings, coordinate mappings, table assemblies, and file generations are handled client-side inside your own browser window. Your sensitive corporate details, invoices, or customer databases are never sent over the network."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the table look blank or show spacing offsets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool extracts text characters directly from digital (native) PDFs. Scanned PDFs (pure images without text layers) or highly complex double-column brochures may not line up perfectly. In these cases, you can simply click any cell in our interactive grid editor and manually edit the values in seconds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a file page limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no hardcoded page limit. Since processing occurs in your local system memory, documents under 30 pages parse almost instantly; larger spreadsheets may take slightly longer depending on your device speed."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <!-- PDF.js for rendering/parsing PDF pages, SheetJS for Excel exports (both loaded on demand via fastload.js) -->
     <script defer src="../assets/fastload.js"></script>
     <!-- shared iLovePDF-style file queue -->
@@ -469,7 +469,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

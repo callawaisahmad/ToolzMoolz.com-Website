@@ -52,37 +52,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Are my uploaded photos safe and private?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely! ToolzMoolz is 100% serverless. All graphics processing, Magic Wand calculations, and canvas manipulations are done locally in your browser's memory. No image is ever uploaded to a server, keeping your photos entirely private."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does the Magic Wand tool work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Simply click on any background color in your uploaded photo. The tool will automatically detect that color and erase it. You can adjust the Tolerance slider to erase more or fewer similar shades, or toggle the 'Connected Pixels Only' mode to prevent erasing identical colors inside your subject."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I download my final image in high resolution?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Our background remover processes and exports images in their exact original high-resolution dimensions as transparent PNGs, without compressing or resizing your visual assets."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Why does the background eraser work so fast?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because all calculations are done directly on your device's graphic processor via HTML5 Canvas 2D Context, which processes millions of pixel channels in less than a millisecond. We don't spend time uploading files to heavy remote servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between 'Connected Pixels Only' and Global Eraser?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When 'Connected pixels only' is enabled, the Magic Wand functions as a classic flood fill, erasing contiguous colors that touch your cursor. When disabled, it acts as a chroma key, erasing that exact color range from every corner of the image (ideal for isolating logo designs)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are high resolution pictures scaled down?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. We process the image at its native camera resolution. The canvas editor automatically scales visually to fit your browser view pane, but the underlying data remains in full-resolution for pristine downloads."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <style>
         .layout-grid {
             display: grid;
@@ -650,7 +650,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

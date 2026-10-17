@@ -50,28 +50,45 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is ReverseJargon?",
-          "acceptedAnswer": { "@type": "Answer", "text": "ReverseJargon is a reverse dictionary for tech. Instead of looking up a word to find its meaning, you describe the concept in plain English and it tells you the exact term — plus a concise explanation, examples and common use cases, all on one screen." }
-        },
-        {
-          "@type": "Question",
-          "name": "Does it cost anything?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. ReverseJargon is completely free to use, with no paywall and no sign-up. It is powered by Google's Gemini AI behind the scenes." }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need an account or API key?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No account, login, or API key is required. Just describe the concept and press Find Term to get the exact term with an explanation, examples and use cases." }
-        }
-      ]
+      "@type": "Question",
+      "name": "Do I need an account or API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Just type your description and hit Find Term — there's no sign-up, no login, and nothing to install. ReverseJargon is powered by Google's Gemini AI behind the scenes, so you get instant answers with zero setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — completely free to use, with no paywall. Ask as many questions as you like; ReverseJargon is here to help you find the right term whenever you need it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my searches private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your description is sent securely to Google's Gemini AI to generate the answer, and nothing is stored or logged on our side. We don't ask for any personal information to use the tool."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is it for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Novice and experienced developers, people new to \"vibe coding\", students, technical writers, and anyone who wants to describe an idea and get the precise term to use with AI tools or in their work."
+      }
     }
-    </script>
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -266,7 +283,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

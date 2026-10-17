@@ -62,8 +62,37 @@
     
     </style>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I convert scanned PDFs to JPG?","acceptedAnswer":{"@type":"Answer","text":"Yes. Rendering works on any PDF — digital or scanned — because each page is drawn as an image on an HTML5 canvas before being saved as JPG."}},{"@type":"Question","name":"What resolution will the JPG images be?","acceptedAnswer":{"@type":"Answer","text":"Choose Standard (1x), High (2x) or Ultra (3x) quality. Higher multipliers produce larger, sharper images, ideal for print or zooming."}},{"@type":"Question","name":"Is there a page limit?","acceptedAnswer":{"@type":"Answer","text":"No hard limit. Rendering happens page by page in your browser; larger PDFs simply take a little longer depending on your device."}}]}
-    </script>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is PDF to JPG used for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sharing slides, attaching single pages to emails, inserting document visuals into reports, or posting content where only image formats are accepted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work with scanned PDFs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — pages are rendered as images, so scanned PDFs work exactly the same as digital ones."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the conversion really private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. PDF.js renders each page locally in your browser; your file is never uploaded to any server."
+      }
+    }
+  ]
+}
+</script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"HowTo","name":"How to pdf to jpg converter","description":"Convert every PDF page to high-quality JPG images online free — perfect for slides, invoices and documents. 100% browser-side, no uploads.","step":[{"@type":"HowToStep","position":1,"name":"Upload a PDF","text":"Choose a PDF or drag it into the upload area."},{"@type":"HowToStep","position":2,"name":"Pick your quality","text":"Select 1x, 2x or 3x for standard, high or ultra resolution."},{"@type":"HowToStep","position":3,"name":"Browse the pages","text":"Each page renders as a JPG thumbnail that you can preview."},{"@type":"HowToStep","position":4,"name":"Download images","text":"Save pages individually or download everything as a ZIP."}]}
     </script>
@@ -295,7 +324,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

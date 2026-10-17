@@ -52,37 +52,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Are my files uploaded to your servers to compress them?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No, never! Every single step of the file compression and ZIP creation is executed locally inside your web browser. We use client-side JSZip compiling, meaning your files are aggregated directly in your system memory. No data is sent over the internet, keeping your private files completely secure."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the maximum file size or quantity limit?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "There are no arbitrary files limits. You can drag and drop dozens of files, and compress folders of any file types. The only limit is your device's physical memory (RAM). Typically, archives up to 500MB process flawlessly in a few seconds on most standard devices."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What do the compression levels mean?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Compression levels range from 0 (Store) to 9 (Maximum). Level 0 simply wraps files into a single ZIP archive instantly without compressing their size. Levels 1 through 9 use DEFLATE algorithms to compress files. Level 6 is the industry-standard balance of fast packaging and high file size reduction."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "What compression algorithm do you use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool uses the standard, universally compatible DEFLATE algorithm, ensuring that your downloaded `.zip` file can be opened natively on all versions of Windows, macOS, Linux, iOS, and Android without needing extra apps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my bandwidth or internet speed going to slow down downloads?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at all! Since the tool compiles your ZIP file client-side within your browser window, there is zero network upload or download traffic. The speed depends only on your local CPU and RAM speed, allowing even massive 300MB bundles to finish in 2-3 seconds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I include folder structures?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can load multiple files from different subfolders, and they will be aggregated cleanly. The tool outputs a flat bundle of all selected files into a single, structured container for quick access."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <!-- JSZip for building the archive (loaded on demand via fastload.js) -->
     <script defer src="../assets/fastload.js"></script>
     <style>
@@ -604,7 +604,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

@@ -52,37 +52,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is my pasted data safe and secure on ToolzMoolz?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, absolutely. The entire conversion process occurs locally in your browser using secure JavaScript. No data is ever transmitted, uploaded, or cached on our servers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What maximum file size or row count is supported?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Since the script processes raw text within your browser memory, it can comfortably parse up to 50,000 rows in seconds without any performance lag."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I convert tab-separated files (TSV) with this tool?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Simply choose the 'Tab' option in the delimiter bar before clicking 'Preview Table'. It will correctly separate each tab-spaced column."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Is SheetJS library executed client-side?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! We use SheetJS (xlsx.full.min.js) strictly in the browser. The conversion is entirely offline. Your financial data, email lists, or database logs are never sent to a server, ensuring 100% data compliance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What maximum file size or row count is supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Since the script processes raw text within your browser memory, it can comfortably parse up to 50,000 rows in seconds without any performance lag. It depends entirely on your local device's memory."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the tool support nested tables or custom delimiters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It parses standard flat tables. For other delimiters, simply choose the closest match or pre-convert your separators inside a text editor to comma or tab before pasting."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <!-- SheetJS for Excel export (loaded on demand via fastload.js) -->
     <script defer src="../assets/fastload.js"></script>
     <style>
@@ -423,6 +423,8 @@ Alice	alice@mail.com	01234"></textarea>
 
     
     <!-- ── SEO EXPLANATION & FAQ SECTION ── -->
+    </div>
+
     <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
         <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Convert Text to Clean Excel Spreadsheet Online</h2>
         <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our free online Delimited Text to Excel converter is a simple, browser-based tool to parse raw, messy data blocks and download them as perfectly formatted spreadsheets. Copying and pasting data tables from emails, log files, PDFs, or raw text databases often ruins column alignments. By choosing the correct delimiter (comma, tab, semi-colon, space, or vertical pipe), you can preview and parse your records instantly before saving them to a standard Excel (.xlsx) file. It is also the quickest way to turn an exported keyword list from the <a href="../keyword-spinner/">Keyword Spinner</a> into one keyword per row in a spreadsheet.</p>
@@ -517,7 +519,7 @@ Alice	alice@mail.com	01234"></textarea>
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 <!-- Tip Modal -->

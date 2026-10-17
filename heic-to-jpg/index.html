@@ -58,8 +58,37 @@
     
     </style>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a HEIC file and why do I get them?","acceptedAnswer":{"@type":"Answer","text":"HEIC (High Efficiency Image Coding) is Apple's default photo format on iPhone, iPad and Mac since iOS 11. It compresses better than JPEG, but many Android devices, browsers and websites cannot open it."}},{"@type":"Question","name":"Will converting HEIC to JPG lose much quality?","acceptedAnswer":{"@type":"Answer","text":"Our converter re-encodes at 92% JPEG quality, which is visually near-lossless for normal photos while producing files that are widely compatible."}},{"@type":"Question","name":"Can I convert multiple photos at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select several HEIC files at once; each is converted and shown as a thumbnail. Download them individually or all together as a ZIP."}}]}
-    </script>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why won't my photo open on other devices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HEIC is proprietary to Apple. Convert to JPG and it opens everywhere, from Windows and Android to web uploads and email clients."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is converting HEIC really free with no limits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% free forever. No watermarks, no signup and no limits on how many photos you convert."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How private is this converter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fully private. HEIC decoding runs locally with heic2any — your photos are never uploaded, stored or transmitted."
+      }
+    }
+  ]
+}
+</script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"HowTo","name":"How to heic to jpg converter","description":"Convert HEIC to JPG online free — turn iPhone HEIC photos into smaller, universally compatible JPEGs. Runs 100% in your browser. Private.","step":[{"@type":"HowToStep","position":1,"name":"Choose your HEIC photos","text":"Select one or more .heic files, or drag them into the drop zone."},{"@type":"HowToStep","position":2,"name":"Convert automatically","text":"Each photo is decoded locally and re-encoded as a JPG thumbnail on screen."},{"@type":"HowToStep","position":3,"name":"Download your JPGs","text":"Download images individually or grab everything as a ZIP in one click."}]}
     </script>
@@ -276,7 +305,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 

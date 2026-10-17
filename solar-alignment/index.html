@@ -16,14 +16,14 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="ToolzMoolz"/>
-<meta property="og:title" content="Solar Panel Alignment Calculator (SolMax) | ToolzMoolz"/>
+<meta property="og:title" content="Solar Panel Angle Calculator | ToolzMoolz"/>
 <meta property="og:description" content="Get the optimal tilt, direction and spacing for your solar panels from real solar astronomy — free, in your browser."/>
 <meta property="og:url" content="https://toolzmoolz.com/solar-alignment/"/>
 <meta property="og:image" content="https://toolzmoolz.com/assets/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Solar Panel Alignment Calculator (SolMax) | ToolzMoolz"/>
+<meta name="twitter:title" content="Solar Panel Angle Calculator | ToolzMoolz"/>
 <meta name="twitter:description" content="Optimal solar panel tilt, direction and spacing — free, in your browser."/>
 <meta name="twitter:image" content="https://toolzmoolz.com/assets/og-image.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
 <script type="application/ld+json">
 {
   "@context":"https://schema.org","@type":"WebApplication",
-  "name":"SolMax — Solar Panel Alignment Calculator",
+  "name":"Solar Panel Angle Calculator — ToolzMoolz",
   "url":"https://toolzmoolz.com/solar-alignment/",
   "applicationCategory":"UtilityApplication","operatingSystem":"All",
   "browserRequirements":"Requires JavaScript support",
@@ -57,6 +57,47 @@
       "position": 2,
       "name": "Solar Alignment",
       "item": "https://toolzmoolz.com/solar-alignment/"
+    }
+  ]
+}
+</script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the best tilt angle for solar panels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As a rule of thumb the best year-round tilt is close to your latitude. SolMax refines that for your exact location: it searches every angle and reports the optimum for annual, winter or summer output, so you can favour winter production or overall yield depending on how you use the array."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which direction should solar panels face?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the northern hemisphere panels should face true south and in the southern hemisphere true north. SolMax calculates the optimal azimuth (direction) for your latitude and shows how much energy you lose for every degree you deviate from it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much energy do I lose with the wrong tilt or direction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Small errors are cheap but they add up. Being 10 to 15 degrees away from the ideal tilt typically costs a few percent of annual yield, while facing well away from the optimum can cost 15% or more. SolMax quantifies the loss so you can judge whether re-aligning an array is worth the effort."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much space do I need between rows of panels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tilted panels cast shadows, so rows must be spaced so the front row does not shade the row behind it when the sun is lowest, at the winter solstice. SolMax computes the minimum row spacing from your latitude, panel dimensions and chosen tilt angle."
+      }
     }
   ]
 }
@@ -148,13 +189,13 @@
           </div>
         </div>
     </div>
-  </div></div>
+  </div>
 </section>
 
 <!-- ====== PAGE: HOW TO USE ====== -->
 <section class="page" id="page-guide">
   <div class="section-wrap guide-page">
-    <h1 class="page-title" data-i18n="guide_title">How to use SolMax</h1>
+    <h2 class="page-title" data-i18n="guide_title">How to use SolMax</h2>
     <p class="page-sub" data-i18n="guide_sub">A step-by-step walkthrough — from location to optimised panel alignment.</p>
 
     <!-- OVERVIEW FLOW -->
@@ -774,7 +815,7 @@
 <!-- ====== PAGE: ABOUT ====== -->
 <section class="page" id="page-about">
   <div class="section-wrap about-page"> <div class="section-alt">
-    <h1 class="page-title" data-i18n="about_title">About SolMax</h1>
+    <h2 class="page-title" data-i18n="about_title">About SolMax</h2>
     <p class="page-sub" data-i18n="about_sub">Understanding the science behind your solar panel alignment</p>
 
     <div class="about-card">
@@ -846,7 +887,7 @@
 <!-- ====== PAGE: CONTACT ====== -->
 <section class="page" id="page-contact">
   <div class="section-wrap contact-page"> <div class="section-alt">
-    <h1 class="page-title" data-i18n="contact_title">Contact</h1>
+    <h2 class="page-title" data-i18n="contact_title">Contact</h2>
     <p class="page-sub" data-i18n="contact_sub">Questions, suggestions, or feedback? We'd love to hear from you.</p>
 
     <div class="contact-grid">
@@ -891,6 +932,30 @@
   </div></div>
 </section>
 
+<!-- ====== FAQ ====== -->
+<section class="section-wrap" style="max-width:900px;margin:0 auto;padding:56px 20px 8px;">
+  <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">Frequently Asked Questions</h2>
+  <p style="margin:0 0 22px;opacity:.75;">Common questions about solar panel tilt angle, direction and spacing.</p>
+  <div style="display:grid;gap:20px;">
+      <div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 6px;">What is the best tilt angle for solar panels?</h3>
+        <p style="margin:0;opacity:.8;line-height:1.7;">As a rule of thumb the best year-round tilt is close to your latitude. SolMax refines that for your exact location: it searches every angle and reports the optimum for annual, winter or summer output, so you can favour winter production or overall yield depending on how you use the array.</p>
+      </div>
+      <div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 6px;">Which direction should solar panels face?</h3>
+        <p style="margin:0;opacity:.8;line-height:1.7;">In the northern hemisphere panels should face true south and in the southern hemisphere true north. SolMax calculates the optimal azimuth (direction) for your latitude and shows how much energy you lose for every degree you deviate from it.</p>
+      </div>
+      <div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 6px;">How much energy do I lose with the wrong tilt or direction?</h3>
+        <p style="margin:0;opacity:.8;line-height:1.7;">Small errors are cheap but they add up. Being 10 to 15 degrees away from the ideal tilt typically costs a few percent of annual yield, while facing well away from the optimum can cost 15% or more. SolMax quantifies the loss so you can judge whether re-aligning an array is worth the effort.</p>
+      </div>
+      <div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 6px;">How much space do I need between rows of panels?</h3>
+        <p style="margin:0;opacity:.8;line-height:1.7;">Tilted panels cast shadows, so rows must be spaced so the front row does not shade the row behind it when the sun is lowest, at the winter solstice. SolMax computes the minimum row spacing from your latitude, panel dimensions and chosen tilt angle.</p>
+      </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ====== FOOTER ====== -->
@@ -909,7 +974,28 @@
     </div>
     <div class="footer-copy" data-i18n="footer_copy">Solar Panel Alignment Instrument &bull; Built with first-principles astronomy</div>
   </div>
-    <div class="footer-bottom" style="max-width:1140px;margin:0 auto;padding-top:12px;font-size:11px;opacity:.55;text-align:center;letter-spacing:.02em;"><span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span></div>
+    <div class="footer-links" style="margin-top:14px;max-width:900px;margin-left:auto;margin-right:auto;flex-wrap:wrap;">
+      <span style="display:block;width:100%;margin-bottom:6px;font-weight:700;opacity:.9;">More free tools</span>
+        <a href="../word-to-pdf/">Word to PDF</a>
+        <a href="../pdf-to-word/">PDF to Word</a>
+        <a href="../image-converter/">Image Converter</a>
+        <a href="../image-compressor/">Image Compressor</a>
+        <a href="../pdf-to-excel/">PDF to Excel</a>
+        <a href="../pdf-signature/">Sign PDF Online</a>
+        <a href="../passport-photo/">Passport Photo</a>
+        <a href="../text-to-excel/">Text to Excel</a>
+        <a href="../ocr-extractor/">OCR Text Extractor</a>
+        <a href="../qr-generator/">QR Code Generator</a>
+        <a href="../age-calculator/">Age Calculator</a>
+        <a href="../exif-remover/">EXIF Remover</a>
+        <a href="../file-compressor/">File Compressor</a>
+        <a href="../audio-trimmer/">Audio Trimmer</a>
+        <a href="../reverse-jargon/">ReverseJargon</a>
+        <a href="../keyword-spinner/">Keyword Spinner</a>
+        <a href="../csv-studio/">CSV to JSON</a>
+        <a href="../bg-remover/">Background Remover</a>
+    </div>
+    <div class="footer-bottom" style="max-width:1140px;margin:0 auto;padding-top:12px;font-size:11px;opacity:.55;text-align:center;letter-spacing:.02em;"><span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span></div>
 </footer>
 
 <script src="js/translations.js"></script>

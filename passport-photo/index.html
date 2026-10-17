@@ -52,37 +52,37 @@
     </script>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is my uploaded photo safe and private on ToolzMoolz?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, absolutely. ToolzMoolz operates 100% in your browser. All image processing, cropping, and canvas renderings are executed locally. No image is ever uploaded to a server, keeping your personal data completely private."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the standard size of a UK passport photo?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The standard UK passport photo dimension is 35mm wide by 45mm high. Our tool comes pre-loaded with this exact preset to ensure compliance."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What paper size should I use to print the 8-photo sheet?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The 8-photo grid sheet is optimized for standard 4x6 inch (10x15 cm) glossy photo paper. Make sure to set your print scale settings to 100% (do not fit-to-page) to maintain exact millimeter dimensions."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Is my personal data uploaded to any servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never. All operations, rendering, and background changes run fully client-side inside your browser via the HTML5 canvas API. No images or files are ever sent over the network, providing complete data security."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What paper size should I use to print the 8-photo sheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 8-photo grid sheet is optimized for standard 4x6 inch (10x15 cm) glossy photo paper. Make sure to set your print scale settings to 100% (do not fit-to-page) to maintain exact millimeter dimensions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the standard passport photo sizes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UK, Australia, India, Germany, and EU countries typically use 35x45 mm. The United States and OCI use 2x2 inches (51x51 mm), and Canada uses 50x70 mm. Custom presets can also be configured using the custom mm dimensions inputs."
+      }
     }
-    </script>
+  ]
+}
+</script>
     <style>
         .photo-wrap {
             display: grid;
@@ -520,6 +520,8 @@
 
     
     <!-- ── SEO EXPLANATION & FAQ SECTION ── -->
+    </div>
+
     <section class="seo-tool-section" style="margin-top: 48px; border-top: 1px solid var(--border); padding-top: 36px; font-family: 'Inter', sans-serif;">
         <h2 style="font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.6px; margin-bottom: 12px;">How to Use the Free Online Passport Size Photo Maker</h2>
         <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Our free online passport size photo crop tool makes it simple to prepare high-resolution, compliant photos for your official documents. Whether you need a 2x2 inch print for a US visa, a 35x45mm crop for a UK passport, or a customized dimension for standard ID cards across the globe, this tool runs entirely inside your browser for total safety and privacy.</p>
@@ -614,7 +616,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #1 · 8 Oct 2026, 2:10 PM PKT</span>
+        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
     </div>
 </footer>
 <!-- Tip Modal -->
