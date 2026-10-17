@@ -227,6 +227,33 @@
     <div style="color: var(--text-sub); font-size: 14px; line-height: 1.7; margin-top: 8px;">
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">How to use the Diff Checker</h3>
         <p>Paste your original text into the left box and the modified version into the right box, then hit <strong>Compare Text Diffs</strong>. The tool highlights every added line in green and every removed line in red, giving you both a clear summary and a copyable diff report.</p>
+                <!-- content-depth -->
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Why use a side-by-side diff checker?</h3>
+        <p>It shows exactly what changed between two versions of a document, a config file or a block of code. That makes review fast: instead of re-reading the whole file you focus only on inserted, removed and edited lines, whether you are checking a contract revision or a deployed configuration.</p>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Step by step: compare two versions</h3>
+        <ol style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Paste the original text into the left panel.</li>
+            <li>Paste the changed text into the right panel.</li>
+            <li>Read the highlighted differences — additions, deletions and edits are colour-coded.</li>
+            <li>Copy or export the result to share the list of changes with a colleague.</li>
+        </ol>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Quick reference</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 12px 0 4px; font-size: 13.5px;">
+            <thead><tr><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Highlight</th><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">What it means</th></tr></thead>
+            <tbody>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Green</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">A line that exists only in the new version</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Red</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">A line that was removed or is missing</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Yellow</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">A line that was changed</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">No colour</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Identical in both versions</td></tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Making a diff you can trust</h3>
+        <ul style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Compare like with like — diffing a config file against a prose document only creates noise.</li>
+            <li>Watch for invisible differences such as trailing spaces or tabs, a common cause of "nothing looks changed".</li>
+            <li>Run a diff before and after an automated edit to confirm nothing unexpected moved.</li>
+            <li>Nothing is uploaded, so it is safe to compare internal configs and credential templates.</li>
+        </ul>
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Is it private and secure?</h3>
         <p>Yes. All comparison happens entirely inside your browser. Nothing you paste is ever uploaded, tracked or stored on any server.</p>
     </div>
@@ -313,7 +340,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
+        <span class="tz-build">Build #4 · 17 Oct 2026, 11:46 AM PKT</span>
     </div>
 </footer>
 

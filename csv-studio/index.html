@@ -229,6 +229,33 @@
     <div style="color: var(--text-sub); font-size: 14px; line-height: 1.7; margin-top: 8px;">
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">How to use the CSV Converter</h3>
         <p>Drag and drop a CSV or TSV file onto the area above, or click to browse. Your data loads instantly into an interactive table you can search. Export the same data as JSON, Markdown or TSV with one click.</p>
+                <!-- content-depth -->
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Why convert spreadsheets in the browser?</h3>
+        <p>CSV and TSV files often need to become JSON for an app, or Markdown for documentation, or the other way round. Converting locally means customer lists, invoices and exports never leave your machine, and you skip the manual import-and-export dance in a spreadsheet program.</p>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Step by step: convert a data file</h3>
+        <ol style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Drop a .csv or .tsv file onto the panel, or paste the data directly.</li>
+            <li>Check the preview table to confirm every column landed in the right place.</li>
+            <li>Choose the output format — JSON, Markdown or a cleaned CSV/TSV.</li>
+            <li>Copy the result or download it as a file.</li>
+        </ol>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Quick reference</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 12px 0 4px; font-size: 13.5px;">
+            <thead><tr><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Format</th><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Best for</th></tr></thead>
+            <tbody>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">CSV</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Spreadsheets and spreadsheet exports</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">TSV</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Data that already contains commas inside values</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">JSON</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Feeding an application or an API</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Markdown</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Tables in README files and documentation</td></tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Getting clean output</h3>
+        <ul style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Make sure the first row is your header row; it becomes the JSON keys or the column names.</li>
+            <li>If columns are misaligned the delimiter is probably wrong — European exports often use semicolons.</li>
+            <li>Save and re-import as UTF-8 so accents and currency symbols stay intact.</li>
+            <li>Quote any value that contains the delimiter, a line break or a double quote.</li>
+        </ul>
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Is it private and secure?</h3>
         <p>Yes. Everything runs entirely inside your browser. No file is ever uploaded, tracked or stored on any server.</p>
     </div>
@@ -315,7 +342,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
+        <span class="tz-build">Build #4 · 17 Oct 2026, 11:46 AM PKT</span>
     </div>
 </footer>
 

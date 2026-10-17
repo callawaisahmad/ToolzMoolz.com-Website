@@ -240,6 +240,33 @@
     <div style="color: var(--text-sub); font-size: 14px; line-height: 1.7; margin-top: 8px;">
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">How to use the OCR Text Extractor</h3>
         <p>Upload or drag-and-drop any image containing text - a screenshot, document scan, photo of a whiteboard, or anything else. Select the document language and hit Start OCR. The engine runs entirely in your browser, so nothing is ever uploaded to a server.</p>
+                <!-- content-depth -->
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Why extract text from images and PDFs?</h3>
+        <p>Scanned letters, screenshots, photographed receipts and image-only PDFs are not searchable or copyable. OCR turns them into editable, searchable text so you can quote a clause, file a receipt or translate a document — without sending the file to anyone else.</p>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Step by step: image to editable text</h3>
+        <ol style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Drop a PNG, JPG, WEBP or PDF that contains text.</li>
+            <li>Wait while the text is recognised — larger images take a little longer.</li>
+            <li>Read the extracted text, fix any stray characters, then copy or download it.</li>
+        </ol>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Quick reference</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 12px 0 4px; font-size: 13.5px;">
+            <thead><tr><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Condition of the source</th><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Effect on accuracy</th></tr></thead>
+            <tbody>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">300 DPI or higher</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Best results</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Cropped tightly to the text</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Best results</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Skewed or rotated scan</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Much worse</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Low contrast or shadowed</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Worse</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Handwriting</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Unreliable</td></tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Improving recognition accuracy</h3>
+        <ul style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Scan or photograph at a straight angle; even a slight tilt increases errors.</li>
+            <li>Crop to the block of text so the engine is not distracted by borders, stamps and logos.</li>
+            <li>Use greyscale or black-and-white for high-contrast printed text.</li>
+            <li>Always proofread numbers, IDs and proper nouns — OCR often confuses 0 with O and 1 with l.</li>
+        </ul>
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Is it private and secure?</h3>
         <p>Yes. The OCR processing happens entirely in your browser using Tesseract.js. No image data is sent to any external server. Your documents stay on your device at all times.</p>
     </div>
@@ -327,7 +354,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
+        <span class="tz-build">Build #4 · 17 Oct 2026, 11:46 AM PKT</span>
     </div>
 </footer>
 

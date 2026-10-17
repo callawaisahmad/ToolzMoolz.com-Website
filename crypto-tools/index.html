@@ -257,6 +257,32 @@
     <div style="color: var(--text-sub); font-size: 14px; line-height: 1.7; margin-top: 8px;">
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">How to use the Crypto Hasher & AES-256 Encrypter</h3>
         <p>Choose the <strong>Hash Generator</strong> tab to compute SHA-256, SHA-512 or SHA-1 hashes of any text. Switch to the <strong>AES-256 Encryption</strong> tab, enter a secret password and either encrypt plain text into a secure Base64 payload or paste a payload back in to decrypt it.</p>
+                <!-- content-depth -->
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Why hash and encrypt in the browser?</h3>
+        <p>Hashing gives you a fingerprint to prove a file or message has not changed, and encryption keeps text readable only to you. Doing it locally means the password, key or file you are working with is never transmitted, which matters when you are handling credentials.</p>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Step by step: hash or encrypt text</h3>
+        <ol style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Choose SHA-256 to hash, or AES-256 to encrypt or decrypt.</li>
+            <li>Paste or type the text you want to process.</li>
+            <li>For encryption, enter a strong passphrase and store it safely.</li>
+            <li>Copy the resulting hash or ciphertext.</li>
+        </ol>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Quick reference</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 12px 0 4px; font-size: 13.5px;">
+            <thead><tr><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Property</th><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">SHA-256 hash</th><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">AES-256 encryption</th></tr></thead>
+            <tbody>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Reversible</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">No</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Yes, with the key</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Use for</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Integrity checks</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Keeping text secret</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Key needed</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">None</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Yes, and it must not be lost</td></tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Using hashes and encryption correctly</h3>
+        <ul style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>A hash is one-way: you cannot recover the original text from it.</li>
+            <li>For storing passwords use a slow algorithm such as bcrypt or Argon2, not a single SHA-256 pass.</li>
+            <li>Encrypting the same text twice with a random initialisation vector gives different ciphertext — that is expected and good.</li>
+            <li>If you lose the encryption key the data is unrecoverable; there is no reset.</li>
+        </ul>
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Is it private and secure?</h3>
         <p>Yes. Every hash and every encryption or decryption is performed entirely inside your browser using the built-in Web Crypto API. Nothing you type is ever uploaded, tracked or stored on any server.</p>
     </div>
@@ -343,7 +369,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
+        <span class="tz-build">Build #4 · 17 Oct 2026, 11:46 AM PKT</span>
     </div>
 </footer>
 

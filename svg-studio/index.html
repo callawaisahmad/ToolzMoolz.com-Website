@@ -243,6 +243,32 @@
     <div style="color: var(--text-sub); font-size: 14px; line-height: 1.7; margin-top: 8px;">
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">How to use SVG Studio</h3>
         <p>Drop or select an SVG vector file above. Choose your export scale (1x to 8x) and format (PNG, JPEG, or WEBP), then click <strong>Export Raster Image</strong> to download. Alternatively, hit <strong>Generate Favicon Package</strong> to instantly download a ZIP bundle with 16×16, 32×32, 48×48, 192×192 and 512×512 PNG favicons.</p>
+                <!-- content-depth -->
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Why convert SVG in the browser?</h3>
+        <p>SVG is ideal on the web, but some places — email signatures, social avatars, older software — only accept PNG or JPG. Converting locally keeps proprietary logos off third-party servers, and the favicon generator turns one SVG into every icon size a site needs.</p>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Step by step: convert an SVG</h3>
+        <ol style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Drop an SVG file onto the panel.</li>
+            <li>Choose the output format and pixel size; export at 2x or 3x for crisp high-density screens.</li>
+            <li>Convert and download the raster image, or generate the full favicon set.</li>
+        </ol>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Quick reference</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 12px 0 4px; font-size: 13.5px;">
+            <thead><tr><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Format</th><th style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Best for</th></tr></thead>
+            <tbody>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">SVG</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Logos and icons on the web, at any size</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">PNG</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Transparent logos, screenshots and favicons</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">JPG</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Photographs where transparency is not needed</td></tr>
+                <tr><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">WEBP</td><td style="padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top;">Smaller web images that still need transparency</td></tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Exporting logos and icons</h3>
+        <ul style="margin: 8px 0 0 20px; padding: 0; line-height: 1.75;">
+            <li>Export logos as PNG with a transparent background so they sit on any colour.</li>
+            <li>Favicons need a square source; pad or crop the logo before converting.</li>
+            <li>Render at 2x or 3x for high-density screens, then let the page size it down.</li>
+            <li>Keep the original SVG — it stays sharp at every size and is far smaller than a large PNG.</li>
+        </ul>
         <h3 style="font-size: 16px; font-weight: 800; color: var(--primary); margin: 24px 0 8px;">Is it private and secure?</h3>
         <p>Yes. All rendering happens entirely inside your browser using the HTML5 Canvas API. Nothing you upload is ever sent to, stored on, or tracked by any server.</p>
     </div>
@@ -329,7 +355,7 @@
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #3 · 17 Oct 2026, 10:43 AM PKT</span>
+        <span class="tz-build">Build #4 · 17 Oct 2026, 11:46 AM PKT</span>
     </div>
 </footer>
 
