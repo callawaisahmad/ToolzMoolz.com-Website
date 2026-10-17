@@ -438,6 +438,27 @@ Alice	alice@mail.com	01234"></textarea>
             <li><strong>Export:</strong> Click **Excel (.xlsx)** to download a native, clean Microsoft Excel spreadsheet, or tap **CSV** to save a standard comma-separated values file.</li>
         </ol>
 
+        <!-- content-depth -->
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin: 24px 0 12px;">Why convert text to Excel?</h3>
+        <p style="color: var(--text-sub); font-size: 13.5px; line-height: 1.65; margin-bottom: 18px;">Data pasted from emails, log files, PDFs or a database export often loses its column alignment the moment it lands in a spreadsheet. Choosing the right delimiter tells the tool exactly where one column ends and the next begins, so every record drops into its own row and every field into its own cell — with no manual splitting.</p>
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin: 24px 0 12px;">Which delimiter should I choose?</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 12.5px;">
+            <thead><tr><th style="text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Delimiter</th><th style="text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Looks like this</th><th style="text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 700;">Common source</th></tr></thead>
+            <tbody>
+                <tr><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Comma</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">name,email,city</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Basic CSV files</td></tr>
+                <tr><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Tab</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">name &#8594; email &#8594; city</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Copied from spreadsheets and tables</td></tr>
+                <tr><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Semicolon</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">name;email;city</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">European and regional CSV exports</td></tr>
+                <tr><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Pipe</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">name | email | city</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Log files and database dumps</td></tr>
+                <tr><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Space</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">name email city</td><td style="padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-sub); vertical-align: top;">Plain text and fixed-width notes</td></tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin: 24px 0 12px;">Turning messy text into a clean sheet</h3>
+        <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13px; line-height: 1.7; margin-bottom: 20px;">
+            <li>Make sure the first row is your header row so the columns get meaningful names.</li>
+            <li>If everything lands in a single column the delimiter is wrong — try another one.</li>
+            <li>Keep the same number of fields on every row, or later rows will shift out of alignment.</li>
+            <li>Save as .xlsx to keep dates and numbers as real values rather than text.</li>
+        </ul>
         <h3 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 24px; margin-bottom: 12px;">Frequently Asked Questions (FAQ)</h3>
         <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
             <div>
@@ -519,7 +540,7 @@ Alice	alice@mail.com	01234"></textarea>
             <li><a href="../contact.html">Contact</a></li>
             <li><button type="button" class="tz-revoke" data-tz-revoke>Cookie Settings</button></li>
         </ul>
-        <span class="tz-build">Build #4 · 17 Oct 2026, 11:46 AM PKT</span>
+        <span class="tz-build">Build #5 · 17 Oct 2026, 11:59 AM PKT</span>
     </div>
 </footer>
 <!-- Tip Modal -->
