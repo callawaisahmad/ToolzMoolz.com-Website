@@ -1,0 +1,25 @@
+# ToolzMoolz — canonical URLs and legacy redirects
+# Served by Apache / LiteSpeed on shared hosting.
+# Every rule is guarded by <IfModule> so the file is inert if mod_rewrite is missing.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) Canonical host.
+  # The site is published on the non-www domain (all canonical tags and the
+  # sitemap use https://toolzmoolz.com/). Send www.* to the canonical host in a
+  # single HTTPS hop so Google does not index the same page twice.
+  RewriteCond %{HTTP_HOST} ^www\.toolzmoolz\.com$ [NC]
+  RewriteRule ^(.*)$ https://toolzmoolz.com/$1 [R=301,L]
+
+  # 2) Canonical home and directory URLs.
+  # /index.html has the same content as / (and /dir/index.html the same as
+  # /dir/), so send the explicit file form to the clean URL. The %{THE_REQUEST}
+  # guard keeps the internal DirectoryIndex mapping from looping.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+  # 3) Legacy URL that Google still crawls (it has never existed on this site).
+  # Resolve it to the closest live tool instead of serving a 404.
+  RewriteRule ^seo-toolkit/backlink-analyzer/?$ /keyword-spinner/ [R=301,L]
+</IfModule>
